@@ -1,0 +1,193 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson>
+  <version>1.336</version>
+  <numExecutors>1</numExecutors>
+  <mode>NORMAL</mode>
+  <useSecurity>true</useSecurity>
+  <authorizationStrategy class="hudson.security.ProjectMatrixAuthorizationStrategy">
+    <permission>hudson.model.View.Configure:admin</permission>
+    <permission>hudson.model.Item.Configure:admin</permission>
+    <permission>hudson.model.Item.Build:admin</permission>
+    <permission>hudson.model.Item.Delete:admin</permission>
+    <permission>hudson.model.Item.Create:admin</permission>
+    <permission>hudson.model.View.Create:admin</permission>
+    <permission>hudson.model.Item.Read:admin</permission>
+    <permission>hudson.model.Hudson.Administer:admin</permission>
+    <permission>hudson.model.Computer.Configure:admin</permission>
+    <permission>hudson.model.Item.Workspace:anonymous</permission>
+    <permission>hudson.model.Item.Workspace:admin</permission>
+    <permission>hudson.scm.SCM.Tag:admin</permission>
+    <permission>hudson.model.Run.Delete:admin</permission>
+    <permission>hudson.model.Computer.Delete:admin</permission>
+    <permission>hudson.model.View.Delete:admin</permission>
+    <permission>hudson.model.Hudson.Read:anonymous</permission>
+    <permission>hudson.model.Hudson.Read:admin</permission>
+    <permission>hudson.model.Run.Update:admin</permission>
+  </authorizationStrategy>
+  <securityRealm class="hudson.security.HudsonPrivateSecurityRealm">
+    <disableSignup>false</disableSignup>
+  </securityRealm>
+  <systemMessage>&lt;H3&gt;OVERVIEW:&lt;/H3&gt; &#xd;
+&lt;B&gt; To Execute JON 23 Tests, click the JON23 tab &lt;/B&gt;&lt;br&gt;&#xd;
+&lt;B&gt; To Execute RHQ (iManage) Tests, click the RHQ tab &lt;/B&gt;&lt;br&gt;&#xd;
+&#xd;
+</systemMessage>
+  <jdks>
+    <jdk>
+      <name>Open JDK 1.6</name>
+      <home>/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64</home>
+      <properties/>
+    </jdk>
+  </jdks>
+  <clouds/>
+  <slaves>
+    <slave>
+      <name>jweiss.usersys.redhat.com</name>
+      <description>Jeff Weiss&apos;s test slave</description>
+      <remoteFS>/home/hudson</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>EXCLUSIVE</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.slaves.JNLPLauncher"/>
+      <label></label>
+      <nodeProperties/>
+    </slave>
+  </slaves>
+  <quietPeriod>5</quietPeriod>
+  <scmCheckoutRetryCount>0</scmCheckoutRetryCount>
+  <views>
+    <hudson.model.AllView>
+      <owner class="hudson" reference="../../.."/>
+      <name>All</name>
+    </hudson.model.AllView>
+    <listView>
+      <owner class="hudson" reference="../../.."/>
+      <name>JON23</name>
+      <description>&lt;H3&gt;OVERVIEW:&lt;/H3&gt;&#xd;
+&lt;B&gt; execute-any-group-jon23 &lt;/B&gt; contains individual suites of automated tests grouped by functional coverage. &lt;BR&gt;&#xd;
+&lt;B&gt; overnight-test-all-groups-jon23 &lt;/B&gt;  is a full regression suite &lt;BR&gt;&#xd;
+&#xd;
+&lt;H3&gt; PREREQUISITE INSTRUCTIONS: &lt;/H3&gt; &#xd;
+&lt;UL&gt;&#xd;
+&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://statler.usersys.redhat.com/auto-ssh/id_auto_dsa.pub&gt;this_jonqa_publickey&lt;/A&gt; user@server_to_test &lt;/CODE&gt;  (Note: The &apos;server_to_test&apos; must be the machine name accessible through DDNS on which your jon23 server is running. The &apos;user&apos; must be the id under which your &apos;server_to_test&apos;  is running.  &lt;/LI&gt;&#xd;
+&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://statler.usersys.redhat.com/auto-ssh/id_auto_dsa.pub&gt;this_jonqa_publickey&lt;/A&gt; user@agent_to_test &lt;/CODE&gt;  (Note: The &apos;agent_to_test&apos; must be the machine name accessible through DDNS on which your jon23 agent is running and is a client of your &apos;server_to_test&apos;. The &apos;user&apos; must be the id under which your &apos;agent_to_test&apos; is running.  &lt;/LI&gt;&#xd;
+&lt;/UL&gt;&#xd;
+&#xd;
+&#xd;
+</description>
+      <jobNames class="tree-set">
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+        <string>execute-any-group-jon23</string>
+        <string>overnight-test-all-groups-jon23</string>
+      </jobNames>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
+        <hudson.views.BuildButtonColumn/>
+      </columns>
+    </listView>
+    <listView>
+      <owner class="hudson" reference="../../.."/>
+      <name>RHQ</name>
+      <description>&lt;H3&gt;OVERVIEW:&lt;/H3&gt; &#xd;
+&lt;B&gt; execute-any-group-rhq &lt;/B&gt; contains individual suites of automated tests grouped by functional coverage.&lt;BR&gt;&#xd;
+&lt;B&gt; overnight-test-all-groups-rhq &lt;/B&gt; is a full regression suite that is scheduled to automatically execute everynight against an automated build and install of from the latest master.  (This job is NOT available for anonymous execution) &lt;BR&gt;&#xd;
+&#xd;
+&lt;H3&gt; PREREQUISITE INSTRUCTIONS: &lt;/H3&gt; &#xd;
+&lt;UL&gt;&#xd;
+&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://statler.usersys.redhat.com/auto-ssh/id_auto_dsa.pub&gt;this_jonqa_publickey&lt;/A&gt; user@server_to_test &lt;/CODE&gt;  (Note: The &apos;server_to_test&apos; must be the machine name accessible through DDNS on which your jon23 server is running. The &apos;user&apos; must be the id under which your &apos;server_to_test&apos;  is running.  &lt;/LI&gt;&#xd;
+&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://statler.usersys.redhat.com/auto-ssh/id_auto_dsa.pub&gt;this_jonqa_publickey&lt;/A&gt; user@agent_to_test &lt;/CODE&gt;  (Note: The &apos;agent_to_test&apos; must be the machine name accessible through DDNS on which your jon23 agent is running and is a client of your &apos;server_to_test&apos;. The &apos;user&apos; must be the id under which your &apos;agent_to_test&apos; is running.  &lt;/LI&gt;&#xd;
+&lt;/UL&gt;&#xd;
+</description>
+      <jobNames class="tree-set">
+        <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView/jobNames/comparator"/>
+        <string>execute-any-group-rhq</string>
+        <string>jweiss-overnight-test-all-groups-rhq</string>
+        <string>overnight-test-all-groups-rhq</string>
+      </jobNames>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
+        <hudson.views.BuildButtonColumn/>
+      </columns>
+    </listView>
+    <listView>
+      <owner class="hudson" reference="../../.."/>
+      <name>RHQ-IndividualGroups</name>
+      <description>&lt;h2&gt;&lt;font color=red&gt;ADMIN ONLY (These jobs are NOT available for anonymous execution.&lt;/font&gt;&lt;/h2&gt;&#xd;
+&lt;H3&gt;OVERVIEW:&lt;/H3&gt; &#xd;
+&lt;B&gt; Tests broken out by group&lt;/B&gt; (Permits more accurate historical trends of each test group) &lt;BR&gt;</description>
+      <jobNames class="tree-set">
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+        <string>Alerts</string>
+        <string>AlertTemplates</string>
+        <string>ConfigurationHistory</string>
+        <string>ConnectionProperties_Editing_and_History</string>
+        <string>Content</string>
+        <string>Cron</string>
+        <string>DatasourceCreation</string>
+        <string>DynaGroups</string>
+        <string>Events</string>
+        <string>Favorites</string>
+        <string>GeneralProperties</string>
+        <string>GroupConfiguration</string>
+        <string>GroupRoles</string>
+        <string>HostsFile</string>
+        <string>LDAPLogin</string>
+        <string>MetricSchedules</string>
+        <string>MetricTemplates</string>
+        <string>Operations</string>
+        <string>Postfix</string>
+        <string>QuickLinks</string>
+        <string>ResourceGroups</string>
+        <string>Search</string>
+        <string>SortTablesByColumns</string>
+        <string>StartPageLinks</string>
+        <string>Sudoers</string>
+        <string>UserAdministration</string>
+      </jobNames>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
+        <hudson.views.BuildButtonColumn/>
+      </columns>
+    </listView>
+    <listView>
+      <owner class="hudson" reference="../../.."/>
+      <name>build</name>
+      <jobNames class="tree-set">
+        <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView[3]/jobNames/comparator"/>
+        <string>build_master</string>
+        <string>build_master-notest</string>
+        <string>install-build</string>
+      </jobNames>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
+        <hudson.views.BuildButtonColumn/>
+      </columns>
+    </listView>
+  </views>
+  <primaryView>All</primaryView>
+  <slaveAgentPort>0</slaveAgentPort>
+  <label></label>
+  <nodeProperties/>
+  <globalNodeProperties/>
+  <disabledAdministrativeMonitors/>
+</hudson>
