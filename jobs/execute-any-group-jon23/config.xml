@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>&lt;H3&gt;INSTRUCTIONS:&lt;/H3&gt; &#xd;
+&lt;UL&gt;&#xd;
+&lt;LI&gt; Click &apos;Build Now&apos; to begin a test run. &lt;/LI&gt;&#xd;
+&lt;LI&gt; From the list of fields, read their descriptions and set the values appropriate for your testing. &lt;/LI&gt;&#xd;
+&lt;LI&gt; Then click the &apos;Build&apos; button. &lt;/LI&gt;&#xd;
+&lt;LI&gt; View your tests in live action by typing: &lt;B&gt;&lt;CODE&gt;vncviewer statler.usersys.redhat.com:0&lt;/CODE&gt;&lt;/B&gt; &lt;/LI&gt;&#xd;
+&lt;/UL&gt;&#xd;
+</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.security.AuthorizationMatrixProperty>
+      <permission>hudson.model.Item.Build:anonymous</permission>
+      <permission>hudson.model.Item.Workspace:anonymous</permission>
+      <permission>hudson.model.Item.Read:anonymous</permission>
+    </hudson.security.AuthorizationMatrixProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>TEST_GROUP</name>
+          <description>&lt;b&gt;&lt;big&gt;The function test group name&lt;/b&gt;&lt;/big&gt;</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>Start Page Links</string>
+              <string>Quick Links</string>
+              <string>LDAP Login</string>
+              <string>Resource Groups</string>
+              <string>Group Configuration</string>
+              <string>Datasource Creation</string>
+              <string>User Administration</string>
+              <string>Content</string>
+              <string>Configuration History</string>
+              <string>Search</string>
+              <string>Favorites</string>
+              <string>Connection Properties Editing and History</string>
+              <string>Events</string>
+              <string>Operations</string>
+              <string>Group Roles</string>
+              <string>DynaGroups</string>
+              <string>Alerts</string>
+              <string>Alert Templates</string>
+              <string>Metric Templates</string>
+              <string>Metric Schedules</string>
+              <string>General Properties</string>
+              <string>Sort Tables By Columns</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>SERVER_URL</name>
+          <description>&lt;b&gt;&lt;big&gt;Your Server Hostname like http://yourServer.com:7080&lt;/b&gt;&lt;/big&gt;</description>
+          <defaultValue>http://auto-jon23.usersys.redhat.com:7080</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>VERSION</name>
+          <description>&lt;b&gt;&lt;big&gt;2.3.0 is our version number for JON&lt;/b&gt;&lt;/big&gt;</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>2.3.0</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>USERNAME</name>
+          <description>&lt;b&gt;&lt;big&gt;The admin user&lt;/b&gt;&lt;/big&gt;</description>
+          <defaultValue>rhqadmin</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.PasswordParameterDefinition>
+          <name>PASSWORD</name>
+          <description>&lt;b&gt;&lt;big&gt;The password for the admin user.&lt;/b&gt;&lt;/big&gt;</description>
+          <defaultValue>rhqadmin</defaultValue>
+        </hudson.model.PasswordParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>SERVER_USER</name>
+          <description>&lt;b&gt;&lt;big&gt;The user that jon is installed under.&lt;/b&gt;&lt;/big&gt;&lt;br&gt;
+&lt;b&gt;&lt;big&gt;Sometimes &quot;root&quot;, or &quot;jonqa&quot; or rhqadmin, or another user&lt;/big&gt;&lt;/b&gt;</description>
+          <defaultValue>jonqa</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector"/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>echo &quot;===========================================================&quot;
+echo  ${TEST_GROUP}
+echo &quot;===========================================================&quot;
+rm -Rf *
+git clone git://github.com/weissjeffm/webui-framework.git
+git clone git://git.rhndev.redhat.com/automatjon
+chmod 600 $WORKSPACE/automatjon/jon-2.0/.ssh/id*</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Ant>
+      <targets>compile-jon</targets>
+      <antName>(Default)</antName>
+      <buildFile>automatjon/jon-2.0/build.xml</buildFile>
+    </hudson.tasks.Ant>
+    <hudson.plugins.groovy.Groovy>
+      <scriptSource class="hudson.plugins.groovy.FileScriptSource">
+        <scriptFile>automatjon/jon-2.0/src/hudson.groovy</scriptFile>
+      </scriptSource>
+      <groovyName>(Default)</groovyName>
+      <parameters>-Dhudson.test.name=$TEST_GROUP   -Djon.server.url=$SERVER_URL -Djon.version=$VERSION  -Djon.admin.user=$USERNAME -Djon.admin.password=$PASSWORD -Djon.server.user=$SERVER_USER</parameters>
+      <scriptParameters>automatjon/jon-2.0/src/com/redhat/qe/jon23/tests/functional-testng.xml ${TEST_GROUP}</scriptParameters>
+      <properties></properties>
+    </hudson.plugins.groovy.Groovy>
+    <hudson.tasks.Ant>
+      <targets>reports</targets>
+      <antName>(Default)</antName>
+      <buildFile>automatjon/jon-2.0/build.xml</buildFile>
+    </hudson.tasks.Ant>
+    <hudson.tasks.Shell>
+      <command>#kill all the leftover firefox processes that selenium started
+sudo -u vncuser killall -9 firefox</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>test-output/**/*</artifacts>
+      <latestOnly>false</latestOnly>
+    </hudson.tasks.ArtifactArchiver>
+    <htmlpublisher.HtmlPublisher>
+      <reportTargets>
+        <htmlpublisher.HtmlPublisherTarget>
+          <reportName>TestNG Report</reportName>
+          <reportDir>test-output/html/</reportDir>
+          <reportFiles>index.html</reportFiles>
+          <keepAll>true</keepAll>
+          <wrapperName>htmlpublisher-wrapper.html</wrapperName>
+        </htmlpublisher.HtmlPublisherTarget>
+      </reportTargets>
+    </htmlpublisher.HtmlPublisher>
+  </publishers>
+  <buildWrappers/>
+</project>

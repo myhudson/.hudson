@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>This suite will execute ALL of the individual test groups. &lt;BR&gt;&#xd;
+View your tests in live action by typing: &lt;CODE&gt;vncviewer statler.usersys.redhat.com:0 &lt;/CODE&gt;</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.security.AuthorizationMatrixProperty>
+      <permission>hudson.model.Item.Read:anonymous</permission>
+    </hudson.security.AuthorizationMatrixProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>SERVER_HOSTNAME</name>
+          <description>Your Server Hostname like http://yourServer.com:7080</description>
+          <defaultValue>http://auto-jon23.usersys.redhat.com:7080</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>VERSION</name>
+          <description>Version of JON</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>2.3.0</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>USERNAME</name>
+          <description>admin for Jon or imanage</description>
+          <defaultValue>rhqadmin</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.PasswordParameterDefinition>
+          <name>PASSWORD</name>
+          <description>password for admin of Jon or imanage</description>
+          <defaultValue>rhqadmin</defaultValue>
+        </hudson.model.PasswordParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>SERVER_USER</name>
+          <description>Thie user that jon is installed under.
+Sometimes &quot;root&quot;, or &quot;jonqa&quot; or rhqadmin, or another user
+jon.server.user=jonqa
+</description>
+          <defaultValue>root</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector"/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>echo &quot;===============&quot;
+echo  ${TEST_GROUP}
+echo &quot;===============&quot;
+rm -Rf *
+git clone git://github.com/weissjeffm/webui-framework.git
+git clone git://git.rhndev.redhat.com/automatjon
+chmod 600 $WORKSPACE/automatjon/jon-2.0/.ssh/id*</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Ant>
+      <targets>23functional-testng</targets>
+      <antName>(Default)</antName>
+      <buildFile>automatjon/jon-2.0/build.xml</buildFile>
+      <properties>jon.server.url=${SERVER_HOSTNAME}
+jon.version=${VERSION}
+jon.admin.user=${USERNAME}
+jon.admin.password=${PASSWORD}
+jon.server.user=${SERVER_USER}</properties>
+    </hudson.tasks.Ant>
+    <hudson.tasks.Ant>
+      <targets>overnight_reports</targets>
+      <antName>(Default)</antName>
+      <buildFile>automatjon/jon-2.0/build.xml</buildFile>
+    </hudson.tasks.Ant>
+    <hudson.tasks.Shell>
+      <command>#kill all the leftover firefox processes that selenium started
+sudo -u vncuser killall -9 firefox</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>automatjon/jon-2.0/test-output/**/*</artifacts>
+      <latestOnly>false</latestOnly>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.tasks.junit.JUnitResultArchiver>
+      <testResults>test-output-reportng/*.xml</testResults>
+      <testDataPublishers/>
+    </hudson.tasks.junit.JUnitResultArchiver>
+    <htmlpublisher.HtmlPublisher>
+      <reportTargets>
+        <htmlpublisher.HtmlPublisherTarget>
+          <reportName>TestNG Report</reportName>
+          <reportDir>automatjon/jon-2.0/test-output/html/</reportDir>
+          <reportFiles>index.html</reportFiles>
+          <keepAll>false</keepAll>
+          <wrapperName>htmlpublisher-wrapper.html</wrapperName>
+        </htmlpublisher.HtmlPublisherTarget>
+      </reportTargets>
+    </htmlpublisher.HtmlPublisher>
+  </publishers>
+  <buildWrappers/>
+</project>
