@@ -130,7 +130,6 @@
         <string>Alerts</string>
         <string>AlertTemplates</string>
         <string>ConfigurationHistory</string>
-        <string>ConnectionProperties_Editing_and_History</string>
         <string>Content</string>
         <string>Cron</string>
         <string>DatasourceCreation</string>
