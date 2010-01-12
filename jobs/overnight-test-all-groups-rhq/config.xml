@@ -88,7 +88,7 @@ sudo -u vncuser killall -9 firefox</command>
       <latestOnly>false</latestOnly>
     </hudson.tasks.ArtifactArchiver>
     <hudson.tasks.junit.JUnitResultArchiver>
-      <testResults>test-output-reportng/*.xml</testResults>
+      <testResults>automatjon/jon-2.0/test-output-reportng/*.xml</testResults>
       <testDataPublishers/>
     </hudson.tasks.junit.JUnitResultArchiver>
     <htmlpublisher.HtmlPublisher>

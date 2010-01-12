@@ -88,7 +88,7 @@ chmod 600 $WORKSPACE/automatjon/jon-2.0/.ssh/id*</command>
         <scriptFile>automatjon/jon-2.0/src/hudson.groovy</scriptFile>
       </scriptSource>
       <groovyName>(Default)</groovyName>
-      <parameters>-Dhudson.test.name=$TEST_GROUP   -Djon.server.url=$SERVER_URL -Djon.version=$VERSION  -Djon.admin.user=$USERNAME -Djon.admin.password=$PASSWORD -Djon.server.user=$SERVER_USER</parameters>
+      <parameters>-Dhudson.test.name=$TEST_GROUP   -Djon.server.url=$SERVER_URL -Djon.version=$VERSION  -Djon.admin.user=$USERNAME -Djon.admin.password=$PASSWORD -Djon.server.user=$SERVER_USER -Dtestng.outputdir=automatjon/jon-2.0/test-output</parameters>
       <scriptParameters>automatjon/jon-2.0/src/com/redhat/qe/rhq14/tests/functional-testng.xml $TEST_GROUP</scriptParameters>
       <properties></properties>
     </hudson.plugins.groovy.Groovy>
@@ -104,18 +104,18 @@ sudo -u vncuser killall -9 firefox</command>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>test-output/**/*</artifacts>
+      <artifacts>automatjon/jon-2.0/test-output/**/*</artifacts>
       <latestOnly>false</latestOnly>
     </hudson.tasks.ArtifactArchiver>
     <hudson.tasks.junit.JUnitResultArchiver>
-      <testResults>test-output-reportng/*.xml</testResults>
+      <testResults>automatjon/jon-2.0/test-output-reportng/*.xml</testResults>
       <testDataPublishers/>
     </hudson.tasks.junit.JUnitResultArchiver>
     <htmlpublisher.HtmlPublisher>
       <reportTargets>
         <htmlpublisher.HtmlPublisherTarget>
           <reportName>TestNG Report</reportName>
-          <reportDir>test-output/html/</reportDir>
+          <reportDir>automatjon/jon-2.0/test-output/html/</reportDir>
           <reportFiles>index.html</reportFiles>
           <keepAll>true</keepAll>
           <wrapperName>htmlpublisher-wrapper.html</wrapperName>
