@@ -99,7 +99,7 @@ chmod 600 $WORKSPACE/automatjon/jon-2.0/.ssh/id*</command>
     </hudson.tasks.Ant>
     <hudson.tasks.Shell>
       <command>#kill all the leftover firefox processes that selenium started
-sudo -u vncuser killall -9 firefox</command>
+sudo -u vncuser killall -9 firefox || echo &quot;looks like firefox is already gone.&quot;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
