@@ -88,7 +88,16 @@ chmod 600 $WORKSPACE/automatjon/jon-2.0/.ssh/id*</command>
         <scriptFile>automatjon/jon-2.0/src/hudson.groovy</scriptFile>
       </scriptSource>
       <groovyName>(Default)</groovyName>
-      <parameters>-Dhudson.test.name=$TEST_GROUP   -Djon.server.url=$SERVER_URL -Djon.version=$VERSION  -Djon.admin.user=$USERNAME -Djon.admin.password=$PASSWORD -Djon.server.user=$SERVER_USER -Dtestng.outputdir=automatjon/jon-2.0/test-output</parameters>
+      <parameters>-Dhudson.test.name=$TEST_GROUP
+-Djon.server.url=$SERVER_URL
+-Djon.version=$VERSION
+-Djon.admin.user=$USERNAME
+-Djon.admin.password=$PASSWORD
+-Djon.server.user=$SERVER_USER
+-Dtestng.outputdir=automatjon/jon-2.0/test-output
+-Dselenium.screenshot.dir=automatjon/jon-2.0/test-output/screenshots
+-Dselenium.screenshot.link.path=../artifact/automatjon/jon-2.0/test-output/screenshots
+</parameters>
       <scriptParameters>automatjon/jon-2.0/src/com/redhat/qe/rhq14/tests/functional-testng.xml $TEST_GROUP</scriptParameters>
       <properties></properties>
     </hudson.plugins.groovy.Groovy>
