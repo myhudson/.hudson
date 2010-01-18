@@ -36,10 +36,17 @@ View your tests in live action by typing: &lt;CODE&gt;vncviewer statler.usersys.
         </hudson.model.PasswordParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>SERVER_USER</name>
-          <description>Thie user that jon is installed under.
-Sometimes &quot;root&quot;, or &quot;jonqa&quot; or rhqadmin, or another user
+          <description>The user that jon is installed and running under.
+Sometimes &quot;root&quot;, or &quot;jonqa&quot;, or another user
 jon.server.user=jonqa
 </description>
+          <defaultValue>jonqa</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>AGENT_USER</name>
+          <description>The user that rhq-agent is running under.
+Sometimes &quot;root&quot;, or &quot;jonqa&quot;, or another user
+jon.agent.user=root</description>
           <defaultValue>root</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
@@ -50,7 +57,7 @@ jon.server.user=jonqa
   <disabled>false</disabled>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector"/>
-  <concurrentBuild>false</concurrentBuild>
+  <concurrentBuild>true</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
       <command>echo &quot;===============&quot;
@@ -69,7 +76,8 @@ chmod 600 $WORKSPACE/automatjon/jon-2.0/.ssh/id*</command>
 jon.version=${VERSION}
 jon.admin.user=${USERNAME}
 jon.admin.password=${PASSWORD}
-jon.server.user=${SERVER_USER}</properties>
+jon.server.user=${SERVER_USER}
+jon.agent.user=${AGENT_USER}</properties>
     </hudson.tasks.Ant>
     <hudson.tasks.Ant>
       <targets>overnight_reports</targets>

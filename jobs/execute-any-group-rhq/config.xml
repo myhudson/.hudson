@@ -3,7 +3,7 @@
   <actions/>
   <description>&lt;H3&gt;INSTRUCTIONS:&lt;/H3&gt; &#xd;
 &lt;UL&gt;&#xd;
-&lt;LI&gt;&lt;b&gt;To get a better idea of what each test group does, look at &lt;/b&gt; &lt;A HREF=http://statler.usersys.redhat.com:8080/view/RHQ/job/overnight-test-all-groups-rhq/lastSuccessfulBuild/artifact/automatjon/jon-2.0/test-output/html/index.html&gt;CLICK HERE&lt;/A&gt;&#xd;
+&lt;LI&gt;&lt;b&gt;To get a better idea of what each test group does, look at the &lt;/b&gt; &lt;A HREF=http://statler.usersys.redhat.com:8080/view/RHQ/job/overnight-test-all-groups-rhq/lastSuccessfulBuild/artifact/automatjon/jon-2.0/test-output/html/index.html&gt;last successful build results of overnight-test-all-groups-rhq&lt;/A&gt;.&#xd;
 &lt;LI&gt; Click &apos;Build Now&apos; to begin a test run. &lt;/LI&gt;&#xd;
 &lt;LI&gt; Pick a &quot;Test Group&quot; from the drop down box, (you can find out what each test group does by clicking the above link)&lt;/LI&gt;&#xd;
 &lt;LI&gt; From the list of fields, read their descriptions and set the values appropriate for your testing. &lt;/LI&gt;&#xd;
@@ -80,8 +80,14 @@
         </hudson.model.PasswordParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>SERVER_USER</name>
-          <description>&lt;b&gt;&lt;big&gt;User running your rhq-server process&lt;/big&gt;&lt;/b&gt;&lt;br&gt;
-&lt;b&gt;&lt;big&gt;Common users: &quot;root&quot;, &quot;jonqa&quot;, &quot;rhq&quot;&lt;/big&gt;&lt;/b&gt;</description>
+          <description>&lt;b&gt;User running your rhq-server process&lt;/b&gt;&lt;br&gt;
+&lt;b&gt;Common users: &quot;root&quot;, &quot;jonqa&quot;, &quot;rhq&quot;&lt;/b&gt;</description>
+          <defaultValue>rhq</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>AGENT_USER</name>
+          <description>&lt;b&gt;User running your rhq-agent process&lt;/b&gt;&lt;br&gt;
+&lt;b&gt;Common users: &quot;root&quot;, &quot;jonqa&quot;, &quot;rhq&quot;&lt;/b&gt;</description>
           <defaultValue>root</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
@@ -119,6 +125,7 @@ chmod 600 $WORKSPACE/automatjon/jon-2.0/.ssh/id*</command>
 -Djon.admin.user=$USERNAME
 -Djon.admin.password=$PASSWORD
 -Djon.server.user=$SERVER_USER
+-Djon.agent.user=$AGENT_USER
 -Dtestng.outputdir=automatjon/jon-2.0/test-output</parameters>
       <scriptParameters>automatjon/jon-2.0/src/com/redhat/qe/rhq14/tests/functional-testng.xml $TEST_GROUP </scriptParameters>
       <properties></properties>

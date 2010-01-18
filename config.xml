@@ -182,6 +182,7 @@
         <string>build_master-notest</string>
         <string>freestyle_buildMaster</string>
         <string>install-build</string>
+        <string>install-build-improved</string>
       </jobNames>
       <columns>
         <hudson.views.StatusColumn/>

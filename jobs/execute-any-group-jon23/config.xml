@@ -75,8 +75,14 @@
         <hudson.model.StringParameterDefinition>
           <name>SERVER_USER</name>
           <description>&lt;b&gt;&lt;big&gt;The user that jon is installed under.&lt;/b&gt;&lt;/big&gt;&lt;br&gt;
-&lt;b&gt;&lt;big&gt;Sometimes &quot;root&quot;, or &quot;jonqa&quot; or rhqadmin, or another user&lt;/big&gt;&lt;/b&gt;</description>
+&lt;b&gt;&lt;big&gt;Sometimes &quot;root&quot;, &quot;jonqa&quot;, or another user&lt;/big&gt;&lt;/b&gt;</description>
           <defaultValue>jonqa</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>AGENT_USER</name>
+          <description>&lt;b&gt;&lt;big&gt;The user that rhq-agent is running under.&lt;/b&gt;&lt;/big&gt;&lt;br&gt;
+&lt;b&gt;&lt;big&gt;Sometimes &quot;root&quot;, &quot;jonqa&quot;, or another user&lt;/big&gt;&lt;/b&gt;</description>
+          <defaultValue>root</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -107,7 +113,7 @@ chmod 600 $WORKSPACE/automatjon/jon-2.0/.ssh/id*</command>
         <scriptFile>automatjon/jon-2.0/src/hudson.groovy</scriptFile>
       </scriptSource>
       <groovyName>(Default)</groovyName>
-      <parameters>-Dhudson.test.name=$TEST_GROUP   -Djon.server.url=$SERVER_URL -Djon.version=$VERSION  -Djon.admin.user=$USERNAME -Djon.admin.password=$PASSWORD -Djon.server.user=$SERVER_USER</parameters>
+      <parameters>-Dhudson.test.name=$TEST_GROUP   -Djon.server.url=$SERVER_URL -Djon.version=$VERSION  -Djon.admin.user=$USERNAME -Djon.admin.password=$PASSWORD -Djon.server.user=$SERVER_USER -Djon.agent.user=$AGENT_USER</parameters>
       <scriptParameters>automatjon/jon-2.0/src/com/redhat/qe/jon23/tests/functional-testng.xml ${TEST_GROUP}</scriptParameters>
       <properties></properties>
     </hudson.plugins.groovy.Groovy>

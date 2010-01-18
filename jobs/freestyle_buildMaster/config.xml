@@ -65,7 +65,7 @@ zip -1 -r rhq-plugin-pack-all-SNAPSHOT.zip * -i *SNAPSHOT.jar
       <latestOnly>false</latestOnly>
     </hudson.tasks.ArtifactArchiver>
     <hudson.tasks.BuildTrigger>
-      <childProjects>install-build</childProjects>
+      <childProjects>install-build-improved</childProjects>
       <threshold>
         <name>UNSTABLE</name>
         <ordinal>1</ordinal>
