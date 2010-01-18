@@ -180,7 +180,7 @@
         <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView[3]/jobNames/comparator"/>
         <string>build_master</string>
         <string>build_master-notest</string>
-        <string>feestyle_buildMaster</string>
+        <string>freestyle_buildMaster</string>
         <string>install-build</string>
       </jobNames>
       <columns>
