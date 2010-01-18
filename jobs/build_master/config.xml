@@ -39,7 +39,8 @@
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
     <submoduleCfg class="list"/>
   </scm>
-  <canRoam>true</canRoam>
+  <assignedNode>jweiss.usersys.redhat.com</assignedNode>
+  <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector">
@@ -59,10 +60,16 @@
   <usePrivateRepository>false</usePrivateRepository>
   <ignoreUpstremChanges>false</ignoreUpstremChanges>
   <archivingDisabled>false</archivingDisabled>
-  <reporters/>
+  <reporters>
+    <hudson.maven.reporters.MavenMailer>
+      <recipients>imanage-qe-list@redhat.com</recipients>
+      <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
+      <sendToIndividuals>false</sendToIndividuals>
+    </hudson.maven.reporters.MavenMailer>
+  </reporters>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>modules/enterprise/server/container/target/rhq-server*.zip</artifacts>
+      <artifacts>modules/enterprise/server/container/target/rhq-server*.zip,modules/plugins/**/*SNAPSHOT.jar</artifacts>
       <latestOnly>false</latestOnly>
     </hudson.tasks.ArtifactArchiver>
     <hudson.tasks.BuildTrigger>

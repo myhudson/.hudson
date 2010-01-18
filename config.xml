@@ -50,7 +50,17 @@
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
       <launcher class="hudson.slaves.JNLPLauncher"/>
       <label></label>
-      <nodeProperties/>
+      <nodeProperties>
+        <hudson.tools.ToolLocationNodeProperty>
+          <locations>
+            <hudson.tools.ToolLocationNodeProperty_-ToolLocation>
+              <type>hudson.tasks.Maven$MavenInstallation$DescriptorImpl</type>
+              <name>/home/hudson/apache-maven-2.2.1</name>
+              <home>/usr/local/maven</home>
+            </hudson.tools.ToolLocationNodeProperty_-ToolLocation>
+          </locations>
+        </hudson.tools.ToolLocationNodeProperty>
+      </nodeProperties>
     </slave>
   </slaves>
   <quietPeriod>5</quietPeriod>
@@ -170,6 +180,7 @@
         <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView[3]/jobNames/comparator"/>
         <string>build_master</string>
         <string>build_master-notest</string>
+        <string>feestyle_buildMaster</string>
         <string>install-build</string>
       </jobNames>
       <columns>

@@ -3,7 +3,9 @@
   <actions/>
   <description>&lt;H3&gt;INSTRUCTIONS:&lt;/H3&gt; &#xd;
 &lt;UL&gt;&#xd;
+&lt;LI&gt;&lt;b&gt;To get a better idea of what each test group does, look at &lt;/b&gt; &lt;A HREF=http://statler.usersys.redhat.com:8080/view/RHQ/job/overnight-test-all-groups-rhq/lastSuccessfulBuild/artifact/automatjon/jon-2.0/test-output/html/index.html&gt;CLICK HERE&lt;/A&gt;&#xd;
 &lt;LI&gt; Click &apos;Build Now&apos; to begin a test run. &lt;/LI&gt;&#xd;
+&lt;LI&gt; Pick a &quot;Test Group&quot; from the drop down box, (you can find out what each test group does by clicking the above link)&lt;/LI&gt;&#xd;
 &lt;LI&gt; From the list of fields, read their descriptions and set the values appropriate for your testing. &lt;/LI&gt;&#xd;
 &lt;LI&gt; Then click the &apos;Build&apos; button. &lt;/LI&gt;&#xd;
 &lt;LI&gt; View your tests in live action by typing: &lt;B&gt;&lt;CODE&gt;vncviewer statler.usersys.redhat.com:0&lt;/CODE&gt;&lt;/B&gt; &lt;/LI&gt;&#xd;
@@ -86,7 +88,8 @@
     </hudson.model.ParametersDefinitionProperty>
   </properties>
   <scm class="hudson.scm.NullSCM"/>
-  <canRoam>true</canRoam>
+  <assignedNode>jweiss.usersys.redhat.com</assignedNode>
+  <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector"/>
@@ -111,8 +114,14 @@ chmod 600 $WORKSPACE/automatjon/jon-2.0/.ssh/id*</command>
         <scriptFile>automatjon/jon-2.0/src/hudson.groovy</scriptFile>
       </scriptSource>
       <groovyName>(Default)</groovyName>
-      <parameters>-Dhudson.test.name=$TEST_GROUP   -Djon.server.url=$SERVER_URL -Djon.version=$VERSION  -Djon.admin.user=$USERNAME -Djon.admin.password=$PASSWORD -Djon.server.user=$SERVER_USER</parameters>
-      <scriptParameters>automatjon/jon-2.0/src/com/redhat/qe/rhq14/tests/functional-testng.xml $TEST_GROUP</scriptParameters>
+      <parameters>-Dhudson.test.name=$TEST_GROUP
+-Djon.server.url=$SERVER_URL
+-Djon.version=$VERSION
+-Djon.admin.user=$USERNAME
+-Djon.admin.password=$PASSWORD
+-Djon.server.user=$SERVER_USER
+-Dtestng.outputdir=automatjon/jon-2.0/test-output</parameters>
+      <scriptParameters>automatjon/jon-2.0/src/com/redhat/qe/rhq14/tests/functional-testng.xml $TEST_GROUP </scriptParameters>
       <properties></properties>
     </hudson.plugins.groovy.Groovy>
     <hudson.tasks.Ant>
@@ -129,14 +138,14 @@ exit 0</command>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>test-output/**/*</artifacts>
+      <artifacts>automatjon/jon-2.0/test-output/**/*</artifacts>
       <latestOnly>false</latestOnly>
     </hudson.tasks.ArtifactArchiver>
     <htmlpublisher.HtmlPublisher>
       <reportTargets>
         <htmlpublisher.HtmlPublisherTarget>
           <reportName>TestNG Report</reportName>
-          <reportDir>test-output/html/</reportDir>
+          <reportDir>automatjon/jon-2.0/test-output/html/</reportDir>
           <reportFiles>index.html</reportFiles>
           <keepAll>true</keepAll>
           <wrapperName>htmlpublisher-wrapper.html</wrapperName>
