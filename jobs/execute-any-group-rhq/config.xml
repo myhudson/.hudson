@@ -48,6 +48,7 @@
               <string>Postfix</string>
               <string>Cron</string>
               <string>Hosts File</string>
+              <string>Aliases File</string>
               <string>Sudoers</string>
               <string>General Properties</string>
               <string>Sort Tables By Columns</string>
