@@ -19,9 +19,9 @@
     <permission>hudson.scm.SCM.Tag:admin</permission>
     <permission>hudson.model.Run.Delete:admin</permission>
     <permission>hudson.model.Computer.Delete:admin</permission>
-    <permission>hudson.model.View.Delete:admin</permission>
     <permission>hudson.model.Hudson.Read:anonymous</permission>
     <permission>hudson.model.Hudson.Read:admin</permission>
+    <permission>hudson.model.View.Delete:admin</permission>
     <permission>hudson.model.Run.Update:admin</permission>
   </authorizationStrategy>
   <securityRealm class="hudson.security.HudsonPrivateSecurityRealm">
@@ -180,9 +180,9 @@
         <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView[3]/jobNames/comparator"/>
         <string>build_master</string>
         <string>build_master-notest</string>
-        <string>freestyle_buildMaster</string>
+        <string>build_master_old</string>
         <string>install-build</string>
-        <string>install-build-improved</string>
+        <string>install-build-old</string>
       </jobNames>
       <columns>
         <hudson.views.StatusColumn/>
