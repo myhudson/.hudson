@@ -1,28 +1,28 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <hudson>
   <version>1.336</version>
-  <numExecutors>1</numExecutors>
+  <numExecutors>4</numExecutors>
   <mode>NORMAL</mode>
   <useSecurity>true</useSecurity>
   <authorizationStrategy class="hudson.security.ProjectMatrixAuthorizationStrategy">
-    <permission>hudson.model.Hudson.Administer:admin</permission>
-    <permission>hudson.model.Item.Build:admin</permission>
-    <permission>hudson.model.Item.Workspace:anonymous</permission>
-    <permission>hudson.model.Item.Workspace:admin</permission>
-    <permission>hudson.model.View.Create:admin</permission>
-    <permission>hudson.model.Computer.Delete:admin</permission>
-    <permission>hudson.model.Run.Delete:admin</permission>
+    <permission>hudson.scm.SCM.Tag:admin</permission>
     <permission>hudson.model.Run.Update:admin</permission>
-    <permission>hudson.model.Item.Delete:admin</permission>
+    <permission>hudson.model.Computer.Delete:admin</permission>
+    <permission>hudson.model.Item.Configure:admin</permission>
+    <permission>hudson.model.View.Create:admin</permission>
+    <permission>hudson.model.Item.Create:admin</permission>
+    <permission>hudson.model.Run.Delete:admin</permission>
+    <permission>hudson.model.Computer.Configure:admin</permission>
+    <permission>hudson.model.View.Delete:admin</permission>
+    <permission>hudson.model.Item.Read:admin</permission>
     <permission>hudson.model.Hudson.Read:anonymous</permission>
     <permission>hudson.model.Hudson.Read:admin</permission>
-    <permission>hudson.scm.SCM.Tag:admin</permission>
-    <permission>hudson.model.Item.Read:admin</permission>
-    <permission>hudson.model.Computer.Configure:admin</permission>
-    <permission>hudson.model.Item.Configure:admin</permission>
+    <permission>hudson.model.Item.Delete:admin</permission>
+    <permission>hudson.model.Hudson.Administer:admin</permission>
     <permission>hudson.model.View.Configure:admin</permission>
-    <permission>hudson.model.Item.Create:admin</permission>
-    <permission>hudson.model.View.Delete:admin</permission>
+    <permission>hudson.model.Item.Workspace:anonymous</permission>
+    <permission>hudson.model.Item.Workspace:admin</permission>
+    <permission>hudson.model.Item.Build:admin</permission>
   </authorizationStrategy>
   <securityRealm class="hudson.security.HudsonPrivateSecurityRealm">
     <disableSignup>false</disableSignup>
@@ -35,7 +35,7 @@
   <jdks>
     <jdk>
       <name>Open JDK 1.6</name>
-      <home>/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64</home>
+      <home>/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0</home>
       <properties/>
     </jdk>
   </jdks>
@@ -60,6 +60,56 @@
             </hudson.tools.ToolLocationNodeProperty_-ToolLocation>
           </locations>
         </hudson.tools.ToolLocationNodeProperty>
+      </nodeProperties>
+    </slave>
+    <slave>
+      <name>localslave1</name>
+      <description>Local slave 1</description>
+      <remoteFS>/home/hudson/localslave1</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.slaves.JNLPLauncher"/>
+      <label>selenium</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator"/>
+              </default>
+              <int>1</int>
+              <string>SELENIUM_ADDRESS</string>
+              <string>10.10.3.33:4442</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+    </slave>
+    <slave>
+      <name>localslave2</name>
+      <description>Local slave 2</description>
+      <remoteFS>/home/hudson/localslave2</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.slaves.JNLPLauncher"/>
+      <label>selenium</label>
+      <nodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave[2]/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+              </default>
+              <int>1</int>
+              <string>SELENIUM_ADDRESS</string>
+              <string>10.10.3.33:4443</string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
       </nodeProperties>
     </slave>
   </slaves>
