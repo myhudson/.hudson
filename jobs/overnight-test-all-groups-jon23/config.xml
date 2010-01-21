@@ -77,7 +77,8 @@ jon.version=${VERSION}
 jon.admin.user=${USERNAME}
 jon.admin.password=${PASSWORD}
 jon.server.user=${SERVER_USER}
-jon.agent.user=${AGENT_USER}</properties>
+jon.agent.user=${AGENT_USER}
+selenium.address=${SELENIUM_ADDRESS}</properties>
     </hudson.tasks.Ant>
     <hudson.tasks.Ant>
       <targets>overnight_reports</targets>

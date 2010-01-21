@@ -2,7 +2,7 @@
 <project>
   <actions/>
   <description>This suite will execute ALL of the individual test groups. &lt;BR&gt;&#xd;
-View your tests in live action by typing: &lt;CODE&gt;vncviewer statler.usersys.redhat.com:0 &lt;/CODE&gt;</description>
+</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
@@ -53,7 +53,8 @@ jon.agent.user=jonqa</description>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
   <scm class="hudson.scm.NullSCM"/>
-  <canRoam>true</canRoam>
+  <assignedNode>selenium</assignedNode>
+  <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector"/>
@@ -78,7 +79,8 @@ jon.version=${VERSION}
 jon.admin.user=${USERNAME}
 jon.admin.password=${PASSWORD}
 jon.server.user=${SERVER_USER}
-jon.agent.user=${AGENT_USER}</properties>
+jon.agent.user=${AGENT_USER}
+selenium.address=${SELENIUM_ADDRESS}</properties>
     </hudson.tasks.Ant>
     <hudson.tasks.Ant>
       <targets>overnight_reports</targets>

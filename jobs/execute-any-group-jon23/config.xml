@@ -12,8 +12,8 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
-      <permission>hudson.model.Item.Workspace:anonymous</permission>
       <permission>hudson.model.Item.Read:anonymous</permission>
+      <permission>hudson.model.Item.Workspace:anonymous</permission>
       <permission>hudson.model.Item.Build:anonymous</permission>
     </hudson.security.AuthorizationMatrixProperty>
     <hudson.model.ParametersDefinitionProperty>
@@ -113,7 +113,14 @@ chmod 600 $WORKSPACE/automatjon/jon-2.0/.ssh/id*</command>
         <scriptFile>automatjon/jon-2.0/src/hudson.groovy</scriptFile>
       </scriptSource>
       <groovyName>(Default)</groovyName>
-      <parameters>-Dhudson.test.name=$TEST_GROUP   -Djon.server.url=$SERVER_URL -Djon.version=$VERSION  -Djon.admin.user=$USERNAME -Djon.admin.password=$PASSWORD -Djon.server.user=$SERVER_USER -Djon.agent.user=$AGENT_USER</parameters>
+      <parameters>-Dhudson.test.name=$TEST_GROUP
+-Djon.server.url=$SERVER_URL
+-Djon.version=$VERSION
+-Djon.admin.user=$USERNAME
+-Djon.admin.password=$PASSWORD
+-Djon.server.user=$SERVER_USER
+-Djon.agent.user=$AGENT_USER
+-Dselenium.address=$SELENIUM_ADDRESS</parameters>
       <scriptParameters>automatjon/jon-2.0/src/com/redhat/qe/jon23/tests/functional-testng.xml ${TEST_GROUP}</scriptParameters>
       <properties></properties>
     </hudson.plugins.groovy.Groovy>
