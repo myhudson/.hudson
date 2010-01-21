@@ -127,7 +127,8 @@ chmod 600 $WORKSPACE/automatjon/jon-2.0/.ssh/id*</command>
 -Djon.admin.password=$PASSWORD
 -Djon.server.user=$SERVER_USER
 -Djon.agent.user=$AGENT_USER
--Dtestng.outputdir=automatjon/jon-2.0/test-output</parameters>
+-Dtestng.outputdir=automatjon/jon-2.0/test-output
+-Dselenium.address=$SELENIUM_ADDRESS</parameters>
       <scriptParameters>automatjon/jon-2.0/src/com/redhat/qe/rhq14/tests/functional-testng.xml $TEST_GROUP </scriptParameters>
       <properties></properties>
     </hudson.plugins.groovy.Groovy>

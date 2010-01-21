@@ -104,6 +104,7 @@ chmod 600 $WORKSPACE/automatjon/jon-2.0/.ssh/id*</command>
 -Dtestng.outputdir=automatjon/jon-2.0/test-output
 -Dselenium.screenshot.dir=automatjon/jon-2.0/test-output/screenshots
 -Dselenium.screenshot.link.path=../artifact/automatjon/jon-2.0/test-output/screenshots
+-Dselenium.address=$SELENIUM_ADDRESS
 </parameters>
       <scriptParameters>automatjon/jon-2.0/src/com/redhat/qe/rhq14/tests/functional-testng.xml $TEST_GROUP</scriptParameters>
       <properties></properties>

@@ -14,9 +14,9 @@
     <permission>hudson.model.Run.Delete:admin</permission>
     <permission>hudson.model.Run.Update:admin</permission>
     <permission>hudson.model.Item.Delete:admin</permission>
+    <permission>hudson.scm.SCM.Tag:admin</permission>
     <permission>hudson.model.Hudson.Read:anonymous</permission>
     <permission>hudson.model.Hudson.Read:admin</permission>
-    <permission>hudson.scm.SCM.Tag:admin</permission>
     <permission>hudson.model.Item.Read:admin</permission>
     <permission>hudson.model.Computer.Configure:admin</permission>
     <permission>hudson.model.Item.Configure:admin</permission>
@@ -200,6 +200,20 @@
   <slaveAgentPort>0</slaveAgentPort>
   <label></label>
   <nodeProperties/>
-  <globalNodeProperties/>
+  <globalNodeProperties>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents/>
+        <tree-map>
+          <default>
+            <comparator class="hudson.util.CaseInsensitiveComparator"/>
+          </default>
+          <int>1</int>
+          <string>SELENIUM_ADDRESS</string>
+          <string>statler.usersys.redhat.com:4480</string>
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+  </globalNodeProperties>
   <disabledAdministrativeMonitors/>
 </hudson>
