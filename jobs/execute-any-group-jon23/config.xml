@@ -21,7 +21,7 @@
       <parameterDefinitions>
         <hudson.model.ChoiceParameterDefinition>
           <name>TEST_GROUP</name>
-          <description>&lt;b&gt;&lt;big&gt;The function test group name&lt;/b&gt;&lt;/big&gt;</description>
+          <description>&lt;b&gt;&lt;big&gt;The testng group name&lt;/big&gt;&lt;/b&gt;</description>
           <choices class="java.util.Arrays$ArrayList">
             <a class="string-array">
               <string>Start Page Links</string>
@@ -44,6 +44,11 @@
               <string>Alert Templates</string>
               <string>Metric Templates</string>
               <string>Metric Schedules</string>
+              <string>Postfix</string>
+              <string>Cron</string>
+              <string>Hosts File</string>
+              <string>Aliases File</string>
+              <string>Sudoers</string>
               <string>General Properties</string>
               <string>Sort Tables By Columns</string>
             </a>
@@ -51,12 +56,12 @@
         </hudson.model.ChoiceParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>SERVER_URL</name>
-          <description>&lt;b&gt;&lt;big&gt;Your Server Hostname like http://yourServer.com:7080&lt;/b&gt;&lt;/big&gt;</description>
-          <defaultValue>http://auto-jon23.usersys.redhat.com:7080</defaultValue>
+          <description>&lt;b&gt;&lt;big&gt;URL to your RHQ server: http://yourserver.com:7080&lt;/big&gt;&lt;/b&gt;</description>
+          <defaultValue>http://SERVER.redhat.com:7080</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.ChoiceParameterDefinition>
           <name>VERSION</name>
-          <description>&lt;b&gt;&lt;big&gt;2.3.0 is our version number for JON&lt;/b&gt;&lt;/big&gt;</description>
+          <description>&lt;b&gt;&lt;big&gt;1.4.0 is our version number for RHQ (iManage)&lt;/big&gt;&lt;/b&gt;</description>
           <choices class="java.util.Arrays$ArrayList">
             <a class="string-array">
               <string>2.3.0</string>
@@ -65,24 +70,24 @@
         </hudson.model.ChoiceParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>USERNAME</name>
-          <description>&lt;b&gt;&lt;big&gt;The admin user&lt;/b&gt;&lt;/big&gt;</description>
+          <description>&lt;b&gt;&lt;big&gt;Administrator for RHQ (iManage)&lt;/big&gt;&lt;/b&gt;</description>
           <defaultValue>rhqadmin</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.PasswordParameterDefinition>
           <name>PASSWORD</name>
-          <description>&lt;b&gt;&lt;big&gt;The password for the admin user.&lt;/b&gt;&lt;/big&gt;</description>
+          <description>&lt;b&gt;&lt;big&gt;Password for admin of RHQ (iManage)&lt;/big&gt;&lt;/b&gt;</description>
           <defaultValue>rhqadmin</defaultValue>
         </hudson.model.PasswordParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>SERVER_USER</name>
-          <description>&lt;b&gt;&lt;big&gt;The user that jon is installed under.&lt;/b&gt;&lt;/big&gt;&lt;br&gt;
-&lt;b&gt;&lt;big&gt;Sometimes &quot;root&quot;, &quot;jonqa&quot;, or another user&lt;/big&gt;&lt;/b&gt;</description>
-          <defaultValue>jonqa</defaultValue>
+          <description>&lt;b&gt;User running your rhq-server process&lt;/b&gt;&lt;br&gt;
+&lt;b&gt;Common users: &quot;root&quot;, &quot;jonqa&quot;, &quot;rhq&quot;&lt;/b&gt;</description>
+          <defaultValue>rhq</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>AGENT_USER</name>
-          <description>&lt;b&gt;&lt;big&gt;The user that rhq-agent is running under.&lt;/b&gt;&lt;/big&gt;&lt;br&gt;
-&lt;b&gt;&lt;big&gt;Sometimes &quot;root&quot;, &quot;jonqa&quot;, or another user&lt;/big&gt;&lt;/b&gt;</description>
+          <description>&lt;b&gt;User running your rhq-agent process&lt;/b&gt;&lt;br&gt;
+&lt;b&gt;Common users: &quot;root&quot;, &quot;jonqa&quot;, &quot;rhq&quot;&lt;/b&gt;</description>
           <defaultValue>root</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
@@ -96,9 +101,9 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>echo &quot;===========================================================&quot;
+      <command>echo &quot;===============&quot;
 echo  ${TEST_GROUP}
-echo &quot;===========================================================&quot;
+echo &quot;===============&quot;
 rm -Rf *
 git clone git://github.com/weissjeffm/webui-framework.git
 git clone git://git.rhndev.redhat.com/automatjon
