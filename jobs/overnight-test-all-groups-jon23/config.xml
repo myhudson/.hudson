@@ -53,7 +53,8 @@ jon.agent.user=root</description>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
   <scm class="hudson.scm.NullSCM"/>
-  <canRoam>true</canRoam>
+  <assignedNode>selenium</assignedNode>
+  <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector"/>
@@ -88,7 +89,7 @@ selenium.address=${SELENIUM_ADDRESS}</properties>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
 #kill all the leftover firefox processes that selenium started
-sudo -u vncuser killall -9 firefox
+#sudo -u vncuser killall -9 firefox
 exit 0</command>
     </hudson.tasks.Shell>
   </builders>

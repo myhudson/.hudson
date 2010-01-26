@@ -39,7 +39,8 @@
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
     <submoduleCfg class="list"/>
   </scm>
-  <canRoam>true</canRoam>
+  <assignedNode>master</assignedNode>
+  <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector">
@@ -50,7 +51,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>mvn -Penterprise,postgres -Ddbsetup install
+      <command>mvn -Penterprise,postgres -Ddbsetup  install
 cd modules
 zip -1 -r rhq-plugin-pack-all-SNAPSHOT.zip plugins/* enterprise/server/plugins/* -i *SNAPSHOT.jar
 </command>
@@ -58,7 +59,7 @@ zip -1 -r rhq-plugin-pack-all-SNAPSHOT.zip plugins/* enterprise/server/plugins/*
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>modules/enterprise/server/container/target/rhq-server*.zip,rhq-plugin-pack*.zip</artifacts>
+      <artifacts>modules/enterprise/server/container/target/rhq-server*.zip,modules/rhq-plugin-pack*.zip</artifacts>
       <latestOnly>false</latestOnly>
     </hudson.tasks.ArtifactArchiver>
     <hudson.tasks.BuildTrigger>

@@ -3,12 +3,11 @@
   <actions/>
   <description>&lt;H3&gt;INSTRUCTIONS:&lt;/H3&gt; &#xd;
 &lt;UL&gt;&#xd;
-&lt;LI&gt;&lt;b&gt;To get a better idea of what each test group does, look at the &lt;/b&gt; &lt;A HREF=http://statler.usersys.redhat.com:8080/view/RHQ/job/overnight-test-all-groups-rhq/lastSuccessfulBuild/artifact/automatjon/jon-2.0/test-output/html/index.html&gt;last successful build results of overnight-test-all-groups-rhq&lt;/A&gt;.&#xd;
+&lt;LI&gt;&lt;b&gt;To get a better idea of what each test group does, look at the &lt;/b&gt; &lt;A HREF=view/RHQ/job/overnight-test-all-groups-rhq/lastSuccessfulBuild/artifact/automatjon/jon-2.0/test-output/html/index.html&gt;last successful build results of overnight-test-all-groups-rhq&lt;/A&gt;.&#xd;
 &lt;LI&gt; Click &apos;Build Now&apos; to begin a test run. &lt;/LI&gt;&#xd;
 &lt;LI&gt; Pick a &quot;Test Group&quot; from the drop down box, (you can find out what each test group does by clicking the above link)&lt;/LI&gt;&#xd;
 &lt;LI&gt; From the list of fields, read their descriptions and set the values appropriate for your testing. &lt;/LI&gt;&#xd;
 &lt;LI&gt; Then click the &apos;Build&apos; button. &lt;/LI&gt;&#xd;
-&lt;LI&gt; View your tests in live action by typing: &lt;B&gt;&lt;CODE&gt;vncviewer statler.usersys.redhat.com:0&lt;/CODE&gt;&lt;/B&gt; &lt;/LI&gt;&#xd;
 &lt;/UL&gt;&#xd;
 </description>
   <keepDependencies>false</keepDependencies>
@@ -129,7 +128,8 @@ chmod 600 $WORKSPACE/automatjon/jon-2.0/.ssh/id*</command>
 -Djon.server.user=$SERVER_USER
 -Djon.agent.user=$AGENT_USER
 -Dtestng.outputdir=automatjon/jon-2.0/test-output
--Dselenium.address=$SELENIUM_ADDRESS</parameters>
+-Dselenium.address=$SELENIUM_ADDRESS
+-Dselenium.screenshot.dir=automatjon/jon-2.0/test-output/screenshots</parameters>
       <scriptParameters>automatjon/jon-2.0/src/com/redhat/qe/rhq14/tests/functional-testng.xml $TEST_GROUP </scriptParameters>
       <properties></properties>
     </hudson.plugins.groovy.Groovy>
@@ -150,6 +150,10 @@ exit 0</command>
       <artifacts>automatjon/jon-2.0/test-output/**/*</artifacts>
       <latestOnly>false</latestOnly>
     </hudson.tasks.ArtifactArchiver>
+    <hudson.tasks.junit.JUnitResultArchiver>
+      <testResults>automatjon/jon-2.0/test-output-reportng/*.xml</testResults>
+      <testDataPublishers/>
+    </hudson.tasks.junit.JUnitResultArchiver>
     <htmlpublisher.HtmlPublisher>
       <reportTargets>
         <htmlpublisher.HtmlPublisherTarget>

@@ -43,7 +43,7 @@
   <slaves>
     <slave>
       <name>localslave1</name>
-      <description>Local slave 1</description>
+      <description>&lt;br&gt;To view vnc desktop, &lt;a href=&apos;http://hudson-qe.rhq.rdu.redhat.com:6002&apos; target=&apos;_blank&apos;&gt;click here&lt;/a&gt; or &lt;h3&gt;vncviewer hudson-qe.rhq.rdu.redhat.com :2&lt;/h3&gt;&lt;br&gt;</description>
       <remoteFS>/home/hudson/localslave1</remoteFS>
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
@@ -118,7 +118,7 @@
     </slave>
     <slave>
       <name>localslave4</name>
-      <description>Local slave 4</description>
+      <description>&lt;br&gt;To use VNC to view jobs executing on this slave:&lt;UL&gt;&lt;LI&gt;Open your browser to &lt;a href=&apos;http://hudson-qe.rhq.rdu.redhat.com:6005&apos; target=&apos;_blank&apos;&gt;http://hudson-qe.rhq.rdu.redhat.com:6005&lt;/a&gt; (if you have a java plugin)&lt;/LI&gt; or &lt;LI&gt;On the command line type: &lt;code&gt;vncviewer hudson-qe.rhq.rdu.redhat.com :5&lt;/code&gt;&lt;/LI&gt;&lt;/UL&gt;</description>
       <remoteFS>/home/hudson/localslave4</remoteFS>
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
@@ -162,6 +162,10 @@
 &lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://statler.usersys.redhat.com/auto-ssh/id_auto_dsa.pub&gt;this_jonqa_publickey&lt;/A&gt; user@agent_to_test &lt;/CODE&gt;  (Note: The &apos;agent_to_test&apos; must be the machine name accessible through DDNS on which your jon23 agent is running and is a client of your &apos;server_to_test&apos;. The &apos;user&apos; must be the id under which your &apos;agent_to_test&apos; is running.  &lt;/LI&gt;&#xd;
 &lt;/UL&gt;&#xd;
 &#xd;
+&lt;H3&gt; VIEWING INSTRUCTIONS FOR EXECUTING JOBS: &lt;/H3&gt; &#xd;
+&lt;UL&gt;&#xd;
+&lt;LI&gt;Jobs that are currently being executed can be viewed in action using a VNC Viewer.  Click on the running localslave in the &lt;a href=http://hudson-qe.rhq.rdu.redhat.com:8080/computer/&gt;Build Executor Status&lt;/a&gt; and follow the links to open a viewer for that slave. &lt;/LI&gt;&#xd;
+&lt;/UL&gt;&#xd;
 &#xd;
 </description>
       <jobNames class="tree-set">
@@ -195,7 +199,6 @@
       <jobNames class="tree-set">
         <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView/jobNames/comparator"/>
         <string>execute-any-group-rhq</string>
-        <string>jweiss-overnight-test-all-groups-rhq</string>
         <string>overnight-test-all-groups-rhq</string>
       </jobNames>
       <columns>

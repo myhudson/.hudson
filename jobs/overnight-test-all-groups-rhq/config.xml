@@ -90,7 +90,7 @@ selenium.address=${SELENIUM_ADDRESS}</properties>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
 #kill all the leftover firefox processes that selenium started
-sudo -u vncuser killall -9 firefox
+#sudo -u vncuser killall -9 firefox  #cant do this with multiple processes running
 exit 0</command>
     </hudson.tasks.Shell>
   </builders>
