@@ -51,7 +51,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>mvn -Penterprise,postgres -Ddbsetup  install
+      <command>mvn -Penterprise,postgres -Ddbsetup  clean install
 cd modules
 zip -1 -r rhq-plugin-pack-all-SNAPSHOT.zip plugins/* enterprise/server/plugins/* -i *SNAPSHOT.jar
 </command>

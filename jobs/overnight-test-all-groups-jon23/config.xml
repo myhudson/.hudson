@@ -2,7 +2,13 @@
 <project>
   <actions/>
   <description>This suite will execute ALL of the individual test groups. &lt;BR&gt;&#xd;
-View your tests in live action by typing: &lt;CODE&gt;vncviewer statler.usersys.redhat.com:0 &lt;/CODE&gt;</description>
+&lt;H3&gt;MANUAL INSTRUCTIONS:&lt;/H3&gt; &#xd;
+&lt;UL&gt;&#xd;
+&lt;LI&gt; Click &apos;Build Now&apos; to manually begin a test run. &lt;/LI&gt;&#xd;
+&lt;LI&gt; From the list of fields, read their descriptions and set the values appropriate for your testing. &lt;/LI&gt;&#xd;
+&lt;LI&gt; Then click the &apos;Build&apos; button. &lt;/LI&gt;&#xd;
+&lt;LI&gt; Then to view the executing tests in live action, click the &apos;localslave&apos; link in the upper right corner on the building page for further VNC instructions.&lt;/LI&gt;&#xd;
+&lt;/UL&gt;</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>

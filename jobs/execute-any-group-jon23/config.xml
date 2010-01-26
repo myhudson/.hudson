@@ -3,11 +3,13 @@
   <actions/>
   <description>&lt;H3&gt;INSTRUCTIONS:&lt;/H3&gt; &#xd;
 &lt;UL&gt;&#xd;
+&lt;LI&gt;&lt;b&gt;To get a better idea of what each test group does, look at the &lt;/b&gt; &lt;A HREF=view/RHQ/job/overnight-test-all-groups-jon23/lastSuccessfulBuild/artifact/automatjon/jon-2.0/test-output/html/index.html&gt;last successful build results of overnight-test-all-groups-jon23&lt;/A&gt;.&#xd;
 &lt;LI&gt; Click &apos;Build Now&apos; to begin a test run. &lt;/LI&gt;&#xd;
+&lt;LI&gt; Pick a &quot;Test Group&quot; from the drop down box, (you can find out what each test group does by clicking the above link)&lt;/LI&gt;&#xd;
 &lt;LI&gt; From the list of fields, read their descriptions and set the values appropriate for your testing. &lt;/LI&gt;&#xd;
 &lt;LI&gt; Then click the &apos;Build&apos; button. &lt;/LI&gt;&#xd;
-&lt;/UL&gt;&#xd;
-</description>
+&lt;LI&gt; Then to view the executing tests in live action, click the &apos;localslave&apos; link in the upper right corner on the building page for further VNC instructions.&lt;/LI&gt;&#xd;
+&lt;/UL&gt;</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>

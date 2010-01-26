@@ -23,7 +23,10 @@
   <builders>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
-/home/hudson/remote-rhq-install.sh rhq auto-rhq.usersys.redhat.com
+TARGET=auto-rhq.usersys.redhat.com
+#killjava
+ssh root@$TARGET killall java
+/home/hudson/remote-rhq-install.sh rhq $TARGET
 
 
 </command>

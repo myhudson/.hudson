@@ -6,7 +6,7 @@
 &lt;LI&gt; Click &apos;Build Now&apos; to begin a test run. &lt;/LI&gt;&#xd;
 &lt;LI&gt; From the list of fields, read their descriptions and set the values appropriate for your testing. &lt;/LI&gt;&#xd;
 &lt;LI&gt; Then click the &apos;Build&apos; button. &lt;/LI&gt;&#xd;
-&lt;LI&gt; View your tests in live action by typing: &lt;B&gt;&lt;CODE&gt;vncviewer hudson-qe.rhq.rdu.redhat.com:2&lt;/CODE&gt;&lt;/B&gt; or &lt;a href=&apos;hudson-qe.rhq.rdu.redhat.com:6002&apos;&gt;click here&lt;/a&gt; if you have the java plugin. &lt;/LI&gt;&#xd;
+&lt;LI&gt; Then to view the executing tests in live action, click the &apos;localslave&apos; link in the upper right corner on the building page for further VNC instructions.&lt;/LI&gt;&#xd;
 &lt;/UL&gt;&#xd;
 &#xd;
 &#xd;

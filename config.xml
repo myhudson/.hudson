@@ -31,7 +31,20 @@
 &lt;B&gt; To Execute JON 23 Tests, click the JON23 tab &lt;/B&gt;&lt;br&gt;&#xd;
 &lt;B&gt; To Execute RHQ (iManage) Tests, click the RHQ tab &lt;/B&gt;&lt;br&gt;&#xd;
 &#xd;
-</systemMessage>
+&lt;H3&gt; PREREQUISITE INSTRUCTIONS: &lt;/H3&gt; &#xd;
+&lt;UL&gt;&#xd;
+&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://hudson-qe.rhq.rdu.redhat.com:8080/auto-ssh/id_auto_dsa.pub&gt;this_publickey&lt;/A&gt; server_user@server.redhat.com&lt;/CODE&gt;  &lt;/LI&gt;&#xd;
+The &lt;code&gt;server_user&lt;/code&gt; is the id of the user running the server process.&#xd;
+&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://hudson-qe.rhq.rdu.redhat.com:8080/auto-ssh/id_auto_dsa.pub&gt;this_publickey&lt;/A&gt; agent_user@agent.redhat.com&lt;/CODE&gt;  &lt;/LI&gt;&#xd;
+The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent process.&#xd;
+&lt;LI&gt;The &lt;code&gt;server&lt;/code&gt; and the &lt;code&gt;agent&lt;/code&gt; must be the fully qualified domain name and resolvable by DNS.&lt;/LI&gt;&#xd;
+&lt;LI&gt;The &lt;code&gt;agent&lt;/code&gt; must already be running and registered to the &lt;code&gt;server&lt;/code&gt;.&lt;/LI&gt;&#xd;
+&lt;/UL&gt;&#xd;
+&#xd;
+&lt;H3&gt; VIEWING INSTRUCTIONS FOR EXECUTING JOBS: &lt;/H3&gt; &#xd;
+&lt;UL&gt;&#xd;
+&lt;LI&gt;Jobs that are currently being executed can be viewed in action using a VNC Viewer.  Click on the running localslave in the &lt;a href=http://hudson-qe.rhq.rdu.redhat.com:8080/computer/&gt;Build Executor Status&lt;/a&gt; and follow the links to open a viewer for that slave. &lt;/LI&gt;&#xd;
+&lt;/UL&gt;</systemMessage>
   <jdks>
     <jdk>
       <name>Open JDK 1.6</name>
@@ -43,7 +56,7 @@
   <slaves>
     <slave>
       <name>localslave1</name>
-      <description>&lt;br&gt;To view vnc desktop, &lt;a href=&apos;http://hudson-qe.rhq.rdu.redhat.com:6002&apos; target=&apos;_blank&apos;&gt;click here&lt;/a&gt; or &lt;h3&gt;vncviewer hudson-qe.rhq.rdu.redhat.com :2&lt;/h3&gt;&lt;br&gt;</description>
+      <description>&lt;br&gt;To use VNC to view jobs executing on this slave:&lt;UL&gt;&lt;LI&gt;Open your browser to &lt;a href=&apos;http://hudson-qe.rhq.rdu.redhat.com:6001&apos; target=&apos;_blank&apos;&gt;http://hudson-qe.rhq.rdu.redhat.com:6001&lt;/a&gt; (if you have a java plugin)&lt;/LI&gt; or &lt;LI&gt;On the command line type: &lt;code&gt;vncviewer hudson-qe.rhq.rdu.redhat.com:1&lt;/code&gt;&lt;/LI&gt;&lt;/UL&gt;</description>
       <remoteFS>/home/hudson/localslave1</remoteFS>
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
@@ -60,7 +73,7 @@
               </default>
               <int>1</int>
               <string>SELENIUM_ADDRESS</string>
-              <string>10.10.3.33:4442</string>
+              <string>hudson-qe.rhq.rdu.redhat.com:4441</string>
             </tree-map>
           </envVars>
         </hudson.slaves.EnvironmentVariablesNodeProperty>
@@ -68,7 +81,7 @@
     </slave>
     <slave>
       <name>localslave2</name>
-      <description>Local slave 2</description>
+      <description>&lt;br&gt;To use VNC to view jobs executing on this slave:&lt;UL&gt;&lt;LI&gt;Open your browser to &lt;a href=&apos;http://hudson-qe.rhq.rdu.redhat.com:6002&apos; target=&apos;_blank&apos;&gt;http://hudson-qe.rhq.rdu.redhat.com:6002&lt;/a&gt; (if you have a java plugin)&lt;/LI&gt; or &lt;LI&gt;On the command line type: &lt;code&gt;vncviewer hudson-qe.rhq.rdu.redhat.com:2&lt;/code&gt;&lt;/LI&gt;&lt;/UL&gt;</description>
       <remoteFS>/home/hudson/localslave2</remoteFS>
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
@@ -85,7 +98,7 @@
               </default>
               <int>1</int>
               <string>SELENIUM_ADDRESS</string>
-              <string>10.10.3.33:4443</string>
+              <string>hudson-qe.rhq.rdu.redhat.com:4442</string>
             </tree-map>
           </envVars>
         </hudson.slaves.EnvironmentVariablesNodeProperty>
@@ -93,7 +106,7 @@
     </slave>
     <slave>
       <name>localslave3</name>
-      <description>Local slave 3</description>
+      <description>&lt;br&gt;To use VNC to view jobs executing on this slave:&lt;UL&gt;&lt;LI&gt;Open your browser to &lt;a href=&apos;http://hudson-qe.rhq.rdu.redhat.com:6003&apos; target=&apos;_blank&apos;&gt;http://hudson-qe.rhq.rdu.redhat.com:6003&lt;/a&gt; (if you have a java plugin)&lt;/LI&gt; or &lt;LI&gt;On the command line type: &lt;code&gt;vncviewer hudson-qe.rhq.rdu.redhat.com:3&lt;/code&gt;&lt;/LI&gt;&lt;/UL&gt;</description>
       <remoteFS>/home/hudson/localslave3</remoteFS>
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
@@ -110,7 +123,7 @@
               </default>
               <int>1</int>
               <string>SELENIUM_ADDRESS</string>
-              <string>10.10.3.33:4444</string>
+              <string>hudson-qe.rhq.rdu.redhat.com:4443</string>
             </tree-map>
           </envVars>
         </hudson.slaves.EnvironmentVariablesNodeProperty>
@@ -118,7 +131,7 @@
     </slave>
     <slave>
       <name>localslave4</name>
-      <description>&lt;br&gt;To use VNC to view jobs executing on this slave:&lt;UL&gt;&lt;LI&gt;Open your browser to &lt;a href=&apos;http://hudson-qe.rhq.rdu.redhat.com:6005&apos; target=&apos;_blank&apos;&gt;http://hudson-qe.rhq.rdu.redhat.com:6005&lt;/a&gt; (if you have a java plugin)&lt;/LI&gt; or &lt;LI&gt;On the command line type: &lt;code&gt;vncviewer hudson-qe.rhq.rdu.redhat.com :5&lt;/code&gt;&lt;/LI&gt;&lt;/UL&gt;</description>
+      <description>&lt;br&gt;To use VNC to view jobs executing on this slave:&lt;UL&gt;&lt;LI&gt;Open your browser to &lt;a href=&apos;http://hudson-qe.rhq.rdu.redhat.com:6004&apos; target=&apos;_blank&apos;&gt;http://hudson-qe.rhq.rdu.redhat.com:6004&lt;/a&gt; (if you have a java plugin)&lt;/LI&gt; or &lt;LI&gt;On the command line type: &lt;code&gt;vncviewer hudson-qe.rhq.rdu.redhat.com:4&lt;/code&gt;&lt;/LI&gt;&lt;/UL&gt;</description>
       <remoteFS>/home/hudson/localslave4</remoteFS>
       <numExecutors>1</numExecutors>
       <mode>NORMAL</mode>
@@ -135,7 +148,7 @@
               </default>
               <int>1</int>
               <string>SELENIUM_ADDRESS</string>
-              <string>10.10.3.33:4445</string>
+              <string>hudson-qe.rhq.rdu.redhat.com:4444</string>
             </tree-map>
           </envVars>
         </hudson.slaves.EnvironmentVariablesNodeProperty>
@@ -158,8 +171,12 @@
 &#xd;
 &lt;H3&gt; PREREQUISITE INSTRUCTIONS: &lt;/H3&gt; &#xd;
 &lt;UL&gt;&#xd;
-&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://statler.usersys.redhat.com/auto-ssh/id_auto_dsa.pub&gt;this_jonqa_publickey&lt;/A&gt; user@server_to_test &lt;/CODE&gt;  (Note: The &apos;server_to_test&apos; must be the machine name accessible through DDNS on which your jon23 server is running. The &apos;user&apos; must be the id under which your &apos;server_to_test&apos;  is running.  &lt;/LI&gt;&#xd;
-&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://statler.usersys.redhat.com/auto-ssh/id_auto_dsa.pub&gt;this_jonqa_publickey&lt;/A&gt; user@agent_to_test &lt;/CODE&gt;  (Note: The &apos;agent_to_test&apos; must be the machine name accessible through DDNS on which your jon23 agent is running and is a client of your &apos;server_to_test&apos;. The &apos;user&apos; must be the id under which your &apos;agent_to_test&apos; is running.  &lt;/LI&gt;&#xd;
+&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://hudson-qe.rhq.rdu.redhat.com:8080/auto-ssh/id_auto_dsa.pub&gt;this_publickey&lt;/A&gt; server_user@server.redhat.com&lt;/CODE&gt;  &lt;/LI&gt;&#xd;
+The &lt;code&gt;server_user&lt;/code&gt; is the id of the user running the server process.&#xd;
+&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://hudson-qe.rhq.rdu.redhat.com:8080/auto-ssh/id_auto_dsa.pub&gt;this_publickey&lt;/A&gt; agent_user@agent.redhat.com&lt;/CODE&gt;  &lt;/LI&gt;&#xd;
+The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent process.&#xd;
+&lt;LI&gt;The &lt;code&gt;server&lt;/code&gt; and the &lt;code&gt;agent&lt;/code&gt; must be the fully qualified domain name and resolvable by DNS.&lt;/LI&gt;&#xd;
+&lt;LI&gt;The &lt;code&gt;agent&lt;/code&gt; must already be running and registered to the &lt;code&gt;server&lt;/code&gt;.&lt;/LI&gt;&#xd;
 &lt;/UL&gt;&#xd;
 &#xd;
 &lt;H3&gt; VIEWING INSTRUCTIONS FOR EXECUTING JOBS: &lt;/H3&gt; &#xd;
@@ -192,10 +209,18 @@
 &#xd;
 &lt;H3&gt; PREREQUISITE INSTRUCTIONS: &lt;/H3&gt; &#xd;
 &lt;UL&gt;&#xd;
-&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://statler.usersys.redhat.com/auto-ssh/id_auto_dsa.pub&gt;this_jonqa_publickey&lt;/A&gt; user@server_to_test &lt;/CODE&gt;  (Note: The &apos;server_to_test&apos; must be the machine name accessible through DDNS on which your jon23 server is running. The &apos;user&apos; must be the id under which your &apos;server_to_test&apos;  is running.  &lt;/LI&gt;&#xd;
-&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://statler.usersys.redhat.com/auto-ssh/id_auto_dsa.pub&gt;this_jonqa_publickey&lt;/A&gt; user@agent_to_test &lt;/CODE&gt;  (Note: The &apos;agent_to_test&apos; must be the machine name accessible through DDNS on which your jon23 agent is running and is a client of your &apos;server_to_test&apos;. The &apos;user&apos; must be the id under which your &apos;agent_to_test&apos; is running.  &lt;/LI&gt;&#xd;
+&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://hudson-qe.rhq.rdu.redhat.com:8080/auto-ssh/id_auto_dsa.pub&gt;this_publickey&lt;/A&gt; server_user@server.redhat.com&lt;/CODE&gt;  &lt;/LI&gt;&#xd;
+The &lt;code&gt;server_user&lt;/code&gt; is the id of the user running the server process.&#xd;
+&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://hudson-qe.rhq.rdu.redhat.com:8080/auto-ssh/id_auto_dsa.pub&gt;this_publickey&lt;/A&gt; agent_user@agent.redhat.com&lt;/CODE&gt;  &lt;/LI&gt;&#xd;
+The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent process.&#xd;
+&lt;LI&gt;The &lt;code&gt;server&lt;/code&gt; and the &lt;code&gt;agent&lt;/code&gt; must be the fully qualified domain name and resolvable by DNS.&lt;/LI&gt;&#xd;
+&lt;LI&gt;The &lt;code&gt;agent&lt;/code&gt; must already be running and registered to the &lt;code&gt;server&lt;/code&gt;.&lt;/LI&gt;&#xd;
 &lt;/UL&gt;&#xd;
-</description>
+&#xd;
+&lt;H3&gt; VIEWING INSTRUCTIONS FOR EXECUTING JOBS: &lt;/H3&gt; &#xd;
+&lt;UL&gt;&#xd;
+&lt;LI&gt;Jobs that are currently being executed can be viewed in action using a VNC Viewer.  Click on the running localslave in the &lt;a href=http://hudson-qe.rhq.rdu.redhat.com:8080/computer/&gt;Build Executor Status&lt;/a&gt; and follow the links to open a viewer for that slave. &lt;/LI&gt;&#xd;
+&lt;/UL&gt;</description>
       <jobNames class="tree-set">
         <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView/jobNames/comparator"/>
         <string>execute-any-group-rhq</string>
@@ -214,9 +239,9 @@
     <listView>
       <owner class="hudson" reference="../../.."/>
       <name>RHQ-IndividualGroups</name>
-      <description>&lt;h2&gt;&lt;font color=red&gt;ADMIN ONLY (These jobs are NOT available for anonymous execution.&lt;/font&gt;&lt;/h2&gt;&#xd;
+      <description>&lt;h2&gt;&lt;font color=red&gt;ADMIN ONLY (These jobs are NOT available for anonymous execution.)&lt;/font&gt;&lt;/h2&gt;&#xd;
 &lt;H3&gt;OVERVIEW:&lt;/H3&gt; &#xd;
-&lt;B&gt; Tests broken out by group&lt;/B&gt; (Permits more accurate historical trends of each test group) &lt;BR&gt;</description>
+&lt;B&gt; Jobs are divided into individual TEST_GROUPs&lt;/B&gt; (Permits more accurate historical trends of each test group) &lt;BR&gt;</description>
       <jobNames class="tree-set">
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
         <string>Alerts</string>
