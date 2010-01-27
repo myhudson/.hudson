@@ -39,7 +39,7 @@
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
     <submoduleCfg class="list"/>
   </scm>
-  <assignedNode>master</assignedNode>
+  <assignedNode>maven</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
@@ -50,9 +50,13 @@
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
+    <hudson.tasks.Maven>
+      <targets>-Penterprise,postgres -Ddbsetup  clean install</targets>
+      <mavenName>/usr/local/apache-maven-2.2.1</mavenName>
+      <usePrivateRepository>false</usePrivateRepository>
+    </hudson.tasks.Maven>
     <hudson.tasks.Shell>
-      <command>mvn -Penterprise,postgres -Ddbsetup  clean install
-cd modules
+      <command>cd modules
 zip -1 -r rhq-plugin-pack-all-SNAPSHOT.zip plugins/* enterprise/server/plugins/* -i *SNAPSHOT.jar
 </command>
     </hudson.tasks.Shell>

@@ -5,24 +5,24 @@
   <mode>NORMAL</mode>
   <useSecurity>true</useSecurity>
   <authorizationStrategy class="hudson.security.ProjectMatrixAuthorizationStrategy">
-    <permission>hudson.scm.SCM.Tag:admin</permission>
-    <permission>hudson.model.Run.Update:admin</permission>
-    <permission>hudson.model.Computer.Delete:admin</permission>
-    <permission>hudson.model.Item.Configure:admin</permission>
-    <permission>hudson.model.View.Create:admin</permission>
-    <permission>hudson.model.Item.Create:admin</permission>
-    <permission>hudson.model.Computer.Configure:admin</permission>
+    <permission>hudson.model.Item.Delete:admin</permission>
+    <permission>hudson.model.Item.Build:admin</permission>
     <permission>hudson.model.Run.Delete:admin</permission>
+    <permission>hudson.model.Computer.Configure:admin</permission>
+    <permission>hudson.scm.SCM.Tag:admin</permission>
+    <permission>hudson.model.Computer.Delete:admin</permission>
+    <permission>hudson.model.View.Configure:admin</permission>
     <permission>hudson.model.View.Delete:admin</permission>
     <permission>hudson.model.Item.Read:admin</permission>
-    <permission>hudson.model.Hudson.Administer:admin</permission>
+    <permission>hudson.model.Item.Configure:admin</permission>
+    <permission>hudson.model.Run.Update:admin</permission>
     <permission>hudson.model.Hudson.Read:anonymous</permission>
     <permission>hudson.model.Hudson.Read:admin</permission>
-    <permission>hudson.model.Item.Delete:admin</permission>
-    <permission>hudson.model.View.Configure:admin</permission>
     <permission>hudson.model.Item.Workspace:anonymous</permission>
     <permission>hudson.model.Item.Workspace:admin</permission>
-    <permission>hudson.model.Item.Build:admin</permission>
+    <permission>hudson.model.View.Create:admin</permission>
+    <permission>hudson.model.Item.Create:admin</permission>
+    <permission>hudson.model.Hudson.Administer:admin</permission>
   </authorizationStrategy>
   <securityRealm class="hudson.security.HudsonPrivateSecurityRealm">
     <disableSignup>false</disableSignup>
@@ -152,6 +152,27 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
             </tree-map>
           </envVars>
         </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </nodeProperties>
+    </slave>
+    <slave>
+      <name>opos13.rhq.rdu.redhat.com01</name>
+      <description>opos13.rhq.rdu.redhat.com01</description>
+      <remoteFS>/home/hudson</remoteFS>
+      <numExecutors>3</numExecutors>
+      <mode>NORMAL</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.slaves.JNLPLauncher"/>
+      <label>maven</label>
+      <nodeProperties>
+        <hudson.tools.ToolLocationNodeProperty>
+          <locations>
+            <hudson.tools.ToolLocationNodeProperty_-ToolLocation>
+              <type>hudson.tasks.Maven$MavenInstallation$DescriptorImpl</type>
+              <name>/usr/local/apache-maven-2.2.1</name>
+              <home></home>
+            </hudson.tools.ToolLocationNodeProperty_-ToolLocation>
+          </locations>
+        </hudson.tools.ToolLocationNodeProperty>
       </nodeProperties>
     </slave>
   </slaves>
@@ -305,7 +326,7 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
   </views>
   <primaryView>All</primaryView>
   <slaveAgentPort>0</slaveAgentPort>
-  <label></label>
+  <label>maven</label>
   <nodeProperties/>
   <globalNodeProperties/>
   <disabledAdministrativeMonitors/>
