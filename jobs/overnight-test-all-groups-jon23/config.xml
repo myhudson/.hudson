@@ -76,7 +76,7 @@ git clone git://git.rhndev.redhat.com/automatjon
 chmod 600 $WORKSPACE/automatjon/jon-2.0/.ssh/id*</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Ant>
-      <targets>23functional-testng</targets>
+      <targets>jon23functional-testng</targets>
       <antName>(Default)</antName>
       <buildFile>automatjon/jon-2.0/build.xml</buildFile>
       <properties>jon.server.url=${SERVER_HOSTNAME}
@@ -105,7 +105,7 @@ exit 0</command>
       <latestOnly>false</latestOnly>
     </hudson.tasks.ArtifactArchiver>
     <hudson.tasks.junit.JUnitResultArchiver>
-      <testResults>test-output-reportng/*.xml</testResults>
+      <testResults>automatjon/jon-2.0/test-output-reportng/*.xml</testResults>
       <testDataPublishers/>
     </hudson.tasks.junit.JUnitResultArchiver>
     <htmlpublisher.HtmlPublisher>
