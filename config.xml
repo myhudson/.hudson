@@ -21,8 +21,8 @@
     <permission>hudson.model.Item.Create:admin</permission>
     <permission>hudson.model.Hudson.Administer:admin</permission>
     <permission>hudson.model.Run.Delete:admin</permission>
-    <permission>hudson.scm.SCM.Tag:admin</permission>
     <permission>hudson.model.Item.Configure:admin</permission>
+    <permission>hudson.scm.SCM.Tag:admin</permission>
   </authorizationStrategy>
   <securityRealm class="hudson.security.HudsonPrivateSecurityRealm">
     <disableSignup>false</disableSignup>
@@ -163,17 +163,7 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
       <launcher class="hudson.slaves.JNLPLauncher"/>
       <label>maven</label>
-      <nodeProperties>
-        <hudson.tools.ToolLocationNodeProperty>
-          <locations>
-            <hudson.tools.ToolLocationNodeProperty_-ToolLocation>
-              <type>hudson.tasks.Maven$MavenInstallation$DescriptorImpl</type>
-              <name>/usr/local/apache-maven-2.2.1</name>
-              <home></home>
-            </hudson.tools.ToolLocationNodeProperty_-ToolLocation>
-          </locations>
-        </hudson.tools.ToolLocationNodeProperty>
-      </nodeProperties>
+      <nodeProperties/>
     </slave>
   </slaves>
   <quietPeriod>5</quietPeriod>
@@ -237,6 +227,7 @@ The &lt;code&gt;server_user&lt;/code&gt; is the id of the user running the serve
 The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent process.&#xd;
 &lt;LI&gt;The &lt;code&gt;server&lt;/code&gt; and the &lt;code&gt;agent&lt;/code&gt; must be the fully qualified domain name and resolvable by DNS.&lt;/LI&gt;&#xd;
 &lt;LI&gt;The &lt;code&gt;agent&lt;/code&gt; must already be running and registered to the &lt;code&gt;server&lt;/code&gt;.&lt;/LI&gt;&#xd;
+&lt;LI&gt;&lt;code&gt;yum install augeas&lt;/code&gt; on the &lt;code&gt;agent&lt;/code&gt; machine so that Augeas-based plugin resources (e.g. Sudoers, Samba, Cron, etc.) can be configured.&lt;/LI&gt;&#xd;
 &lt;/UL&gt;&#xd;
 &#xd;
 &lt;H3&gt; VIEWING INSTRUCTIONS FOR EXECUTING JOBS: &lt;/H3&gt; &#xd;
@@ -288,6 +279,7 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
         <string>Postfix</string>
         <string>QuickLinks</string>
         <string>ResourceGroups</string>
+        <string>Samba</string>
         <string>Search</string>
         <string>SortTablesByColumns</string>
         <string>StartPageLinks</string>
@@ -310,9 +302,10 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
       <name>build</name>
       <jobNames class="tree-set">
         <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView[3]/jobNames/comparator"/>
-        <string>build_master</string>
         <string>build_master-notest</string>
-        <string>install-build</string>
+        <string>build_master_old</string>
+        <string>install-master</string>
+        <string>master</string>
       </jobNames>
       <columns>
         <hudson.views.StatusColumn/>
@@ -330,7 +323,14 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
       <name>DEV</name>
       <jobNames class="tree-set">
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
+        <string>1.4.0-B1</string>
+        <string>alertPlugin</string>
+        <string>candlepin</string>
+        <string>content</string>
         <string>linux-config</string>
+        <string>master</string>
+        <string>master-disabled</string>
+        <string>raw-config</string>
         <string>test</string>
       </jobNames>
       <columns>

@@ -114,7 +114,7 @@ exit 0</command>
           <reportName>TestNG Report</reportName>
           <reportDir>automatjon/jon-2.0/test-output/html/</reportDir>
           <reportFiles>index.html</reportFiles>
-          <keepAll>false</keepAll>
+          <keepAll>true</keepAll>
           <wrapperName>htmlpublisher-wrapper.html</wrapperName>
         </htmlpublisher.HtmlPublisherTarget>
       </reportTargets>

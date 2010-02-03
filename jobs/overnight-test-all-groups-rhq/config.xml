@@ -14,6 +14,9 @@ This project is scheduled to kick-off automatically every night following the su
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
       <permission>hudson.model.Item.Read:anonymous</permission>
+      <permission>hudson.model.Item.Build:anonymous</permission>
+      <permission>hudson.model.Item.Release:anonymous</permission>
+      <permission>hudson.model.Item.Workspace:anonymous</permission>
     </hudson.security.AuthorizationMatrixProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
@@ -114,7 +117,7 @@ exit 0</command>
       <reportTargets>
         <htmlpublisher.HtmlPublisherTarget>
           <reportName>TestNG Report</reportName>
-          <reportDir>automatjon/jon-2.0/test-output/html/</reportDir>
+          <reportDir>automatjon/jon-2.0/test-output/html</reportDir>
           <reportFiles>index.html</reportFiles>
           <keepAll>true</keepAll>
           <wrapperName>htmlpublisher-wrapper.html</wrapperName>

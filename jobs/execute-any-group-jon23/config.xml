@@ -14,8 +14,8 @@
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
       <permission>hudson.model.Item.Read:anonymous</permission>
-      <permission>hudson.model.Item.Workspace:anonymous</permission>
       <permission>hudson.model.Item.Build:anonymous</permission>
+      <permission>hudson.model.Item.Workspace:anonymous</permission>
     </hudson.security.AuthorizationMatrixProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
@@ -44,11 +44,6 @@
               <string>Alert Templates</string>
               <string>Metric Templates</string>
               <string>Metric Schedules</string>
-              <string>Postfix</string>
-              <string>Cron</string>
-              <string>Hosts File</string>
-              <string>Aliases File</string>
-              <string>Sudoers</string>
               <string>General Properties</string>
               <string>Sort Tables By Columns</string>
             </a>

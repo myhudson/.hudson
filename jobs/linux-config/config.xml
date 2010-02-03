@@ -43,7 +43,7 @@
     <clean>false</clean>
     <submoduleCfg class="list"/>
   </scm>
-  <assignedNode>master</assignedNode>
+  <assignedNode>maven</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
@@ -75,5 +75,15 @@
       <factGenerator/>
     </hudson.plugins.chucknorris.CordellWalkerRecorder>
   </publishers>
-  <buildWrappers/>
+  <buildWrappers>
+    <hudson.plugins.m2extrasteps.M2ExtraStepsWrapper>
+      <preBuildSteps>
+        <hudson.tasks.Shell>
+          <command>sudo  /root/linux-config-db-recreate.sh</command>
+        </hudson.tasks.Shell>
+      </preBuildSteps>
+      <postBuildSteps/>
+      <runIfResult>allCases</runIfResult>
+    </hudson.plugins.m2extrasteps.M2ExtraStepsWrapper>
+  </buildWrappers>
 </maven2-moduleset>

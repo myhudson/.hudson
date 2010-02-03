@@ -15,8 +15,8 @@
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
       <permission>hudson.model.Item.Read:anonymous</permission>
-      <permission>hudson.model.Item.Workspace:anonymous</permission>
       <permission>hudson.model.Item.Build:anonymous</permission>
+      <permission>hudson.model.Item.Workspace:anonymous</permission>
     </hudson.security.AuthorizationMatrixProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
@@ -50,6 +50,7 @@
               <string>Hosts File</string>
               <string>Aliases File</string>
               <string>Sudoers</string>
+              <string>Samba</string>
               <string>General Properties</string>
               <string>Sort Tables By Columns</string>
             </a>
