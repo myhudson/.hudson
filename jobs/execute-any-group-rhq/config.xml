@@ -63,10 +63,10 @@
         </hudson.model.StringParameterDefinition>
         <hudson.model.ChoiceParameterDefinition>
           <name>VERSION</name>
-          <description>&lt;b&gt;&lt;big&gt;1.4.0 is our version number for RHQ (iManage)&lt;/big&gt;&lt;/b&gt;</description>
+          <description>&lt;b&gt;&lt;big&gt;3.0.0 is our version number for RHQ (iManage)&lt;/big&gt;&lt;/b&gt;</description>
           <choices class="java.util.Arrays$ArrayList">
             <a class="string-array">
-              <string>1.4.0</string>
+              <string>3.0.0</string>
             </a>
           </choices>
         </hudson.model.ChoiceParameterDefinition>
@@ -132,7 +132,7 @@ chmod 600 $WORKSPACE/automatjon/jon-2.0/.ssh/id*</command>
 -Dtestng.outputdir=automatjon/jon-2.0/test-output
 -Dselenium.address=$SELENIUM_ADDRESS
 -Dselenium.screenshot.dir=automatjon/jon-2.0/test-output/screenshots</parameters>
-      <scriptParameters>automatjon/jon-2.0/src/com/redhat/qe/rhq14/tests/functional-testng.xml $TEST_GROUP </scriptParameters>
+      <scriptParameters>automatjon/jon-2.0/src/com/redhat/qe/rhq30/tests/functional-testng.xml $TEST_GROUP </scriptParameters>
       <properties></properties>
     </hudson.plugins.groovy.Groovy>
     <hudson.tasks.Ant>

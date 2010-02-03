@@ -35,10 +35,10 @@
         </hudson.model.StringParameterDefinition>
         <hudson.model.ChoiceParameterDefinition>
           <name>VERSION</name>
-          <description>&lt;b&gt;&lt;big&gt;1.4.0 is our version number for RHQ (iManage)&lt;/big&gt;&lt;/b&gt;</description>
+          <description>&lt;b&gt;&lt;big&gt;3.0.0 is our version number for RHQ (iManage)&lt;/big&gt;&lt;/b&gt;</description>
           <choices class="java.util.Arrays$ArrayList">
             <a class="string-array">
-              <string>1.4.0</string>
+              <string>3.0.0</string>
             </a>
           </choices>
         </hudson.model.ChoiceParameterDefinition>

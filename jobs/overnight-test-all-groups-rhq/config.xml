@@ -27,10 +27,10 @@ This project is scheduled to kick-off automatically every night following the su
         </hudson.model.StringParameterDefinition>
         <hudson.model.ChoiceParameterDefinition>
           <name>VERSION</name>
-          <description>1.4.0 is our version for RHQ</description>
+          <description>3.0.0 is our version for RHQ</description>
           <choices class="java.util.Arrays$ArrayList">
             <a class="string-array">
-              <string>1.4.0</string>
+              <string>3.0.0</string>
             </a>
           </choices>
         </hudson.model.ChoiceParameterDefinition>
@@ -81,7 +81,7 @@ chmod 600 $WORKSPACE/automatjon/jon-2.0/.ssh/id*
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Ant>
-      <targets>rhq14functional-testng</targets>
+      <targets>rhq30functional-testng</targets>
       <antName>(Default)</antName>
       <buildFile>automatjon/jon-2.0/build.xml</buildFile>
       <properties>jon.server.url=${SERVER_HOSTNAME}
