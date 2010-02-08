@@ -5,24 +5,24 @@
   <mode>NORMAL</mode>
   <useSecurity>true</useSecurity>
   <authorizationStrategy class="hudson.security.ProjectMatrixAuthorizationStrategy">
-    <permission>hudson.model.View.Delete:admin</permission>
-    <permission>hudson.model.Computer.Delete:admin</permission>
-    <permission>hudson.model.Computer.Configure:admin</permission>
+    <permission>hudson.model.Hudson.Administer:admin</permission>
+    <permission>hudson.model.Item.Configure:admin</permission>
     <permission>hudson.model.Item.Build:admin</permission>
+    <permission>hudson.scm.SCM.Tag:admin</permission>
+    <permission>hudson.model.Item.Read:admin</permission>
+    <permission>hudson.model.Item.Delete:admin</permission>
+    <permission>hudson.model.View.Delete:admin</permission>
     <permission>hudson.model.View.Configure:admin</permission>
-    <permission>hudson.model.Item.Workspace:anonymous</permission>
-    <permission>hudson.model.Item.Workspace:admin</permission>
+    <permission>hudson.model.Item.Create:admin</permission>
+    <permission>hudson.model.Computer.Delete:admin</permission>
     <permission>hudson.model.Run.Update:admin</permission>
+    <permission>hudson.model.Computer.Configure:admin</permission>
     <permission>hudson.model.View.Create:admin</permission>
     <permission>hudson.model.Hudson.Read:anonymous</permission>
     <permission>hudson.model.Hudson.Read:admin</permission>
-    <permission>hudson.model.Item.Delete:admin</permission>
-    <permission>hudson.model.Item.Read:admin</permission>
-    <permission>hudson.model.Item.Create:admin</permission>
-    <permission>hudson.model.Hudson.Administer:admin</permission>
     <permission>hudson.model.Run.Delete:admin</permission>
-    <permission>hudson.model.Item.Configure:admin</permission>
-    <permission>hudson.scm.SCM.Tag:admin</permission>
+    <permission>hudson.model.Item.Workspace:anonymous</permission>
+    <permission>hudson.model.Item.Workspace:admin</permission>
   </authorizationStrategy>
   <securityRealm class="hudson.security.HudsonPrivateSecurityRealm">
     <disableSignup>false</disableSignup>
@@ -94,7 +94,7 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator"/>
               </default>
               <int>1</int>
               <string>SELENIUM_ADDRESS</string>
@@ -172,6 +172,8 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
     <hudson.model.AllView>
       <owner class="hudson" reference="../../.."/>
       <name>All</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
     </hudson.model.AllView>
     <listView>
       <owner class="hudson" reference="../../.."/>
@@ -196,6 +198,8 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
 &lt;/UL&gt;&#xd;
 &#xd;
 </description>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
       <jobNames class="tree-set">
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
         <string>execute-any-group-jon23</string>
@@ -234,6 +238,8 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
 &lt;UL&gt;&#xd;
 &lt;LI&gt;Jobs that are currently being executed can be viewed in action using a VNC Viewer.  Click on the running localslave in the &lt;a href=http://hudson-qe.rhq.rdu.redhat.com:8080/computer/&gt;Build Executor Status&lt;/a&gt; and follow the links to open a viewer for that slave. &lt;/LI&gt;&#xd;
 &lt;/UL&gt;</description>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
       <jobNames class="tree-set">
         <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView/jobNames/comparator"/>
         <string>execute-any-group-rhq</string>
@@ -256,6 +262,8 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
       <description>&lt;h2&gt;&lt;font color=red&gt;ADMIN ONLY (These jobs are NOT available for anonymous execution.)&lt;/font&gt;&lt;/h2&gt;&#xd;
 &lt;H3&gt;OVERVIEW:&lt;/H3&gt; &#xd;
 &lt;B&gt; Jobs are divided into individual TEST_GROUPs&lt;/B&gt; (Permits more accurate historical trends of each test group) &lt;BR&gt;</description>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
       <jobNames class="tree-set">
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
         <string>Alerts</string>
@@ -300,6 +308,8 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
     <listView>
       <owner class="hudson" reference="../../.."/>
       <name>build</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
       <jobNames class="tree-set">
         <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView[3]/jobNames/comparator"/>
         <string>build_master-notest</string>
@@ -321,6 +331,24 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
     <listView>
       <owner class="hudson" reference="../../.."/>
       <name>DEV</name>
+      <description>&lt;H3&gt; Bugs blocking our continuous integration system&lt;/H3&gt;&#xd;
+&lt;a href=https://bugzilla.redhat.com/show_bug.cgi?id=562594&gt;Unassigned bugs blocking our webui automation&lt;/a&gt;&lt;br&gt;&#xd;
+&lt;a href=https://bugzilla.redhat.com/show_bug.cgi?id=562434&gt;All bugs blocking our webui automation&lt;/a&gt;&#xd;
+&#xd;
+&#xd;
+&lt;H3&gt; Help QE be more effective :) &lt;/H3&gt; &#xd;
+&lt;UL&gt;&#xd;
+&lt;LI&gt; The QE team automatically installs and executes webui automation every time master is built in hudson  &lt;/LI&gt;&#xd;
+&lt;LI&gt; Some tests are skipped due to known open bugs, the bugs are listed in our automation results, but are tracked above  &lt;/LI&gt;&#xd;
+&lt;LI&gt; If we can reduce the number of open bugs, we will have &lt;b&gt;MORE&lt;/b&gt; tests execute against &lt;b&gt;EVERY&lt;/b&gt; build &lt;/LI&gt;&#xd;
+&lt;LI&gt; The tests are executed in the &quot;overnight&quot; jobs listed below&lt;/LI&gt;&#xd;
+&#xd;
+&lt;br&gt;&#xd;
+&lt;b&gt;Thank you!!&lt;/b&gt;&#xd;
+&#xd;
+</description>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
       <jobNames class="tree-set">
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
         <string>1.4.0-B1</string>
@@ -330,6 +358,8 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
         <string>linux-config</string>
         <string>master</string>
         <string>master-disabled</string>
+        <string>overnight-test-all-groups-jon23</string>
+        <string>overnight-test-all-groups-rhq</string>
         <string>raw-config</string>
         <string>test</string>
       </jobNames>

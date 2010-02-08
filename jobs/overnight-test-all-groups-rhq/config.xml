@@ -9,14 +9,20 @@ This project is scheduled to kick-off automatically every night following the su
 &lt;LI&gt; From the list of fields, read their descriptions and set the values appropriate for your testing. &lt;/LI&gt;&#xd;
 &lt;LI&gt; Then click the &apos;Build&apos; button. &lt;/LI&gt;&#xd;
 &lt;LI&gt; Then to view the executing tests in live action, click the &apos;localslave&apos; link in the upper right corner on the building page for further VNC instructions.&lt;/LI&gt;&#xd;
-&lt;/UL&gt;</description>
+&lt;/UL&gt;&#xd;
+&#xd;
+&lt;font color=red&gt;WARNING:&lt;/font&gt; Do not use the TestNG Reports links on this page since their embedded screenshot links will not work.  Instead click to the build# of interest to you in the Build History table below and open its TestNG Report.</description>
+  <logRotator>
+    <daysToKeep>15</daysToKeep>
+    <numToKeep>15</numToKeep>
+  </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
-      <permission>hudson.model.Item.Read:anonymous</permission>
-      <permission>hudson.model.Item.Build:anonymous</permission>
       <permission>hudson.model.Item.Release:anonymous</permission>
+      <permission>hudson.model.Item.Read:anonymous</permission>
       <permission>hudson.model.Item.Workspace:anonymous</permission>
+      <permission>hudson.model.Item.Build:anonymous</permission>
     </hudson.security.AuthorizationMatrixProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
@@ -68,7 +74,7 @@ jon.agent.user=jonqa</description>
   <disabled>false</disabled>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector"/>
-  <concurrentBuild>false</concurrentBuild>
+  <concurrentBuild>true</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
       <command>echo &quot;===========================================================&quot;

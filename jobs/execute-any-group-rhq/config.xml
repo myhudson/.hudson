@@ -10,6 +10,8 @@
 &lt;LI&gt; Then click the &apos;Build&apos; button. &lt;/LI&gt;&#xd;
 &lt;LI&gt; Then to view the executing tests in live action, click the &apos;localslave&apos; link in the upper right corner on the building page for further VNC instructions.&lt;/LI&gt;&#xd;
 &lt;/UL&gt;&#xd;
+&#xd;
+&lt;font color=red&gt;WARNING:&lt;/font&gt; Do not use the TestNG Reports links on this page since their embedded screenshot links will not work.  Instead click to the build# of interest to you in the Build History table below and open its TestNG Report.&#xd;
 </description>
   <keepDependencies>false</keepDependencies>
   <properties>
