@@ -15,9 +15,9 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
-      <permission>hudson.model.Item.Build:anonymous</permission>
-      <permission>hudson.model.Item.Workspace:anonymous</permission>
       <permission>hudson.model.Item.Read:anonymous</permission>
+      <permission>hudson.model.Item.Workspace:anonymous</permission>
+      <permission>hudson.model.Item.Build:anonymous</permission>
     </hudson.security.AuthorizationMatrixProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
@@ -47,6 +47,7 @@
               <string>Metric Templates</string>
               <string>Metric Schedules</string>
               <string>General Properties</string>
+              <string>Manual Addition of Inventory</string>
               <string>Sort Tables By Columns</string>
             </a>
           </choices>
@@ -73,7 +74,7 @@
         <hudson.model.PasswordParameterDefinition>
           <name>PASSWORD</name>
           <description>&lt;b&gt;&lt;big&gt;Password for admin of RHQ (iManage)&lt;/big&gt;&lt;/b&gt;</description>
-          <defaultValue>rhqadmin</defaultValue>
+          <defaultValue>BP89DRZfRIkPil2otq+C6SDw3bEkqgu/TJS2quV1SmE=</defaultValue>
         </hudson.model.PasswordParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>SERVER_USER</name>
@@ -96,7 +97,7 @@
   <disabled>false</disabled>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector"/>
-  <concurrentBuild>false</concurrentBuild>
+  <concurrentBuild>true</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
       <command>echo &quot;===============&quot;
@@ -148,10 +149,6 @@ exit 0</command>
       <artifacts>automatjon/jon-2.0/test-output/**/*</artifacts>
       <latestOnly>false</latestOnly>
     </hudson.tasks.ArtifactArchiver>
-    <hudson.tasks.junit.JUnitResultArchiver>
-      <testResults>automatjon/jon-2.0/test-output-reportng/*.xml</testResults>
-      <testDataPublishers/>
-    </hudson.tasks.junit.JUnitResultArchiver>
     <htmlpublisher.HtmlPublisher>
       <reportTargets>
         <htmlpublisher.HtmlPublisherTarget>

@@ -14,7 +14,10 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
+      <permission>hudson.model.Item.Release:anonymous</permission>
       <permission>hudson.model.Item.Read:anonymous</permission>
+      <permission>hudson.model.Item.Workspace:anonymous</permission>
+      <permission>hudson.model.Item.Build:anonymous</permission>
     </hudson.security.AuthorizationMatrixProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
@@ -40,7 +43,7 @@
         <hudson.model.PasswordParameterDefinition>
           <name>PASSWORD</name>
           <description>password for admin of Jon or imanage</description>
-          <defaultValue>rhqadmin</defaultValue>
+          <defaultValue>BP89DRZfRIkPil2otq+C6SDw3bEkqgu/TJS2quV1SmE=</defaultValue>
         </hudson.model.PasswordParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>SERVER_USER</name>

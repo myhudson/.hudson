@@ -5,24 +5,24 @@
   <mode>NORMAL</mode>
   <useSecurity>true</useSecurity>
   <authorizationStrategy class="hudson.security.ProjectMatrixAuthorizationStrategy">
-    <permission>hudson.model.Hudson.Administer:admin</permission>
-    <permission>hudson.model.Item.Configure:admin</permission>
-    <permission>hudson.model.Item.Build:admin</permission>
-    <permission>hudson.scm.SCM.Tag:admin</permission>
-    <permission>hudson.model.Item.Read:admin</permission>
-    <permission>hudson.model.Item.Delete:admin</permission>
-    <permission>hudson.model.View.Delete:admin</permission>
     <permission>hudson.model.View.Configure:admin</permission>
-    <permission>hudson.model.Item.Create:admin</permission>
+    <permission>hudson.model.View.Delete:admin</permission>
+    <permission>hudson.model.Item.Configure:admin</permission>
+    <permission>hudson.model.Computer.Configure:admin</permission>
+    <permission>hudson.scm.SCM.Tag:admin</permission>
+    <permission>hudson.model.Item.Build:admin</permission>
     <permission>hudson.model.Computer.Delete:admin</permission>
     <permission>hudson.model.Run.Update:admin</permission>
-    <permission>hudson.model.Computer.Configure:admin</permission>
-    <permission>hudson.model.View.Create:admin</permission>
+    <permission>hudson.model.Item.Read:admin</permission>
+    <permission>hudson.model.Run.Delete:admin</permission>
     <permission>hudson.model.Hudson.Read:anonymous</permission>
     <permission>hudson.model.Hudson.Read:admin</permission>
-    <permission>hudson.model.Run.Delete:admin</permission>
+    <permission>hudson.model.Item.Create:admin</permission>
     <permission>hudson.model.Item.Workspace:anonymous</permission>
     <permission>hudson.model.Item.Workspace:admin</permission>
+    <permission>hudson.model.View.Create:admin</permission>
+    <permission>hudson.model.Hudson.Administer:admin</permission>
+    <permission>hudson.model.Item.Delete:admin</permission>
   </authorizationStrategy>
   <securityRealm class="hudson.security.HudsonPrivateSecurityRealm">
     <disableSignup>false</disableSignup>
@@ -281,6 +281,7 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
         <string>GroupRoles</string>
         <string>HostsFile</string>
         <string>LDAPLogin</string>
+        <string>ManualAdditionofInventory</string>
         <string>MetricSchedules</string>
         <string>MetricTemplates</string>
         <string>Operations</string>
@@ -312,10 +313,13 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
       <filterQueue>false</filterQueue>
       <jobNames class="tree-set">
         <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView[3]/jobNames/comparator"/>
+        <string>automatjon</string>
         <string>build_master-notest</string>
         <string>build_master_old</string>
+        <string>install-auto-rhq01</string>
         <string>install-master</string>
         <string>master</string>
+        <string>python_candlepin</string>
       </jobNames>
       <columns>
         <hudson.views.StatusColumn/>

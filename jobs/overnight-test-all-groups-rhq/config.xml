@@ -48,7 +48,7 @@ This project is scheduled to kick-off automatically every night following the su
         <hudson.model.PasswordParameterDefinition>
           <name>PASSWORD</name>
           <description>password for admin of Jon or imanage</description>
-          <defaultValue>rhqadmin</defaultValue>
+          <defaultValue>BP89DRZfRIkPil2otq+C6SDw3bEkqgu/TJS2quV1SmE=</defaultValue>
         </hudson.model.PasswordParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>SERVER_USER</name>
@@ -67,6 +67,9 @@ jon.agent.user=jonqa</description>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
+    <hudson.plugins.trac.TracProjectProperty>
+      <tracWebsite>https://engineering.redhat.com/trac/IntegratedMgmtQE#Automation/</tracWebsite>
+    </hudson.plugins.trac.TracProjectProperty>
   </properties>
   <scm class="hudson.scm.NullSCM"/>
   <assignedNode>selenium</assignedNode>

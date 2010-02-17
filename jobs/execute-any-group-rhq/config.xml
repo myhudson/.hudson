@@ -17,8 +17,8 @@
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
       <permission>hudson.model.Item.Read:anonymous</permission>
-      <permission>hudson.model.Item.Build:anonymous</permission>
       <permission>hudson.model.Item.Workspace:anonymous</permission>
+      <permission>hudson.model.Item.Build:anonymous</permission>
     </hudson.security.AuthorizationMatrixProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
@@ -54,6 +54,7 @@
               <string>Sudoers</string>
               <string>Samba</string>
               <string>General Properties</string>
+              <string>Manual Addition of Inventory</string>
               <string>Sort Tables By Columns</string>
             </a>
           </choices>
@@ -80,7 +81,7 @@
         <hudson.model.PasswordParameterDefinition>
           <name>PASSWORD</name>
           <description>&lt;b&gt;&lt;big&gt;Password for admin of RHQ (iManage)&lt;/big&gt;&lt;/b&gt;</description>
-          <defaultValue>rhqadmin</defaultValue>
+          <defaultValue>BP89DRZfRIkPil2otq+C6SDw3bEkqgu/TJS2quV1SmE=</defaultValue>
         </hudson.model.PasswordParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>SERVER_USER</name>
