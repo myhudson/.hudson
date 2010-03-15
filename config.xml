@@ -17,10 +17,10 @@
     <permission>hudson.model.Run.Delete:admin</permission>
     <permission>hudson.model.Hudson.Read:anonymous</permission>
     <permission>hudson.model.Hudson.Read:admin</permission>
-    <permission>hudson.model.Item.Create:admin</permission>
     <permission>hudson.model.Item.Workspace:anonymous</permission>
     <permission>hudson.model.Item.Workspace:admin</permission>
     <permission>hudson.model.View.Create:admin</permission>
+    <permission>hudson.model.Item.Create:admin</permission>
     <permission>hudson.model.Hudson.Administer:admin</permission>
     <permission>hudson.model.Item.Delete:admin</permission>
   </authorizationStrategy>
@@ -33,9 +33,9 @@
 &#xd;
 &lt;H3&gt; PREREQUISITE INSTRUCTIONS: &lt;/H3&gt; &#xd;
 &lt;UL&gt;&#xd;
-&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://hudson-qe.rhq.rdu.redhat.com:8080/auto-ssh/id_auto_dsa.pub&gt;this_publickey&lt;/A&gt; server_user@server.redhat.com&lt;/CODE&gt;  &lt;/LI&gt;&#xd;
+&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://hudson-qe.rhq.rdu.redhat.com/auto-ssh/id_auto_dsa.pub&gt;this_publickey&lt;/A&gt; server_user@server.redhat.com&lt;/CODE&gt;  &lt;/LI&gt;&#xd;
 The &lt;code&gt;server_user&lt;/code&gt; is the id of the user running the server process.&#xd;
-&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://hudson-qe.rhq.rdu.redhat.com:8080/auto-ssh/id_auto_dsa.pub&gt;this_publickey&lt;/A&gt; agent_user@agent.redhat.com&lt;/CODE&gt;  &lt;/LI&gt;&#xd;
+&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://hudson-qe.rhq.rdu.redhat.com/auto-ssh/id_auto_dsa.pub&gt;this_publickey&lt;/A&gt; agent_user@agent.redhat.com&lt;/CODE&gt;  &lt;/LI&gt;&#xd;
 The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent process.&#xd;
 &lt;LI&gt;The &lt;code&gt;server&lt;/code&gt; and the &lt;code&gt;agent&lt;/code&gt; must be the fully qualified domain name and resolvable by DNS.&lt;/LI&gt;&#xd;
 &lt;LI&gt;The &lt;code&gt;agent&lt;/code&gt; must already be running and registered to the &lt;code&gt;server&lt;/code&gt;.&lt;/LI&gt;&#xd;
@@ -184,9 +184,9 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
 &#xd;
 &lt;H3&gt; PREREQUISITE INSTRUCTIONS: &lt;/H3&gt; &#xd;
 &lt;UL&gt;&#xd;
-&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://hudson-qe.rhq.rdu.redhat.com:8080/auto-ssh/id_auto_dsa.pub&gt;this_publickey&lt;/A&gt; server_user@server.redhat.com&lt;/CODE&gt;  &lt;/LI&gt;&#xd;
+&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://hudson-qe.rhq.rdu.redhat.com/auto-ssh/id_auto_dsa.pub&gt;this_publickey&lt;/A&gt; server_user@server.redhat.com&lt;/CODE&gt;  &lt;/LI&gt;&#xd;
 The &lt;code&gt;server_user&lt;/code&gt; is the id of the user running the server process.&#xd;
-&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://hudson-qe.rhq.rdu.redhat.com:8080/auto-ssh/id_auto_dsa.pub&gt;this_publickey&lt;/A&gt; agent_user@agent.redhat.com&lt;/CODE&gt;  &lt;/LI&gt;&#xd;
+&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://hudson-qe.rhq.rdu.redhat.com/auto-ssh/id_auto_dsa.pub&gt;this_publickey&lt;/A&gt; agent_user@agent.redhat.com&lt;/CODE&gt;  &lt;/LI&gt;&#xd;
 The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent process.&#xd;
 &lt;LI&gt;The &lt;code&gt;server&lt;/code&gt; and the &lt;code&gt;agent&lt;/code&gt; must be the fully qualified domain name and resolvable by DNS.&lt;/LI&gt;&#xd;
 &lt;LI&gt;The &lt;code&gt;agent&lt;/code&gt; must already be running and registered to the &lt;code&gt;server&lt;/code&gt;.&lt;/LI&gt;&#xd;
@@ -204,6 +204,7 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
         <string>execute-any-group-jon23</string>
         <string>overnight-test-all-groups-jon23</string>
+        <string>populate-data</string>
       </jobNames>
       <columns>
         <hudson.views.StatusColumn/>
@@ -225,9 +226,9 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
 &#xd;
 &lt;H3&gt; PREREQUISITE INSTRUCTIONS: &lt;/H3&gt; &#xd;
 &lt;UL&gt;&#xd;
-&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://hudson-qe.rhq.rdu.redhat.com:8080/auto-ssh/id_auto_dsa.pub&gt;this_publickey&lt;/A&gt; server_user@server.redhat.com&lt;/CODE&gt;  &lt;/LI&gt;&#xd;
+&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://hudson-qe.rhq.rdu.redhat.com/auto-ssh/id_auto_dsa.pub&gt;this_publickey&lt;/A&gt; server_user@server.redhat.com&lt;/CODE&gt;  &lt;/LI&gt;&#xd;
 The &lt;code&gt;server_user&lt;/code&gt; is the id of the user running the server process.&#xd;
-&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://hudson-qe.rhq.rdu.redhat.com:8080/auto-ssh/id_auto_dsa.pub&gt;this_publickey&lt;/A&gt; agent_user@agent.redhat.com&lt;/CODE&gt;  &lt;/LI&gt;&#xd;
+&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://hudson-qe.rhq.rdu.redhat.com/auto-ssh/id_auto_dsa.pub&gt;this_publickey&lt;/A&gt; agent_user@agent.redhat.com&lt;/CODE&gt;  &lt;/LI&gt;&#xd;
 The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent process.&#xd;
 &lt;LI&gt;The &lt;code&gt;server&lt;/code&gt; and the &lt;code&gt;agent&lt;/code&gt; must be the fully qualified domain name and resolvable by DNS.&lt;/LI&gt;&#xd;
 &lt;LI&gt;The &lt;code&gt;agent&lt;/code&gt; must already be running and registered to the &lt;code&gt;server&lt;/code&gt;.&lt;/LI&gt;&#xd;
@@ -266,11 +267,11 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
       <filterQueue>false</filterQueue>
       <jobNames class="tree-set">
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
+        <string>AgentCommands</string>
         <string>Alerts</string>
         <string>AlertTemplates</string>
         <string>AliasesFile</string>
         <string>ConfigurationHistory</string>
-        <string>Content</string>
         <string>Cron</string>
         <string>DatasourceCreation</string>
         <string>DynaGroups</string>
@@ -280,16 +281,20 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
         <string>GroupConfiguration</string>
         <string>GroupRoles</string>
         <string>HostsFile</string>
+        <string>JBossAS5Plugin</string>
         <string>LDAPLogin</string>
         <string>ManualAdditionofInventory</string>
         <string>MetricSchedules</string>
         <string>MetricTemplates</string>
+        <string>MicroblogAlertSenderPlugin</string>
         <string>Operations</string>
         <string>Postfix</string>
         <string>QuickLinks</string>
         <string>ResourceGroups</string>
         <string>Samba</string>
         <string>Search</string>
+        <string>ServerSidePluginContainer</string>
+        <string>SNMPAlertSenderPlugin</string>
         <string>SortTablesByColumns</string>
         <string>StartPageLinks</string>
         <string>Sudoers</string>
@@ -316,6 +321,7 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
         <string>automatjon</string>
         <string>build_master-notest</string>
         <string>build_master_old</string>
+        <string>gwt</string>
         <string>install-auto-rhq01</string>
         <string>install-master</string>
         <string>master</string>
@@ -375,6 +381,28 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
         <hudson.views.LastFailureColumn/>
         <hudson.views.LastDurationColumn/>
         <de.fspengler.hudson.pview.ConsoleViewColumn/>
+      </columns>
+    </listView>
+    <listView>
+      <owner class="hudson" reference="../../.."/>
+      <name>candlepin</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <jobNames class="tree-set">
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+        <string>candlepin</string>
+        <string>candlepin-utility</string>
+        <string>certificate-harness</string>
+        <string>certificate-service</string>
+        <string>cp-services</string>
+      </jobNames>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
       </columns>
     </listView>
   </views>

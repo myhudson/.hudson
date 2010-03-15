@@ -49,6 +49,8 @@
               <string>General Properties</string>
               <string>Manual Addition of Inventory</string>
               <string>Sort Tables By Columns</string>
+              <string>Agent Commands</string>
+              <string>JBossAS5 Plugin</string>
             </a>
           </choices>
         </hudson.model.ChoiceParameterDefinition>
