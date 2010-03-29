@@ -3,7 +3,7 @@
   <actions/>
   <description>&lt;H3&gt;INSTRUCTIONS:&lt;/H3&gt; &#xd;
 &lt;UL&gt;&#xd;
-&lt;LI&gt;&lt;b&gt;To get a better idea of what each test group does, look at the &lt;/b&gt; &lt;A HREF=view/RHQ/job/overnight-test-all-groups-jon23/lastSuccessfulBuild/artifact/automatjon/jon-2.0/test-output/html/index.html&gt;last successful build results of overnight-test-all-groups-jon23&lt;/A&gt;.&#xd;
+&lt;LI&gt;&lt;b&gt;To get a better idea of what each test group does, look at the &lt;/b&gt; &lt;A HREF=view/RHQ/job/overnight-test-all-groups-jon23/lastSuccessfulBuild/artifact/automatjon/jon/test-output/html/index.html&gt;last successful build results of overnight-test-all-groups-jon23&lt;/A&gt;.&#xd;
 &lt;LI&gt; Click &apos;Build Now&apos; to begin a test run. &lt;/LI&gt;&#xd;
 &lt;LI&gt; Pick a &quot;Test Group&quot; from the drop down box, (you can find out what each test group does by clicking the above link)&lt;/LI&gt;&#xd;
 &lt;LI&gt; From the list of fields, read their descriptions and set the values appropriate for your testing. &lt;/LI&gt;&#xd;
@@ -108,16 +108,16 @@ echo &quot;===============&quot;
 rm -Rf *
 git clone git://github.com/weissjeffm/webui-framework.git
 git clone git://git.rhndev.redhat.com/automatjon
-chmod 600 $WORKSPACE/automatjon/jon-2.0/.ssh/id*</command>
+chmod 600 $WORKSPACE/automatjon/jon/.ssh/id*</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Ant>
       <targets>compile-jon</targets>
       <antName>(Default)</antName>
-      <buildFile>automatjon/jon-2.0/build.xml</buildFile>
+      <buildFile>automatjon/jon/build.xml</buildFile>
     </hudson.tasks.Ant>
     <hudson.plugins.groovy.Groovy>
       <scriptSource class="hudson.plugins.groovy.FileScriptSource">
-        <scriptFile>automatjon/jon-2.0/src/hudson.groovy</scriptFile>
+        <scriptFile>automatjon/jon/src/hudson.groovy</scriptFile>
       </scriptSource>
       <groovyName>(Default)</groovyName>
       <parameters>-Dhudson.test.name=$TEST_GROUP
@@ -127,17 +127,17 @@ chmod 600 $WORKSPACE/automatjon/jon-2.0/.ssh/id*</command>
 -Djon.admin.password=$PASSWORD
 -Djon.server.user=$SERVER_USER
 -Djon.agent.user=$AGENT_USER
--Dtestng.outputdir=automatjon/jon-2.0/test-output
--Dselenium.screenshot.dir=automatjon/jon-2.0/test-output/screenshots
--Dselenium.screenshot.link.path=../artifact/automatjon/jon-2.0/test-output/screenshots
+-Dtestng.outputdir=automatjon/jon/test-output
+-Dselenium.screenshot.dir=automatjon/jon/test-output/screenshots
+-Dselenium.screenshot.link.path=../artifact/automatjon/jon/test-output/screenshots
 -Dselenium.address=$SELENIUM_ADDRESS</parameters>
-      <scriptParameters>automatjon/jon-2.0/src/com/redhat/qe/jon23/tests/functional-testng.xml ${TEST_GROUP}</scriptParameters>
+      <scriptParameters>automatjon/jon/src/com/redhat/qe/jon23/tests/functional-testng.xml ${TEST_GROUP}</scriptParameters>
       <properties></properties>
     </hudson.plugins.groovy.Groovy>
     <hudson.tasks.Ant>
       <targets>reports</targets>
       <antName>(Default)</antName>
-      <buildFile>automatjon/jon-2.0/build.xml</buildFile>
+      <buildFile>automatjon/jon/build.xml</buildFile>
     </hudson.tasks.Ant>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
@@ -148,14 +148,14 @@ exit 0</command>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>automatjon/jon-2.0/test-output/**/*</artifacts>
+      <artifacts>automatjon/jon/test-output/**/*</artifacts>
       <latestOnly>false</latestOnly>
     </hudson.tasks.ArtifactArchiver>
     <htmlpublisher.HtmlPublisher>
       <reportTargets>
         <htmlpublisher.HtmlPublisherTarget>
           <reportName>TestNG Report</reportName>
-          <reportDir>automatjon/jon-2.0/test-output/html/</reportDir>
+          <reportDir>automatjon/jon/test-output/html/</reportDir>
           <reportFiles>index.html</reportFiles>
           <keepAll>true</keepAll>
           <wrapperName>htmlpublisher-wrapper.html</wrapperName>

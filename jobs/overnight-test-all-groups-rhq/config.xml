@@ -29,7 +29,7 @@ This project is scheduled to kick-off automatically every night following the su
         <hudson.model.StringParameterDefinition>
           <name>SERVER_HOSTNAME</name>
           <description>Your Server Hostname like http://yourServer.com:7080</description>
-          <defaultValue>http://auto-rhq.usersys.redhat.com:7080</defaultValue>
+          <defaultValue>http://auto-rhq01.usersys.redhat.com:7080</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.ChoiceParameterDefinition>
           <name>VERSION</name>
@@ -91,13 +91,13 @@ echo &quot;===========================================================&quot;
 rm -Rf *
 git clone git://github.com/weissjeffm/webui-framework.git
 git clone -b $BRANCH git://git.rhndev.redhat.com/automatjon
-chmod 600 $WORKSPACE/automatjon/jon-2.0/.ssh/id*
+chmod 600 $WORKSPACE/automatjon/jon/.ssh/id*
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Ant>
       <targets>rhq30functional-testng</targets>
       <antName>(Default)</antName>
-      <buildFile>automatjon/jon-2.0/build.xml</buildFile>
+      <buildFile>automatjon/jon/build.xml</buildFile>
       <properties>jon.server.url=${SERVER_HOSTNAME}
 jon.version=${VERSION}
 jon.admin.user=${USERNAME}
@@ -109,7 +109,7 @@ selenium.address=${SELENIUM_ADDRESS}</properties>
     <hudson.tasks.Ant>
       <targets>overnight_reports</targets>
       <antName>(Default)</antName>
-      <buildFile>automatjon/jon-2.0/build.xml</buildFile>
+      <buildFile>automatjon/jon/build.xml</buildFile>
     </hudson.tasks.Ant>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
@@ -120,18 +120,18 @@ exit 0</command>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>automatjon/jon-2.0/test-output/**/*</artifacts>
+      <artifacts>automatjon/jon/test-output/**/*</artifacts>
       <latestOnly>false</latestOnly>
     </hudson.tasks.ArtifactArchiver>
     <hudson.tasks.junit.JUnitResultArchiver>
-      <testResults>automatjon/jon-2.0/test-output-reportng/*.xml</testResults>
+      <testResults>automatjon/jon/test-output-reportng/*.xml</testResults>
       <testDataPublishers/>
     </hudson.tasks.junit.JUnitResultArchiver>
     <htmlpublisher.HtmlPublisher>
       <reportTargets>
         <htmlpublisher.HtmlPublisherTarget>
           <reportName>TestNG Report</reportName>
-          <reportDir>automatjon/jon-2.0/test-output/html</reportDir>
+          <reportDir>automatjon/jon/test-output/html</reportDir>
           <reportFiles>index.html</reportFiles>
           <keepAll>true</keepAll>
           <wrapperName>htmlpublisher-wrapper.html</wrapperName>

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <hudson>
-  <version>1.336</version>
+  <version>1.346</version>
   <numExecutors>2</numExecutors>
   <mode>NORMAL</mode>
   <useSecurity>true</useSecurity>
@@ -8,19 +8,29 @@
     <permission>hudson.model.View.Configure:admin</permission>
     <permission>hudson.model.View.Delete:admin</permission>
     <permission>hudson.model.Item.Configure:admin</permission>
-    <permission>hudson.model.Computer.Configure:admin</permission>
     <permission>hudson.scm.SCM.Tag:admin</permission>
+    <permission>hudson.model.Computer.Configure:admin</permission>
     <permission>hudson.model.Item.Build:admin</permission>
+    <permission>hudson.model.Item.Build:ips</permission>
+    <permission>hudson.model.Item.Build:jsanda</permission>
     <permission>hudson.model.Computer.Delete:admin</permission>
     <permission>hudson.model.Run.Update:admin</permission>
     <permission>hudson.model.Item.Read:admin</permission>
-    <permission>hudson.model.Run.Delete:admin</permission>
+    <permission>hudson.model.Item.Read:ips</permission>
+    <permission>hudson.model.Item.Read:jsanda</permission>
     <permission>hudson.model.Hudson.Read:anonymous</permission>
     <permission>hudson.model.Hudson.Read:admin</permission>
+    <permission>hudson.model.Hudson.Read:ips</permission>
+    <permission>hudson.model.Hudson.Read:jsanda</permission>
+    <permission>hudson.model.Run.Delete:admin</permission>
     <permission>hudson.model.Item.Workspace:anonymous</permission>
     <permission>hudson.model.Item.Workspace:admin</permission>
+    <permission>hudson.model.Item.Workspace:ips</permission>
+    <permission>hudson.model.Item.Workspace:jsanda</permission>
     <permission>hudson.model.View.Create:admin</permission>
     <permission>hudson.model.Item.Create:admin</permission>
+    <permission>hudson.model.Item.Create:ips</permission>
+    <permission>hudson.model.Item.Create:jsanda</permission>
     <permission>hudson.model.Hudson.Administer:admin</permission>
     <permission>hudson.model.Item.Delete:admin</permission>
   </authorizationStrategy>
@@ -177,7 +187,7 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
     </hudson.model.AllView>
     <listView>
       <owner class="hudson" reference="../../.."/>
-      <name>JON23</name>
+      <name>qe-JON</name>
       <description>&lt;H3&gt;OVERVIEW:&lt;/H3&gt;&#xd;
 &lt;B&gt; execute-any-group-jon23 &lt;/B&gt; contains individual suites of automated tests grouped by functional coverage. &lt;BR&gt;&#xd;
 &lt;B&gt; overnight-test-all-groups-jon23 &lt;/B&gt;  is a full regression suite &lt;BR&gt;&#xd;
@@ -219,7 +229,7 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
     </listView>
     <listView>
       <owner class="hudson" reference="../../.."/>
-      <name>RHQ</name>
+      <name>qe-RHQ</name>
       <description>&lt;H3&gt;OVERVIEW:&lt;/H3&gt; &#xd;
 &lt;B&gt; execute-any-group-rhq &lt;/B&gt; contains individual suites of automated tests grouped by functional coverage.&lt;BR&gt;&#xd;
 &lt;B&gt; overnight-test-all-groups-rhq &lt;/B&gt; is a full regression suite that is scheduled to automatically execute everynight against an automated build and install of from the latest master.  (This job is NOT available for anonymous execution) &lt;BR&gt;&#xd;
@@ -244,6 +254,8 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
       <jobNames class="tree-set">
         <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView/jobNames/comparator"/>
         <string>execute-any-group-rhq</string>
+        <string>install-master</string>
+        <string>new-install-master</string>
         <string>overnight-test-all-groups-rhq</string>
       </jobNames>
       <columns>
@@ -259,8 +271,8 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
     </listView>
     <listView>
       <owner class="hudson" reference="../../.."/>
-      <name>RHQ-IndividualGroups</name>
-      <description>&lt;h2&gt;&lt;font color=red&gt;ADMIN ONLY (These jobs are NOT available for anonymous execution.)&lt;/font&gt;&lt;/h2&gt;&#xd;
+      <name>qe-RHQ-IndividualGroups</name>
+      <description>&lt;!--&lt;h2&gt;&lt;font color=red&gt;ADMIN ONLY (These jobs are NOT available for anonymous execution.)&lt;/font&gt;&lt;/h2&gt;--&gt;&#xd;
 &lt;H3&gt;OVERVIEW:&lt;/H3&gt; &#xd;
 &lt;B&gt; Jobs are divided into individual TEST_GROUPs&lt;/B&gt; (Permits more accurate historical trends of each test group) &lt;BR&gt;</description>
       <filterExecutors>false</filterExecutors>
@@ -313,19 +325,13 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
     </listView>
     <listView>
       <owner class="hudson" reference="../../.."/>
-      <name>build</name>
+      <name>RHQ</name>
       <filterExecutors>false</filterExecutors>
       <filterQueue>false</filterQueue>
       <jobNames class="tree-set">
         <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView[3]/jobNames/comparator"/>
-        <string>automatjon</string>
-        <string>build_master-notest</string>
-        <string>build_master_old</string>
         <string>gwt</string>
-        <string>install-auto-rhq01</string>
-        <string>install-master</string>
         <string>master</string>
-        <string>python_candlepin</string>
       </jobNames>
       <columns>
         <hudson.views.StatusColumn/>
@@ -365,13 +371,12 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
         <string>alertPlugin</string>
         <string>candlepin</string>
         <string>content</string>
+        <string>jon</string>
         <string>linux-config</string>
         <string>master</string>
         <string>master-disabled</string>
-        <string>overnight-test-all-groups-jon23</string>
-        <string>overnight-test-all-groups-rhq</string>
+        <string>python_candlepin</string>
         <string>raw-config</string>
-        <string>test</string>
       </jobNames>
       <columns>
         <hudson.views.StatusColumn/>
@@ -385,16 +390,16 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
     </listView>
     <listView>
       <owner class="hudson" reference="../../.."/>
-      <name>candlepin</name>
+      <name>Entitlement</name>
       <filterExecutors>false</filterExecutors>
       <filterQueue>false</filterQueue>
       <jobNames class="tree-set">
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
-        <string>candlepin</string>
-        <string>candlepin-utility</string>
         <string>certificate-harness</string>
-        <string>certificate-service</string>
-        <string>cp-services</string>
+        <string>IT-candlepin</string>
+        <string>IT-candlepin-utility</string>
+        <string>IT-certificate-service</string>
+        <string>IT-cp-services</string>
       </jobNames>
       <columns>
         <hudson.views.StatusColumn/>
@@ -403,6 +408,45 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
         <hudson.views.LastSuccessColumn/>
         <hudson.views.LastFailureColumn/>
         <hudson.views.LastDurationColumn/>
+      </columns>
+    </listView>
+    <listView>
+      <owner class="hudson" reference="../../.."/>
+      <name>qe-Cloude</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <jobNames class="tree-set">
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+        <string>Grinder</string>
+      </jobNames>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
+        <de.fspengler.hudson.pview.ConsoleViewColumn/>
+      </columns>
+    </listView>
+    <listView>
+      <owner class="hudson" reference="../../.."/>
+      <name>JON</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <jobNames class="tree-set">
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+        <string>jon</string>
+      </jobNames>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
+        <hudson.views.BuildButtonColumn/>
+        <de.fspengler.hudson.pview.ConsoleViewColumn/>
       </columns>
     </listView>
   </views>

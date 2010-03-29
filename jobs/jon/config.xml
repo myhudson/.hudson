@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<maven2-moduleset>
+  <actions/>
+  <description>JBoss Operation Network (JON) trunk&#xd;
+&#xd;
+</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.security.AuthorizationMatrixProperty>
+      <permission>hudson.model.Run.Update:ips</permission>
+      <permission>hudson.model.Item.Delete:ips</permission>
+      <permission>hudson.model.Run.Delete:ips</permission>
+      <permission>hudson.model.Item.Build:ips</permission>
+      <permission>hudson.model.Item.Release:ips</permission>
+      <permission>hudson.model.Item.Read:anonymous</permission>
+      <permission>hudson.model.Item.Read:ips</permission>
+      <permission>hudson.model.Item.Workspace:ips</permission>
+      <permission>hudson.model.Item.Configure:ips</permission>
+    </hudson.security.AuthorizationMatrixProperty>
+  </properties>
+  <scm class="hudson.scm.SubversionSCM">
+    <locations>
+      <hudson.scm.SubversionSCM_-ModuleLocation>
+        <remote>https://jonadmin:jmazzite42!@svn.devel.redhat.com/repos/jboss-jon/trunk</remote>
+        <local>.</local>
+      </hudson.scm.SubversionSCM_-ModuleLocation>
+    </locations>
+    <useUpdate>true</useUpdate>
+    <doRevert>false</doRevert>
+    <excludedRegions></excludedRegions>
+    <excludedUsers></excludedUsers>
+    <excludedRevprop></excludedRevprop>
+    <excludedCommitMessages></excludedCommitMessages>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector">
+    <hudson.triggers.SCMTrigger>
+      <spec># every 5 minutes
+*/5 * * * *
+</spec>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <rootModule>
+    <groupId>org.jboss.on</groupId>
+    <artifactId>jboss-on-parent</artifactId>
+  </rootModule>
+  <goals>--settings settings.xml -Pdist clean install</goals>
+  <defaultGoals>install</defaultGoals>
+  <aggregatorStyleBuild>true</aggregatorStyleBuild>
+  <incrementalBuild>false</incrementalBuild>
+  <usePrivateRepository>true</usePrivateRepository>
+  <ignoreUpstremChanges>false</ignoreUpstremChanges>
+  <archivingDisabled>false</archivingDisabled>
+  <reporters>
+    <hudson.maven.reporters.MavenMailer>
+      <recipients>jboss-on-team@redhat.com</recipients>
+      <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
+      <sendToIndividuals>false</sendToIndividuals>
+    </hudson.maven.reporters.MavenMailer>
+  </reporters>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>jon/dist/**/target/*.zip</artifacts>
+      <latestOnly>false</latestOnly>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.plugins.chucknorris.CordellWalkerRecorder>
+      <factGenerator/>
+    </hudson.plugins.chucknorris.CordellWalkerRecorder>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.m2extrasteps.M2ExtraStepsWrapper>
+      <preBuildSteps>
+        <hudson.tasks.Shell>
+          <command>#set lang encoding
+export LANG=en_US.iso88591
+
+# Print some environment info.
+echo WORKSPACE=${WORKSPACE}
+echo JAVA_HOME=${JAVA_HOME}
+#M2_HOME=/qa/tools/opt/maven-2.1.0
+echo M2_HOME=${M2_HOME}
+
+# Create Maven settings.xml.
+SETTINGS=${WORKSPACE}/settings.xml
+cat &lt;&lt;EOF &gt;${SETTINGS}
+&lt;settings&gt;
+
+  &lt;profiles&gt;
+
+    &lt;profile&gt;
+      &lt;id&gt;dist&lt;/id&gt;
+
+      &lt;repositories&gt;
+            &lt;repository&gt;
+               &lt;id&gt;jboss-snapshots&lt;/id&gt;
+               &lt;name&gt;JBoss Snapshot Repository&lt;/name&gt;
+               &lt;url&gt;http://snapshots.jboss.org/maven2/&lt;/url&gt;
+               &lt;snapshots&gt;
+                  &lt;enabled&gt;true&lt;/enabled&gt;
+               &lt;/snapshots&gt;
+            &lt;/repository&gt;
+      &lt;/repositories&gt;
+
+      &lt;pluginRepositories&gt;
+            &lt;pluginRepository&gt;
+               &lt;id&gt;jboss-snapshots&lt;/id&gt;
+               &lt;name&gt;JBoss Snapshot Repository&lt;/name&gt;
+               &lt;url&gt;http://snapshots.jboss.org/maven2/&lt;/url&gt;
+               &lt;snapshots&gt;
+                  &lt;enabled&gt;true&lt;/enabled&gt;
+               &lt;/snapshots&gt;
+            &lt;/pluginRepository&gt;
+      &lt;/pluginRepositories&gt;
+    &lt;/profile&gt;
+
+  &lt;/profiles&gt;
+
+&lt;/settings&gt;
+EOF
+</command>
+        </hudson.tasks.Shell>
+      </preBuildSteps>
+      <postBuildSteps/>
+      <runIfResult>allCases</runIfResult>
+    </hudson.plugins.m2extrasteps.M2ExtraStepsWrapper>
+  </buildWrappers>
+</maven2-moduleset>
