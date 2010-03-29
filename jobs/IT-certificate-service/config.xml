@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Builds the certificate service</description>
+  <logRotator>
+    <daysToKeep>3</daysToKeep>
+    <numToKeep>-1</numToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.plugins.git.GitSCM">
+    <configVersion>1</configVersion>
+    <remoteRepositories>
+      <org.spearce.jgit.transport.RemoteConfig>
+        <string>origin</string>
+        <int>5</int>
+        <string>fetch</string>
+        <string>+refs/heads/*:refs/remotes/origin/*</string>
+        <string>receivepack</string>
+        <string>git-upload-pack</string>
+        <string>uploadpack</string>
+        <string>git-upload-pack</string>
+        <string>url</string>
+        <string>git://cp-git.engsupport.redhat.com/srv/git/cp/cert-service</string>
+        <string>tagopt</string>
+        <string></string>
+      </org.spearce.jgit.transport.RemoteConfig>
+    </remoteRepositories>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>origin/HEAD</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <mergeOptions/>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <clean>false</clean>
+    <submoduleCfg class="list"/>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector">
+    <hudson.triggers.SCMTrigger>
+      <spec>*/5 * * * *</spec>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>mvn clean install sonar:sonar -Dsonar.host.url=http://cert-ci.devlab.redhat.com:9000/sonar -Dmaven.rpm.forceRPMBuild -Drpm.release=$BUILD_NUMBER</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>for f in `find $WORKSPACE -name &apos;*.noarch.rpm&apos;` ; do 
+    x=`echo $f|sed &apos;s/[[:digit:]]\+.noarch.rpm//&apos;`; 
+    x=`basename $x`; 
+    find /srv/yum -name &quot;${x}*&quot; -exec rm {} \; 
+    cp $f /srv/yum;
+done &amp;&amp; createrepo /srv/yum</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>
