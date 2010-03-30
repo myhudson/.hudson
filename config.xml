@@ -5,34 +5,34 @@
   <mode>NORMAL</mode>
   <useSecurity>true</useSecurity>
   <authorizationStrategy class="hudson.security.ProjectMatrixAuthorizationStrategy">
-    <permission>hudson.model.View.Configure:admin</permission>
+    <permission>hudson.model.Hudson.Administer:admin</permission>
+    <permission>hudson.model.Run.Delete:admin</permission>
+    <permission>hudson.model.View.Create:admin</permission>
+    <permission>hudson.model.Item.Create:jsanda</permission>
+    <permission>hudson.model.Item.Create:ips</permission>
+    <permission>hudson.model.Item.Create:admin</permission>
+    <permission>hudson.model.Item.Read:jsanda</permission>
+    <permission>hudson.model.Item.Read:ips</permission>
+    <permission>hudson.model.Item.Read:admin</permission>
+    <permission>hudson.model.Computer.Delete:admin</permission>
+    <permission>hudson.model.Hudson.Read:anonymous</permission>
+    <permission>hudson.model.Hudson.Read:jsanda</permission>
+    <permission>hudson.model.Hudson.Read:ips</permission>
+    <permission>hudson.model.Hudson.Read:admin</permission>
     <permission>hudson.model.View.Delete:admin</permission>
     <permission>hudson.model.Item.Configure:admin</permission>
+    <permission>hudson.model.Run.Update:admin</permission>
+    <permission>hudson.model.Item.Delete:admin</permission>
+    <permission>hudson.model.View.Configure:admin</permission>
     <permission>hudson.scm.SCM.Tag:admin</permission>
     <permission>hudson.model.Computer.Configure:admin</permission>
-    <permission>hudson.model.Item.Build:admin</permission>
-    <permission>hudson.model.Item.Build:ips</permission>
     <permission>hudson.model.Item.Build:jsanda</permission>
-    <permission>hudson.model.Computer.Delete:admin</permission>
-    <permission>hudson.model.Run.Update:admin</permission>
-    <permission>hudson.model.Item.Read:admin</permission>
-    <permission>hudson.model.Item.Read:ips</permission>
-    <permission>hudson.model.Item.Read:jsanda</permission>
-    <permission>hudson.model.Hudson.Read:anonymous</permission>
-    <permission>hudson.model.Hudson.Read:admin</permission>
-    <permission>hudson.model.Hudson.Read:ips</permission>
-    <permission>hudson.model.Hudson.Read:jsanda</permission>
-    <permission>hudson.model.Run.Delete:admin</permission>
+    <permission>hudson.model.Item.Build:ips</permission>
+    <permission>hudson.model.Item.Build:admin</permission>
     <permission>hudson.model.Item.Workspace:anonymous</permission>
-    <permission>hudson.model.Item.Workspace:admin</permission>
-    <permission>hudson.model.Item.Workspace:ips</permission>
     <permission>hudson.model.Item.Workspace:jsanda</permission>
-    <permission>hudson.model.View.Create:admin</permission>
-    <permission>hudson.model.Item.Create:admin</permission>
-    <permission>hudson.model.Item.Create:ips</permission>
-    <permission>hudson.model.Item.Create:jsanda</permission>
-    <permission>hudson.model.Hudson.Administer:admin</permission>
-    <permission>hudson.model.Item.Delete:admin</permission>
+    <permission>hudson.model.Item.Workspace:ips</permission>
+    <permission>hudson.model.Item.Workspace:admin</permission>
   </authorizationStrategy>
   <securityRealm class="hudson.security.HudsonPrivateSecurityRealm">
     <disableSignup>false</disableSignup>
@@ -254,7 +254,7 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
       <jobNames class="tree-set">
         <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView/jobNames/comparator"/>
         <string>execute-any-group-rhq</string>
-        <string>install-master</string>
+        <string>install-master-disabled</string>
         <string>new-install-master</string>
         <string>overnight-test-all-groups-rhq</string>
       </jobNames>
@@ -417,6 +417,8 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
       <filterQueue>false</filterQueue>
       <jobNames class="tree-set">
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
+        <string>amazon-client-test</string>
+        <string>CloudeCreate</string>
         <string>Grinder</string>
       </jobNames>
       <columns>

@@ -7,14 +7,14 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
-      <permission>hudson.model.Run.Update:ips</permission>
-      <permission>hudson.model.Item.Delete:ips</permission>
-      <permission>hudson.model.Run.Delete:ips</permission>
       <permission>hudson.model.Item.Build:ips</permission>
-      <permission>hudson.model.Item.Release:ips</permission>
       <permission>hudson.model.Item.Read:anonymous</permission>
       <permission>hudson.model.Item.Read:ips</permission>
+      <permission>hudson.model.Run.Update:ips</permission>
+      <permission>hudson.model.Run.Delete:ips</permission>
       <permission>hudson.model.Item.Workspace:ips</permission>
+      <permission>hudson.model.Item.Release:ips</permission>
+      <permission>hudson.model.Item.Delete:ips</permission>
       <permission>hudson.model.Item.Configure:ips</permission>
     </hudson.security.AuthorizationMatrixProperty>
   </properties>
@@ -71,13 +71,14 @@
     </hudson.plugins.chucknorris.CordellWalkerRecorder>
   </publishers>
   <buildWrappers>
+    <hudson.plugins.setenv.SetEnvBuildWrapper>
+      <localVarText>LANG=en_US.iso88591
+</localVarText>
+    </hudson.plugins.setenv.SetEnvBuildWrapper>
     <hudson.plugins.m2extrasteps.M2ExtraStepsWrapper>
       <preBuildSteps>
         <hudson.tasks.Shell>
-          <command>#set lang encoding
-export LANG=en_US.iso88591
-
-# Print some environment info.
+          <command># Print some environment info.
 echo WORKSPACE=${WORKSPACE}
 echo JAVA_HOME=${JAVA_HOME}
 #M2_HOME=/qa/tools/opt/maven-2.1.0
