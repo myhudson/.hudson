@@ -38,13 +38,29 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>echo &quot;==================&quot;
-echo  ${TEST_GROUP}
-echo &quot;==================&quot;
-rm -Rf *
-git clone git://github.com/weissjeffm/webui-framework.git
-git clone git://git.rhndev.redhat.com/automatjon
-chmod 600 $WORKSPACE/automatjon/jon/.ssh/id*</command>
+      <command>#!/bin/bash -xe
+
+cd $WORKSPACE
+if [ -d automatjon ]; then 
+ cd automatjon
+ git clean -df
+ git pull
+else
+ git clone git://git.rhndev.redhat.com/automatjon
+fi
+
+cd $WORKSPACE
+
+if [ -d webui-framework ]; then 
+ cd webui-framework
+ git clean -df
+ git pull
+else
+ git clone git://github.com/weissjeffm/webui-framework.git
+fi
+
+chmod 600 $WORKSPACE/automatjon/jon/.ssh/id*
+</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Ant>
       <targets>compile</targets>

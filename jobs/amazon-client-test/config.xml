@@ -11,13 +11,13 @@
           <description>Access ID for Amazon&apos;s cloud</description>
           <defaultValue></defaultValue>
         </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
+        <hudson.model.PasswordParameterDefinition>
           <name>AWS_SECRET_KEY</name>
           <description>Secret key for Amazon&apos;s cloud</description>
-          <defaultValue></defaultValue>
-        </hudson.model.StringParameterDefinition>
+          <defaultValue>dXCl+kj20/EIiIk6l8uQ8A==</defaultValue>
+        </hudson.model.PasswordParameterDefinition>
         <hudson.model.FileParameterDefinition>
-          <name>/tmp/cloude-key.pem</name>
+          <name>cloude-key.pem</name>
           <description>Your amazon cloud ssh key file (cloude-key.pem)</description>
         </hudson.model.FileParameterDefinition>
       </parameterDefinitions>
@@ -32,12 +32,30 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>echo &quot;==================&quot;
+      <command>#!/bin/bash
+echo &quot;==================&quot;
 echo  ${TEST_GROUP}
 echo &quot;==================&quot;
-rm -Rf *
-git clone git://github.com/weissjeffm/webui-framework.git
-git clone git://git.rhndev.redhat.com/automatjon
+
+cd $WORKSPACE
+
+find . -type d -name &quot;test-output*&quot; -exec rm -rf {} \;
+if [ -d automatjon ]; then 
+ cd automatjon
+ git pull
+else
+ git clone git://git.rhndev.redhat.com/automatjon
+fi
+
+cd $WORKSPACE
+
+if [ -d webui-framework ]; then 
+ cd webui-framework
+ git pull
+else
+ git clone git://github.com/weissjeffm/webui-framework.git
+fi
+
 chmod 600 $WORKSPACE/automatjon/jon/.ssh/id*</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Ant>
@@ -53,7 +71,7 @@ chmod 600 $WORKSPACE/automatjon/jon/.ssh/id*</command>
       <parameters>-Dworkspace.dir=$WORKSPACE
 -Dec2.awsAccessId=$AWS_ACCESS_ID
 -Dec2.awsSecretKey=$AWS_SECRET_KEY
--Dec2.sshPrivateKey=/tmp/cloude-key.pem
+-Dec2.sshPrivateKey=$WORKSPACE/cloude-key.pem
 -Dcloude.dev.hostname=hudson-qe.rhq.rdu.redhat.com
 -Dcloude.dev.user=cloude
 -Dcloude.dev.sshPrivateKey=$WORKSPACE/automatjon/jon/.ssh/id_auto_dsa
@@ -63,12 +81,19 @@ chmod 600 $WORKSPACE/automatjon/jon/.ssh/id*</command>
       <properties>testng.project.dir=automatjon/cloude
 </properties>
     </hudson.plugins.groovy.Groovy>
+    <hudson.tasks.Shell>
+      <command>rm $WORKSPACE/cloude-key.pem</command>
+    </hudson.tasks.Shell>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
       <artifacts>automatjon/cloude/test-output/**/*</artifacts>
       <latestOnly>false</latestOnly>
     </hudson.tasks.ArtifactArchiver>
+    <hudson.tasks.junit.JUnitResultArchiver>
+      <testResults>automatjon/cloude/test-output-junit/*.xml</testResults>
+      <testDataPublishers/>
+    </hudson.tasks.junit.JUnitResultArchiver>
     <htmlpublisher.HtmlPublisher>
       <reportTargets>
         <htmlpublisher.HtmlPublisherTarget>
