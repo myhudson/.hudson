@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>&lt;H1&gt;&lt;font color=red&gt;UNDER DEVELOPMENT&lt;/font&gt;&lt;/H1&gt;&#xd;
+&lt;H3&gt;MANUAL INSTRUCTIONS:&lt;/H3&gt; &#xd;
+&lt;UL&gt;&#xd;
+&lt;LI&gt; Click &apos;Build Now&apos; to manually begin a test run. &lt;/LI&gt;&#xd;
+&lt;LI&gt; From the list of fields, read their descriptions and set the values appropriate for your testing. &lt;/LI&gt;&#xd;
+&lt;LI&gt; Then click the &apos;Build&apos; button. &lt;/LI&gt;&#xd;
+&lt;/UL&gt;</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>AWS_ACCESS_ID</name>
+          <description>Access ID for Amazon&apos;s cloud</description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.PasswordParameterDefinition>
+          <name>AWS_SECRET_KEY</name>
+          <description>Secret key for Amazon&apos;s cloud</description>
+          <defaultValue>dXCl+kj20/EIiIk6l8uQ8A==</defaultValue>
+        </hudson.model.PasswordParameterDefinition>
+        <hudson.model.FileParameterDefinition>
+          <name>cloude-key.pem</name>
+          <description>Your amazon cloud ssh key file (cloude-key.pem)</description>
+        </hudson.model.FileParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <assignedNode>selenium</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector"/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>echo &quot;==================&quot;
+echo  ${TEST_GROUP}
+echo &quot;==================&quot;
+rm -Rf *
+git clone git://github.com/weissjeffm/webui-framework.git
+git clone git://git.rhndev.redhat.com/automatjon
+chmod 600 $WORKSPACE/automatjon/jon/.ssh/id*</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Ant>
+      <targets>compile</targets>
+      <antName>(Default)</antName>
+      <buildFile>$WORKSPACE/automatjon/cloude/build.xml</buildFile>
+    </hudson.tasks.Ant>
+    <hudson.plugins.groovy.Groovy>
+      <scriptSource class="hudson.plugins.groovy.FileScriptSource">
+        <scriptFile>webui-framework/groovy/src/hudson.groovy</scriptFile>
+      </scriptSource>
+      <groovyName>(Default)</groovyName>
+      <parameters>-Dworkspace.dir=$WORKSPACE
+-Dec2.awsAccessId=$AWS_ACCESS_ID
+-Dec2.awsSecretKey=$AWS_SECRET_KEY
+-Dec2.sshPrivateKey=$WORKSPACE/cloude-key.pem
+-Dcloude.dev.hostname=hudson-qe.rhq.rdu.redhat.com
+-Dcloude.dev.user=cloude
+-Dcloude.dev.sshPrivateKey=$WORKSPACE/automatjon/jon/.ssh/id_auto_dsa
+-Dcloude.dev.sshPassphrase=dog8code
+-Dcloude.dev.repo.dir=/home/cloude/workspace/
+</parameters>
+      <scriptParameters>automatjon/cloude/src/com/redhat/qe/cloude/tests/CloudeCreateTests.xml</scriptParameters>
+      <properties>testng.project.dir=automatjon/cloude
+</properties>
+    </hudson.plugins.groovy.Groovy>
+    <hudson.tasks.Shell>
+      <command>rm -f $WORKSPACE/cloude-key.pem</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>automatjon/cloude/test-output/**/*</artifacts>
+      <latestOnly>false</latestOnly>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.tasks.junit.JUnitResultArchiver>
+      <testResults>automatjon/cloude/test-output-junit/*.xml</testResults>
+      <testDataPublishers/>
+    </hudson.tasks.junit.JUnitResultArchiver>
+    <htmlpublisher.HtmlPublisher>
+      <reportTargets>
+        <htmlpublisher.HtmlPublisherTarget>
+          <reportName>TestNG Report</reportName>
+          <reportDir>automatjon/cloude/test-output/html/</reportDir>
+          <reportFiles>index.html</reportFiles>
+          <keepAll>true</keepAll>
+          <wrapperName>htmlpublisher-wrapper.html</wrapperName>
+        </htmlpublisher.HtmlPublisherTarget>
+      </reportTargets>
+    </htmlpublisher.HtmlPublisher>
+  </publishers>
+  <buildWrappers/>
+</project>
