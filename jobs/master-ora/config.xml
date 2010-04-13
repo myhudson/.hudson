@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<maven2-moduleset>
+  <actions/>
+  <description>&lt;h2&gt;RHQ master branch CI Build - Builds RHQ Oracle XE 10g&lt;/h2&gt;&#xd;
+&#xd;
+&lt;h4&gt;No artifacts published by this build. It is Java5 API enforcement and unit test execution against Oracle.&lt;/h4&gt;&#xd;
+&#xd;
+&lt;h5&gt;maintained by &lt;a href=&quot;mailto:jshaughn@redhat.com&quot;&gt;Jay Shaughnessy&lt;/a&gt;&lt;/h5&gt;&#xd;
+</description>
+  <logRotator>
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>5</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>5</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.security.AuthorizationMatrixProperty>
+      <permission>hudson.model.Item.Build:ccrouch</permission>
+      <permission>hudson.model.Item.Build:anonymous</permission>
+      <permission>hudson.model.Item.Build:jshaughn</permission>
+      <permission>hudson.model.Item.Build:ips</permission>
+      <permission>hudson.model.Run.Delete:ccrouch</permission>
+      <permission>hudson.model.Run.Delete:jshaughn</permission>
+      <permission>hudson.model.Run.Delete:ips</permission>
+      <permission>hudson.model.Item.Release:ccrouch</permission>
+      <permission>hudson.model.Item.Release:jshaughn</permission>
+      <permission>hudson.model.Item.Release:ips</permission>
+      <permission>hudson.model.Item.Workspace:ccrouch</permission>
+      <permission>hudson.model.Item.Workspace:anonymous</permission>
+      <permission>hudson.model.Item.Workspace:jshaughn</permission>
+      <permission>hudson.model.Item.Workspace:ips</permission>
+      <permission>hudson.model.Item.Delete:ccrouch</permission>
+      <permission>hudson.model.Item.Delete:jshaughn</permission>
+      <permission>hudson.model.Item.Delete:ips</permission>
+      <permission>hudson.model.Item.Read:ccrouch</permission>
+      <permission>hudson.model.Item.Read:anonymous</permission>
+      <permission>hudson.model.Item.Read:jshaughn</permission>
+      <permission>hudson.model.Item.Read:ips</permission>
+      <permission>hudson.model.Run.Update:ccrouch</permission>
+      <permission>hudson.model.Run.Update:jshaughn</permission>
+      <permission>hudson.model.Run.Update:ips</permission>
+      <permission>hudson.model.Item.Configure:ccrouch</permission>
+      <permission>hudson.model.Item.Configure:jshaughn</permission>
+      <permission>hudson.model.Item.Configure:ips</permission>
+    </hudson.security.AuthorizationMatrixProperty>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM">
+    <configVersion>1</configVersion>
+    <remoteRepositories>
+      <org.spearce.jgit.transport.RemoteConfig>
+        <string>origin</string>
+        <int>5</int>
+        <string>fetch</string>
+        <string>+refs/heads/*:refs/remotes/origin/*</string>
+        <string>receivepack</string>
+        <string>git-upload-pack</string>
+        <string>uploadpack</string>
+        <string>git-upload-pack</string>
+        <string>url</string>
+        <string>git://git.fedorahosted.org/rhq/rhq.git</string>
+        <string>tagopt</string>
+        <string></string>
+      </org.spearce.jgit.transport.RemoteConfig>
+    </remoteRepositories>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>origin/master</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <mergeOptions/>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <clean>false</clean>
+    <choosingStrategy>Default</choosingStrategy>
+    <submoduleCfg class="list"/>
+  </scm>
+  <assignedNode>opos13.rhq.rdu.redhat.com01</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector"/>
+  <concurrentBuild>false</concurrentBuild>
+  <rootModule>
+    <groupId>org.rhq</groupId>
+    <artifactId>rhq-parent</artifactId>
+  </rootModule>
+  <goals>--settings=settings.xml -P$JOB_NAME,enterprise,ojdbc-driver -Dpackage-connectors -Dexclude-webdav -Ddbsetup clean install</goals>
+  <defaultGoals>install</defaultGoals>
+  <aggregatorStyleBuild>true</aggregatorStyleBuild>
+  <incrementalBuild>false</incrementalBuild>
+  <usePrivateRepository>true</usePrivateRepository>
+  <ignoreUpstremChanges>true</ignoreUpstremChanges>
+  <archivingDisabled>true</archivingDisabled>
+  <reporters>
+    <hudson.maven.reporters.MavenMailer>
+      <recipients>jboss-on-team@redhat.com</recipients>
+      <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
+      <sendToIndividuals>false</sendToIndividuals>
+    </hudson.maven.reporters.MavenMailer>
+  </reporters>
+  <publishers>
+    <hudson.plugins.chucknorris.CordellWalkerRecorder>
+      <factGenerator/>
+    </hudson.plugins.chucknorris.CordellWalkerRecorder>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.setenv.SetEnvBuildWrapper>
+      <localVarText>LANG=en_US.iso88591
+
+</localVarText>
+    </hudson.plugins.setenv.SetEnvBuildWrapper>
+    <hudson.plugins.m2extrasteps.M2ExtraStepsWrapper>
+      <preBuildSteps>
+        <hudson.tasks.Shell>
+          <command># Print some environment info.
+echo WORKSPACE=${WORKSPACE}
+echo JAVA_HOME=${JAVA_HOME}
+#M2_HOME=/qa/tools/opt/maven-2.1.0
+echo M2_HOME=${M2_HOME}
+
+echo &quot;Checking out settings.xml from JON SVN...&quot;
+echo t | svn export --username jonadmin --password jmazzite42! https://svn.devel.redhat.com/repos/jboss-jon/trunk/etc/m2/settings.xml
+
+# TODO: Blow away and recreate the DB.
+
+</command>
+        </hudson.tasks.Shell>
+      </preBuildSteps>
+      <postBuildSteps>
+        <hudson.tasks.Shell>
+          <command></command>
+        </hudson.tasks.Shell>
+      </postBuildSteps>
+      <runIfResult>allCases</runIfResult>
+    </hudson.plugins.m2extrasteps.M2ExtraStepsWrapper>
+  </buildWrappers>
+</maven2-moduleset>

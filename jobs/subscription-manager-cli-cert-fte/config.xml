@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>This suite executes an exhaustive set of tests against subscription-manager-cli based upon the following TCMS suite:&lt;BR/&gt;&#xd;
+&lt;a href=&quot;https://tcms.engineering.redhat.com/plan/2105/&quot;&gt;https://tcms.engineering.redhat.com/plan/2105/&lt;/a&gt;&lt;BR/&gt;&#xd;
+&lt;H3&gt; To View Results, click TestNG Report&lt;/H3&gt;&#xd;
+&lt;br&gt;&#xd;
+&lt;H3&gt;MANUAL INSTRUCTIONS:&lt;/H3&gt; &#xd;
+&lt;UL&gt;&#xd;
+&lt;LI&gt; Click &apos;Build Now&apos; to manually begin a test run. &lt;/LI&gt;&#xd;
+&lt;LI&gt; From the list of fields, read their descriptions and set the values appropriate for your testing. &lt;/LI&gt;&#xd;
+&lt;LI&gt; Then click the &apos;Build&apos; button. &lt;/LI&gt;&#xd;
+&lt;/UL&gt;</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.security.AuthorizationMatrixProperty>
+      <permission>hudson.model.Item.Build:anonymous</permission>
+      <permission>hudson.model.Item.Workspace:anonymous</permission>
+      <permission>hudson.model.Item.Read:anonymous</permission>
+    </hudson.security.AuthorizationMatrixProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>RHSM_RPM</name>
+          <description>url to latest subscription-manager RPM</description>
+          <defaultValue>http://download.devel.redhat.com/brewroot/packages/subscription-manager/0.37/1.el6/i686/subscription-manager-0.37-1.el6.i686.rpm</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>CLIENT_HOSTNAME</name>
+          <description>hostname of the client running subscription-manager-cli</description>
+          <defaultValue>oldceremony.rhndev.redhat.com</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>CLIENT_USERNAME</name>
+          <description>username used to register to a Candlepin server</description>
+          <defaultValue>HARDCODED</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>CLIENT_PASSWORD</name>
+          <description>password used to register to a Candlepin server</description>
+          <defaultValue>HARDCODED</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>SERVER_PORT</name>
+          <description>port through which to access Candlepin server</description>
+          <defaultValue>443</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>CLIENT_CERTFREQUENCY</name>
+          <description>default certificate refresh frequency as set in /etc/rhsm/rhsm.conf (you can usually leave this one alone)</description>
+          <defaultValue>240</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>SERVER_BASEURL</name>
+          <description>base URL to Candlepin server as set in /etc/rhsm/rhsm.conf (you can usually leave this one alone)</description>
+          <defaultValue>http://redhat.com/content</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <assignedNode>selenium</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector">
+    <hudson.triggers.TimerTrigger>
+      <spec>0 2 * * *</spec>
+    </hudson.triggers.TimerTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash -xe
+
+cd $WORKSPACE
+if [ -d automatjon ]; then 
+ cd automatjon
+ git clean -df
+ git pull
+else
+ git clone git://git.rhndev.redhat.com/automatjon
+fi
+
+cd $WORKSPACE
+
+if [ -d webui-framework ]; then 
+ cd webui-framework
+ git clean -df
+ git pull
+else
+ git clone git://github.com/weissjeffm/webui-framework.git
+fi
+
+chmod 600 $WORKSPACE/automatjon/jon/.ssh/id*</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Ant>
+      <targets>compile</targets>
+      <antName>(Default)</antName>
+      <buildFile>$WORKSPACE/automatjon/sm/build.xml</buildFile>
+    </hudson.tasks.Ant>
+    <hudson.plugins.groovy.Groovy>
+      <scriptSource class="hudson.plugins.groovy.FileScriptSource">
+        <scriptFile>webui-framework/groovy/src/hudson.groovy</scriptFile>
+      </scriptSource>
+      <groovyName>(Default)</groovyName>
+      <parameters>-Drhsm.client.hostname=$CLIENT_HOSTNAME
+-Drhsm.client.username=jsomara
+-Drhsm.client.password=redhat
+-Drhsm.client.certfrequency=$CLIENT_CERTFREQUENCY
+-Drhsm.server.hostname=cert-fte-candlepin.devlab.redhat.com
+-Drhsm.server.port=$SERVER_PORT
+-Drhsm.server.baseurl=$SERVER_BASEURL
+-Drhsm.rpm=$RHSM_RPM
+-Drhsm.sshkey.private=automatjon/jon/.ssh/id_auto_dsa
+-Drhsm.sshkey.passphrase=dog8code</parameters>
+      <scriptParameters>automatjon/sm/src/com/redhat/qe/sm/tests/sm-tests.xml</scriptParameters>
+      <properties>testng.project.dir=automatjon/sm</properties>
+    </hudson.plugins.groovy.Groovy>
+  </builders>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>automatjon/sm/test-output/**/*</artifacts>
+      <latestOnly>false</latestOnly>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.tasks.junit.JUnitResultArchiver>
+      <testResults>automatjon/sm/test-output-junit/*.xml</testResults>
+      <testDataPublishers/>
+    </hudson.tasks.junit.JUnitResultArchiver>
+    <htmlpublisher.HtmlPublisher>
+      <reportTargets>
+        <htmlpublisher.HtmlPublisherTarget>
+          <reportName>TestNG Report</reportName>
+          <reportDir>automatjon/sm/test-output/html/</reportDir>
+          <reportFiles>index.html</reportFiles>
+          <keepAll>true</keepAll>
+          <wrapperName>htmlpublisher-wrapper.html</wrapperName>
+        </htmlpublisher.HtmlPublisherTarget>
+      </reportTargets>
+    </htmlpublisher.HtmlPublisher>
+    <hudson.plugins.chucknorris.CordellWalkerRecorder>
+      <factGenerator/>
+    </hudson.plugins.chucknorris.CordellWalkerRecorder>
+    <hudson.plugins.emailext.ExtendedEmailPublisher>
+      <recipientList>entitlement-team-list@redhat.com</recipientList>
+      <configuredTriggers>
+        <hudson.plugins.emailext.plugins.trigger.UnstableTrigger>
+          <email>
+            <recipientList></recipientList>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <sendToDevelopers>true</sendToDevelopers>
+            <includeCulprits>false</includeCulprits>
+            <sendToRecipientList>true</sendToRecipientList>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.UnstableTrigger>
+        <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+          <email>
+            <recipientList></recipientList>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <sendToDevelopers>true</sendToDevelopers>
+            <includeCulprits>false</includeCulprits>
+            <sendToRecipientList>true</sendToRecipientList>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+        <hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
+          <email>
+            <recipientList></recipientList>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <sendToDevelopers>true</sendToDevelopers>
+            <includeCulprits>false</includeCulprits>
+            <sendToRecipientList>true</sendToRecipientList>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
+      </configuredTriggers>
+      <contentType>default</contentType>
+      <defaultSubject>cert-fte-candlepin: latest entitlement-qe test execution </defaultSubject>
+      <defaultContent>$DEFAULT_CONTENT
+</defaultContent>
+    </hudson.plugins.emailext.ExtendedEmailPublisher>
+  </publishers>
+  <buildWrappers/>
+</project>

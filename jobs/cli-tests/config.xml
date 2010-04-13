@@ -53,8 +53,7 @@
     <groupId>org.rhq</groupId>
     <artifactId>rhq-remoting-cli-scripts</artifactId>
   </rootModule>
-  <rootPOM>modules/enterprise/remoting/scripts/pom.xml</rootPOM>
-  <goals>test -Dtest=test_SubjectManager.js -Drhq.server.name=10.16.120.233</goals>
+  <goals>test -Dtest=test_SubjectManager.js -Drhq.server.name=10.16.120.233 -Pcli-tests</goals>
   <defaultGoals>install</defaultGoals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>

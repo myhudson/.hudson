@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.security.AuthorizationMatrixProperty>
+      <permission>hudson.model.Item.Build:anonymous</permission>
+      <permission>hudson.model.Item.Workspace:anonymous</permission>
+      <permission>hudson.model.Item.Read:anonymous</permission>
+    </hudson.security.AuthorizationMatrixProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>AWS_ACCESS_ID</name>
+          <description>Access ID for Amazon&apos;s cloud</description>
+          <defaultValue>AKIAJGYNHDRJSYFYQ2IA</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.PasswordParameterDefinition>
+          <name>AWS_SECRET_KEY</name>
+          <description>Secret key for Amazon&apos;s cloud</description>
+          <defaultValue>JOcPd7BRjf6ifkJG4wRF9MpJjbjBNZ1VxknWQFpVIQhm228rmz2N5RAB/4Sn7EemIPDdsSSqC79MlLaq5XVKYQ==</defaultValue>
+        </hudson.model.PasswordParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>AWS_CLIENT_AMI_ID</name>
+          <description>AMI id of the client starter image to use.  If left blank, the AMIs will be scanned for any name with &quot;STARTER&quot; in the name and a datestamp, and the AMI with the latest datestamp will be selected.</description>
+          <defaultValue>ami-15a34d7c</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.FileParameterDefinition>
+          <name>automatjon/cloude/stage/mushroom-cloude-key.pem</name>
+          <description>Your amazon cloud ssh key file (cloude-key.pem)</description>
+        </hudson.model.FileParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <assignedNode>master</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector">
+    <hudson.triggers.TimerTrigger>
+      <spec>0,30	*	*	*	*</spec>
+    </hudson.triggers.TimerTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+echo &quot;==================&quot;
+echo  ${TEST_GROUP}
+echo &quot;==================&quot;
+
+cd $WORKSPACE
+
+find . -type d -name &quot;test-output*&quot; -exec rm -rf {} \;
+if [ -d automatjon ]; then 
+ cd automatjon
+ git pull
+else
+ git clone git://git.rhndev.redhat.com/automatjon
+fi
+
+cd $WORKSPACE
+
+if [ -d webui-framework ]; then 
+ cd webui-framework
+ git pull
+else
+ git clone git://github.com/weissjeffm/webui-framework.git
+fi
+
+chmod 600 $WORKSPACE/automatjon/jon/.ssh/id*
+chmod 600 $WORKSPACE/automatjon/cloude/stage/mush*
+cp $WORKSPACE/automatjon/cloude/stage/mush* $WORKSPACE/cloude-key.pem</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Ant>
+      <targets>compile</targets>
+      <antName>(Default)</antName>
+      <buildFile>$WORKSPACE/automatjon/cloude/build.xml</buildFile>
+    </hudson.tasks.Ant>
+    <hudson.plugins.groovy.Groovy>
+      <scriptSource class="hudson.plugins.groovy.FileScriptSource">
+        <scriptFile>webui-framework/groovy/src/hudson.groovy</scriptFile>
+      </scriptSource>
+      <groovyName>(Default)</groovyName>
+      <parameters>-Dworkspace.dir=$WORKSPACE
+-Dec2.awsAccessId=$AWS_ACCESS_ID
+-Dec2.awsSecretKey=$AWS_SECRET_KEY
+-Dec2.sshPrivateKey=$WORKSPACE/cloude-key.pem
+-Dcloude.clientAMI.id=$AWS_CLIENT_AMI_ID
+-Dcloude.dev.hostname=hudson-qe.rhq.rdu.redhat.com
+-Dcloude.dev.user=cloude
+-Dcloude.dev.sshPrivateKey=$WORKSPACE/automatjon/jon/.ssh/id_auto_dsa
+-Dcloude.dev.sshPassphrase=dog8code
+-Dcloude.dev.repo.dir=/home/cloude/workspace/
+</parameters>
+      <scriptParameters>automatjon/cloude/src/com/redhat/qe/cloude/tests/ec2-client-test.xml</scriptParameters>
+      <properties>testng.project.dir=automatjon/cloude
+</properties>
+    </hudson.plugins.groovy.Groovy>
+    <hudson.tasks.Shell>
+      <command>rm $WORKSPACE/cloude-key.pem</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>automatjon/cloude/test-output/**/*</artifacts>
+      <latestOnly>false</latestOnly>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.tasks.junit.JUnitResultArchiver>
+      <testResults>automatjon/cloude/test-output-junit/*.xml</testResults>
+      <testDataPublishers/>
+    </hudson.tasks.junit.JUnitResultArchiver>
+    <htmlpublisher.HtmlPublisher>
+      <reportTargets>
+        <htmlpublisher.HtmlPublisherTarget>
+          <reportName>TestNG Report</reportName>
+          <reportDir>automatjon/cloude/test-output/html/</reportDir>
+          <reportFiles>index.html</reportFiles>
+          <keepAll>true</keepAll>
+          <wrapperName>htmlpublisher-wrapper.html</wrapperName>
+        </htmlpublisher.HtmlPublisherTarget>
+      </reportTargets>
+    </htmlpublisher.HtmlPublisher>
+    <hudson.plugins.chucknorris.CordellWalkerRecorder>
+      <factGenerator/>
+    </hudson.plugins.chucknorris.CordellWalkerRecorder>
+    <hudson.tasks.Mailer>
+      <recipients>whayutin@redhat.com mushroom-devel@redhat.com</recipients>
+      <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
+      <sendToIndividuals>false</sendToIndividuals>
+    </hudson.tasks.Mailer>
+    <hudson.plugins.emailext.ExtendedEmailPublisher>
+      <recipientList></recipientList>
+      <configuredTriggers>
+        <hudson.plugins.emailext.plugins.trigger.UnstableTrigger>
+          <email>
+            <recipientList></recipientList>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <sendToDevelopers>true</sendToDevelopers>
+            <includeCulprits>false</includeCulprits>
+            <sendToRecipientList>true</sendToRecipientList>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.UnstableTrigger>
+        <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+          <email>
+            <recipientList></recipientList>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <sendToDevelopers>true</sendToDevelopers>
+            <includeCulprits>false</includeCulprits>
+            <sendToRecipientList>true</sendToRecipientList>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+        <hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
+          <email>
+            <recipientList></recipientList>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <sendToDevelopers>true</sendToDevelopers>
+            <includeCulprits>false</includeCulprits>
+            <sendToRecipientList>true</sendToRecipientList>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
+      </configuredTriggers>
+      <contentType>default</contentType>
+      <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
+      <defaultContent>$DEFAULT_CONTENT</defaultContent>
+    </hudson.plugins.emailext.ExtendedEmailPublisher>
+  </publishers>
+  <buildWrappers/>
+</project>
