@@ -4,6 +4,11 @@
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
+    <hudson.security.AuthorizationMatrixProperty>
+      <permission>hudson.model.Item.Build:anonymous</permission>
+      <permission>hudson.model.Item.Workspace:anonymous</permission>
+      <permission>hudson.model.Item.Read:anonymous</permission>
+    </hudson.security.AuthorizationMatrixProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
@@ -16,6 +21,11 @@
           <description>Secret key for Amazon&apos;s cloud</description>
           <defaultValue>dXCl+kj20/EIiIk6l8uQ8A==</defaultValue>
         </hudson.model.PasswordParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>AWS_CLIENT_AMI_ID</name>
+          <description>AMI id of the client starter image to use.  If left blank, the AMIs will be scanned for any name with &quot;STARTER&quot; in the name and a datestamp, and the AMI with the latest datestamp will be selected.</description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
         <hudson.model.FileParameterDefinition>
           <name>cloude-key.pem</name>
           <description>Your amazon cloud ssh key file (cloude-key.pem)</description>
@@ -72,11 +82,13 @@ chmod 600 $WORKSPACE/automatjon/jon/.ssh/id*</command>
 -Dec2.awsAccessId=$AWS_ACCESS_ID
 -Dec2.awsSecretKey=$AWS_SECRET_KEY
 -Dec2.sshPrivateKey=$WORKSPACE/cloude-key.pem
+-Dcloude.clientAMI.id=$AWS_CLIENT_AMI_ID
 -Dcloude.dev.hostname=hudson-qe.rhq.rdu.redhat.com
 -Dcloude.dev.user=cloude
 -Dcloude.dev.sshPrivateKey=$WORKSPACE/automatjon/jon/.ssh/id_auto_dsa
 -Dcloude.dev.sshPassphrase=dog8code
--Dcloude.dev.repo.dir=/home/cloude/workspace/</parameters>
+-Dcloude.dev.repo.dir=/home/cloude/workspace/
+</parameters>
       <scriptParameters>automatjon/cloude/src/com/redhat/qe/cloude/tests/ec2-client-test.xml</scriptParameters>
       <properties>testng.project.dir=automatjon/cloude
 </properties>

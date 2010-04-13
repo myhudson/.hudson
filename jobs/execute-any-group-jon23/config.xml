@@ -15,9 +15,9 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
-      <permission>hudson.model.Item.Read:anonymous</permission>
-      <permission>hudson.model.Item.Workspace:anonymous</permission>
       <permission>hudson.model.Item.Build:anonymous</permission>
+      <permission>hudson.model.Item.Workspace:anonymous</permission>
+      <permission>hudson.model.Item.Read:anonymous</permission>
     </hudson.security.AuthorizationMatrixProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
@@ -51,6 +51,7 @@
               <string>Sort Tables By Columns</string>
               <string>Agent Commands</string>
               <string>JBossAS5 Plugin</string>
+              <string>JMS</string>
             </a>
           </choices>
         </hudson.model.ChoiceParameterDefinition>

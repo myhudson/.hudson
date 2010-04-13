@@ -1,45 +1,120 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <hudson>
-  <version>1.346</version>
+  <version>1.352</version>
   <numExecutors>2</numExecutors>
   <mode>NORMAL</mode>
   <useSecurity>true</useSecurity>
   <authorizationStrategy class="hudson.security.ProjectMatrixAuthorizationStrategy">
-    <permission>hudson.model.Hudson.Administer:admin</permission>
-    <permission>hudson.model.Run.Delete:admin</permission>
-    <permission>hudson.model.View.Create:admin</permission>
-    <permission>hudson.model.Item.Create:jsanda</permission>
-    <permission>hudson.model.Item.Create:ips</permission>
-    <permission>hudson.model.Item.Create:admin</permission>
-    <permission>hudson.model.Item.Read:jsanda</permission>
-    <permission>hudson.model.Item.Read:ips</permission>
-    <permission>hudson.model.Item.Read:admin</permission>
-    <permission>hudson.model.Computer.Delete:admin</permission>
-    <permission>hudson.model.Hudson.Read:anonymous</permission>
-    <permission>hudson.model.Hudson.Read:jsanda</permission>
-    <permission>hudson.model.Hudson.Read:ips</permission>
-    <permission>hudson.model.Hudson.Read:admin</permission>
-    <permission>hudson.model.View.Delete:admin</permission>
-    <permission>hudson.model.Item.Configure:admin</permission>
-    <permission>hudson.model.Run.Update:admin</permission>
-    <permission>hudson.model.Item.Delete:admin</permission>
-    <permission>hudson.model.View.Configure:admin</permission>
-    <permission>hudson.scm.SCM.Tag:admin</permission>
-    <permission>hudson.model.Computer.Configure:admin</permission>
+    <permission>hudson.model.Item.Build:jshaughn</permission>
     <permission>hudson.model.Item.Build:jsanda</permission>
     <permission>hudson.model.Item.Build:ips</permission>
     <permission>hudson.model.Item.Build:admin</permission>
+    <permission>hudson.model.Item.Build:jweiss</permission>
+    <permission>hudson.model.Item.Build:whayutin</permission>
+    <permission>hudson.model.Item.Build:jsefler</permission>
+    <permission>hudson.model.Item.Build:ssalevan</permission>
+    <permission>hudson.model.Computer.Configure:admin</permission>
+    <permission>hudson.model.Computer.Configure:jweiss</permission>
+    <permission>hudson.model.Computer.Configure:whayutin</permission>
+    <permission>hudson.model.Computer.Configure:jsefler</permission>
+    <permission>hudson.model.Computer.Configure:ssalevan</permission>
     <permission>hudson.model.Item.Workspace:anonymous</permission>
+    <permission>hudson.model.Item.Workspace:jshaughn</permission>
     <permission>hudson.model.Item.Workspace:jsanda</permission>
     <permission>hudson.model.Item.Workspace:ips</permission>
     <permission>hudson.model.Item.Workspace:admin</permission>
+    <permission>hudson.model.Item.Workspace:jweiss</permission>
+    <permission>hudson.model.Item.Workspace:whayutin</permission>
+    <permission>hudson.model.Item.Workspace:jsefler</permission>
+    <permission>hudson.model.Item.Workspace:ssalevan</permission>
+    <permission>hudson.model.Item.Delete:admin</permission>
+    <permission>hudson.model.Item.Delete:jweiss</permission>
+    <permission>hudson.model.Item.Delete:whayutin</permission>
+    <permission>hudson.model.Item.Delete:jsefler</permission>
+    <permission>hudson.model.Item.Delete:ssalevan</permission>
+    <permission>hudson.model.Item.Read:jshaughn</permission>
+    <permission>hudson.model.Item.Read:jsanda</permission>
+    <permission>hudson.model.Item.Read:ips</permission>
+    <permission>hudson.model.Item.Read:admin</permission>
+    <permission>hudson.model.Item.Read:jweiss</permission>
+    <permission>hudson.model.Item.Read:whayutin</permission>
+    <permission>hudson.model.Item.Read:jsefler</permission>
+    <permission>hudson.model.Item.Read:ssalevan</permission>
+    <permission>hudson.model.View.Delete:admin</permission>
+    <permission>hudson.model.View.Delete:jweiss</permission>
+    <permission>hudson.model.View.Delete:whayutin</permission>
+    <permission>hudson.model.View.Delete:jsefler</permission>
+    <permission>hudson.model.View.Delete:ssalevan</permission>
+    <permission>hudson.model.Hudson.Administer:admin</permission>
+    <permission>hudson.model.Hudson.Administer:jweiss</permission>
+    <permission>hudson.model.Hudson.Administer:whayutin</permission>
+    <permission>hudson.model.Hudson.Administer:jsefler</permission>
+    <permission>hudson.model.Hudson.Administer:ssalevan</permission>
+    <permission>hudson.model.Run.Update:admin</permission>
+    <permission>hudson.model.Run.Update:jweiss</permission>
+    <permission>hudson.model.Run.Update:whayutin</permission>
+    <permission>hudson.model.Run.Update:jsefler</permission>
+    <permission>hudson.model.Run.Update:ssalevan</permission>
+    <permission>hudson.model.Computer.Delete:admin</permission>
+    <permission>hudson.model.Computer.Delete:jweiss</permission>
+    <permission>hudson.model.Computer.Delete:whayutin</permission>
+    <permission>hudson.model.Computer.Delete:jsefler</permission>
+    <permission>hudson.model.Computer.Delete:ssalevan</permission>
+    <permission>hudson.model.Item.Create:jshaughn</permission>
+    <permission>hudson.model.Item.Create:jsanda</permission>
+    <permission>hudson.model.Item.Create:ips</permission>
+    <permission>hudson.model.Item.Create:admin</permission>
+    <permission>hudson.model.Item.Create:jweiss</permission>
+    <permission>hudson.model.Item.Create:whayutin</permission>
+    <permission>hudson.model.Item.Create:jsefler</permission>
+    <permission>hudson.model.Item.Create:ssalevan</permission>
+    <permission>hudson.model.Run.Delete:admin</permission>
+    <permission>hudson.model.Run.Delete:jweiss</permission>
+    <permission>hudson.model.Run.Delete:whayutin</permission>
+    <permission>hudson.model.Run.Delete:jsefler</permission>
+    <permission>hudson.model.Run.Delete:ssalevan</permission>
+    <permission>hudson.model.View.Create:jshaughn</permission>
+    <permission>hudson.model.View.Create:jsanda</permission>
+    <permission>hudson.model.View.Create:ips</permission>
+    <permission>hudson.model.View.Create:admin</permission>
+    <permission>hudson.model.View.Create:jweiss</permission>
+    <permission>hudson.model.View.Create:whayutin</permission>
+    <permission>hudson.model.View.Create:jsefler</permission>
+    <permission>hudson.model.View.Create:ssalevan</permission>
+    <permission>hudson.model.View.Configure:jshaughn</permission>
+    <permission>hudson.model.View.Configure:jsanda</permission>
+    <permission>hudson.model.View.Configure:ips</permission>
+    <permission>hudson.model.View.Configure:admin</permission>
+    <permission>hudson.model.View.Configure:jweiss</permission>
+    <permission>hudson.model.View.Configure:whayutin</permission>
+    <permission>hudson.model.View.Configure:jsefler</permission>
+    <permission>hudson.model.View.Configure:ssalevan</permission>
+    <permission>hudson.scm.SCM.Tag:admin</permission>
+    <permission>hudson.scm.SCM.Tag:jweiss</permission>
+    <permission>hudson.scm.SCM.Tag:whayutin</permission>
+    <permission>hudson.scm.SCM.Tag:jsefler</permission>
+    <permission>hudson.scm.SCM.Tag:ssalevan</permission>
+    <permission>hudson.model.Item.Configure:admin</permission>
+    <permission>hudson.model.Item.Configure:jweiss</permission>
+    <permission>hudson.model.Item.Configure:whayutin</permission>
+    <permission>hudson.model.Item.Configure:jsefler</permission>
+    <permission>hudson.model.Item.Configure:ssalevan</permission>
+    <permission>hudson.model.Hudson.Read:anonymous</permission>
+    <permission>hudson.model.Hudson.Read:jshaughn</permission>
+    <permission>hudson.model.Hudson.Read:jsanda</permission>
+    <permission>hudson.model.Hudson.Read:ips</permission>
+    <permission>hudson.model.Hudson.Read:admin</permission>
+    <permission>hudson.model.Hudson.Read:jweiss</permission>
+    <permission>hudson.model.Hudson.Read:whayutin</permission>
+    <permission>hudson.model.Hudson.Read:jsefler</permission>
+    <permission>hudson.model.Hudson.Read:ssalevan</permission>
   </authorizationStrategy>
   <securityRealm class="hudson.security.HudsonPrivateSecurityRealm">
     <disableSignup>false</disableSignup>
   </securityRealm>
-  <systemMessage>&lt;H3&gt;OVERVIEW:&lt;/H3&gt; &#xd;
-&lt;B&gt; To Execute JON 23 Tests, click the JON23 tab &lt;/B&gt;&lt;br&gt;&#xd;
-&lt;B&gt; To Execute RHQ (iManage) Tests, click the RHQ tab &lt;/B&gt;&lt;br&gt;&#xd;
+  <systemMessage>&lt;H3&gt;QE OVERVIEW:&lt;/H3&gt; &#xd;
+&lt;B&gt; To Execute JON 23 Tests, click the qe-JON tab &lt;/B&gt;&lt;br&gt;&#xd;
+&lt;B&gt; To Execute RHQ Tests, click the qe-RHQ tab &lt;/B&gt;&lt;br&gt;&#xd;
 &#xd;
 &lt;H3&gt; PREREQUISITE INSTRUCTIONS: &lt;/H3&gt; &#xd;
 &lt;UL&gt;&#xd;
@@ -284,6 +359,7 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
         <string>AlertTemplates</string>
         <string>AliasesFile</string>
         <string>ConfigurationHistory</string>
+        <string>Content</string>
         <string>Cron</string>
         <string>DatasourceCreation</string>
         <string>DynaGroups</string>
@@ -294,6 +370,7 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
         <string>GroupRoles</string>
         <string>HostsFile</string>
         <string>JBossAS5Plugin</string>
+        <string>JMS</string>
         <string>LDAPLogin</string>
         <string>ManualAdditionofInventory</string>
         <string>MetricSchedules</string>
@@ -330,6 +407,7 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
       <filterQueue>false</filterQueue>
       <jobNames class="tree-set">
         <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView[3]/jobNames/comparator"/>
+        <string>bugfixes</string>
         <string>gwt</string>
         <string>master</string>
       </jobNames>
@@ -357,7 +435,7 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
 &lt;LI&gt; The QE team automatically installs and executes webui automation every time master is built in hudson  &lt;/LI&gt;&#xd;
 &lt;LI&gt; Some tests are skipped due to known open bugs, the bugs are listed in our automation results, but are tracked above  &lt;/LI&gt;&#xd;
 &lt;LI&gt; If we can reduce the number of open bugs, we will have &lt;b&gt;MORE&lt;/b&gt; tests execute against &lt;b&gt;EVERY&lt;/b&gt; build &lt;/LI&gt;&#xd;
-&lt;LI&gt; The tests are executed in the &quot;overnight&quot; jobs listed below&lt;/LI&gt;&#xd;
+&lt;LI&gt; The tests are executed in the &quot;qe&quot; job tabs listed below&lt;/LI&gt;&#xd;
 &#xd;
 &lt;br&gt;&#xd;
 &lt;b&gt;Thank you!!&lt;/b&gt;&#xd;
@@ -367,16 +445,13 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
       <filterQueue>false</filterQueue>
       <jobNames class="tree-set">
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
-        <string>1.4.0-B1</string>
-        <string>alertPlugin</string>
+        <string>bugfixes</string>
         <string>candlepin</string>
-        <string>content</string>
+        <string>gwt</string>
         <string>jon</string>
-        <string>linux-config</string>
         <string>master</string>
-        <string>master-disabled</string>
+        <string>master-ora</string>
         <string>python_candlepin</string>
-        <string>raw-config</string>
       </jobNames>
       <columns>
         <hudson.views.StatusColumn/>
@@ -391,6 +466,24 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
     <listView>
       <owner class="hudson" reference="../../.."/>
       <name>Entitlement</name>
+      <description>&lt;H3&gt;OVERVIEW:&lt;/H3&gt; &#xd;
+&lt;B&gt; subscription-manager-cli &lt;/B&gt; contains test cases from &lt;A HREF=https://tcms.engineering.redhat.com/plan/2105/&gt;CLI CASES&lt;/A&gt;&lt;BR&gt;&#xd;
+&#xd;
+&lt;H3&gt; PREREQUISITE INSTRUCTIONS: &lt;/H3&gt; &#xd;
+&lt;UL&gt;&#xd;
+&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://hudson-qe.rhq.rdu.redhat.com/auto-ssh/id_auto_dsa.pub&gt;this_publickey&lt;/A&gt; server_user@server.redhat.com&lt;/CODE&gt;  &lt;/LI&gt;&#xd;
+The &lt;code&gt;server_user&lt;/code&gt; is the id of the user running the server process.&#xd;
+&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://hudson-qe.rhq.rdu.redhat.com/auto-ssh/id_auto_dsa.pub&gt;this_publickey&lt;/A&gt; agent_user@agent.redhat.com&lt;/CODE&gt;  &lt;/LI&gt;&#xd;
+&#xd;
+&lt;LI&gt;The &lt;code&gt;server&lt;/code&gt; and the &lt;code&gt;client&lt;/code&gt; must be the fully qualified domain name and resolvable by DNS.&lt;/LI&gt;&#xd;
+&#xd;
+&#xd;
+&lt;/UL&gt;&#xd;
+&#xd;
+&lt;H3&gt; VIEWING INSTRUCTIONS FOR EXECUTING JOBS: &lt;/H3&gt; &#xd;
+&lt;UL&gt;&#xd;
+&lt;LI&gt;Jobs that are currently being executed can be viewed in action using a VNC Viewer.  Click on the running localslave in the &lt;a href=http://hudson-qe.rhq.rdu.redhat.com:8080/computer/&gt;Build Executor Status&lt;/a&gt; and follow the links to open a viewer for that slave. &lt;/LI&gt;&#xd;
+&lt;/UL&gt;</description>
       <filterExecutors>false</filterExecutors>
       <filterQueue>false</filterQueue>
       <jobNames class="tree-set">
@@ -400,6 +493,10 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
         <string>IT-candlepin-utility</string>
         <string>IT-certificate-service</string>
         <string>IT-cp-services</string>
+        <string>subscription-manager-cli</string>
+        <string>subscription-manager-cli-cert-fte</string>
+        <string>subscription-manager-cli-prad.rdu</string>
+        <string>subscription-manager-cli-statler.usersys</string>
       </jobNames>
       <columns>
         <hudson.views.StatusColumn/>
@@ -418,6 +515,7 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
       <jobNames class="tree-set">
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
         <string>amazon-client-test</string>
+        <string>cloude-client-loop-test</string>
         <string>CloudeCreate</string>
         <string>Grinder</string>
       </jobNames>

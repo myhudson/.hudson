@@ -1,20 +1,43 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <maven2-moduleset>
   <actions/>
-  <description>JBoss Operation Network (JON) trunk&#xd;
+  <description>Builds JBoss Operation Network (JON) Snapshot Distribution from JON SVN trunk - build artifacts include the main distribution zipfile, as well as the EAP, SOA-P, and EWS plugin pack zipfiles&#xd;
+&#xd;
+&#xd;
 &#xd;
 </description>
+  <logRotator>
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>10</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>5</artifactNumToKeep>
+  </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
+      <permission>hudson.model.Item.Build:ccrouch</permission>
+      <permission>hudson.model.Item.Build:anonymous</permission>
       <permission>hudson.model.Item.Build:ips</permission>
-      <permission>hudson.model.Item.Read:anonymous</permission>
-      <permission>hudson.model.Item.Read:ips</permission>
-      <permission>hudson.model.Run.Update:ips</permission>
+      <permission>hudson.model.Run.Delete:ccrouch</permission>
+      <permission>hudson.model.Run.Delete:jshaughn</permission>
       <permission>hudson.model.Run.Delete:ips</permission>
+      <permission>hudson.model.Item.Workspace:ccrouch</permission>
+      <permission>hudson.model.Item.Workspace:jshaughn</permission>
       <permission>hudson.model.Item.Workspace:ips</permission>
+      <permission>hudson.model.Item.Release:ccrouch</permission>
+      <permission>hudson.model.Item.Release:jshaughn</permission>
       <permission>hudson.model.Item.Release:ips</permission>
+      <permission>hudson.model.Item.Delete:jshaughn</permission>
       <permission>hudson.model.Item.Delete:ips</permission>
+      <permission>hudson.model.Item.Read:ccrouch</permission>
+      <permission>hudson.model.Item.Read:anonymous</permission>
+      <permission>hudson.model.Item.Read:jshaughn</permission>
+      <permission>hudson.model.Item.Read:ips</permission>
+      <permission>hudson.model.Run.Update:ccrouch</permission>
+      <permission>hudson.model.Run.Update:jshaughn</permission>
+      <permission>hudson.model.Run.Update:ips</permission>
+      <permission>hudson.model.Item.Configure:ccrouch</permission>
+      <permission>hudson.model.Item.Configure:jshaughn</permission>
       <permission>hudson.model.Item.Configure:ips</permission>
     </hudson.security.AuthorizationMatrixProperty>
   </properties>
@@ -36,25 +59,20 @@
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector">
-    <hudson.triggers.SCMTrigger>
-      <spec># every 5 minutes
-*/5 * * * *
-</spec>
-    </hudson.triggers.SCMTrigger>
-  </triggers>
+  <triggers class="vector"/>
   <concurrentBuild>false</concurrentBuild>
   <rootModule>
     <groupId>org.jboss.on</groupId>
     <artifactId>jboss-on-parent</artifactId>
   </rootModule>
-  <goals>--settings settings.xml -Pdist clean install</goals>
+  <goals>-P$JOB_NAME clean install</goals>
+  <alternateSettings>etc/m2/settings.xml</alternateSettings>
   <defaultGoals>install</defaultGoals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>
   <usePrivateRepository>true</usePrivateRepository>
-  <ignoreUpstremChanges>false</ignoreUpstremChanges>
-  <archivingDisabled>false</archivingDisabled>
+  <ignoreUpstremChanges>true</ignoreUpstremChanges>
+  <archivingDisabled>true</archivingDisabled>
   <reporters>
     <hudson.maven.reporters.MavenMailer>
       <recipients>jboss-on-team@redhat.com</recipients>
@@ -84,44 +102,7 @@ echo WORKSPACE=${WORKSPACE}
 echo JAVA_HOME=${JAVA_HOME}
 #M2_HOME=/qa/tools/opt/maven-2.1.0
 echo M2_HOME=${M2_HOME}
-
-# Create Maven settings.xml.
-SETTINGS=${WORKSPACE}/settings.xml
-cat &lt;&lt;EOF &gt;${SETTINGS}
-&lt;settings&gt;
-
-  &lt;profiles&gt;
-
-    &lt;profile&gt;
-      &lt;id&gt;dist&lt;/id&gt;
-
-      &lt;repositories&gt;
-            &lt;repository&gt;
-               &lt;id&gt;jboss-snapshots&lt;/id&gt;
-               &lt;name&gt;JBoss Snapshot Repository&lt;/name&gt;
-               &lt;url&gt;http://snapshots.jboss.org/maven2/&lt;/url&gt;
-               &lt;snapshots&gt;
-                  &lt;enabled&gt;true&lt;/enabled&gt;
-               &lt;/snapshots&gt;
-            &lt;/repository&gt;
-      &lt;/repositories&gt;
-
-      &lt;pluginRepositories&gt;
-            &lt;pluginRepository&gt;
-               &lt;id&gt;jboss-snapshots&lt;/id&gt;
-               &lt;name&gt;JBoss Snapshot Repository&lt;/name&gt;
-               &lt;url&gt;http://snapshots.jboss.org/maven2/&lt;/url&gt;
-               &lt;snapshots&gt;
-                  &lt;enabled&gt;true&lt;/enabled&gt;
-               &lt;/snapshots&gt;
-            &lt;/pluginRepository&gt;
-      &lt;/pluginRepositories&gt;
-    &lt;/profile&gt;
-
-  &lt;/profiles&gt;
-
-&lt;/settings&gt;
-EOF
+echo MAVEN_OPTS=${MAVEN_OPTS}
 </command>
         </hudson.tasks.Shell>
       </preBuildSteps>

@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<maven2-moduleset>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.security.AuthorizationMatrixProperty>
+      <permission>hudson.model.Item.Build:jsanda</permission>
+      <permission>hudson.model.Run.Delete:jsanda</permission>
+      <permission>hudson.model.Item.Workspace:jsanda</permission>
+      <permission>hudson.model.Item.Release:jsanda</permission>
+      <permission>hudson.model.Item.Read:jsanda</permission>
+      <permission>hudson.model.Item.Delete:jsanda</permission>
+      <permission>hudson.model.Run.Update:jsanda</permission>
+      <permission>hudson.model.Item.Configure:jsanda</permission>
+    </hudson.security.AuthorizationMatrixProperty>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM">
+    <configVersion>1</configVersion>
+    <remoteRepositories>
+      <org.spearce.jgit.transport.RemoteConfig>
+        <string>origin</string>
+        <int>5</int>
+        <string>fetch</string>
+        <string>+refs/heads/*:refs/remotes/origin/*</string>
+        <string>receivepack</string>
+        <string>git-upload-pack</string>
+        <string>uploadpack</string>
+        <string>git-upload-pack</string>
+        <string>url</string>
+        <string>git://git.fedorahosted.org/git/rhq/rhq.git</string>
+        <string>tagopt</string>
+        <string></string>
+      </org.spearce.jgit.transport.RemoteConfig>
+    </remoteRepositories>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>**</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <mergeOptions/>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <clean>false</clean>
+    <choosingStrategy>Default</choosingStrategy>
+    <submoduleCfg class="list"/>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector"/>
+  <concurrentBuild>false</concurrentBuild>
+  <rootModule>
+    <groupId>org.rhq</groupId>
+    <artifactId>rhq-remoting-cli-scripts</artifactId>
+  </rootModule>
+  <rootPOM>modules/enterprise/remoting/scripts/pom.xml</rootPOM>
+  <goals>test -Dtest=test_SubjectManager.js -Drhq.server.name=10.16.120.233</goals>
+  <defaultGoals>install</defaultGoals>
+  <aggregatorStyleBuild>true</aggregatorStyleBuild>
+  <incrementalBuild>false</incrementalBuild>
+  <usePrivateRepository>false</usePrivateRepository>
+  <ignoreUpstremChanges>false</ignoreUpstremChanges>
+  <archivingDisabled>false</archivingDisabled>
+  <reporters/>
+  <publishers/>
+  <buildWrappers/>
+</maven2-moduleset>

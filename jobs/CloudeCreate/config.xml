@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>&lt;H1&gt;&lt;font color=red&gt;UNDER DEVELOPMENT&lt;/font&gt;&lt;/H1&gt;&#xd;
+  <description>&lt;!--&lt;H1&gt;&lt;font color=red&gt;UNDER DEVELOPMENT&lt;/font&gt;&lt;/H1&gt;--&gt;&#xd;
 &lt;H3&gt;MANUAL INSTRUCTIONS:&lt;/H3&gt; &#xd;
 &lt;UL&gt;&#xd;
 &lt;LI&gt; Click &apos;Build Now&apos; to manually begin a test run. &lt;/LI&gt;&#xd;
@@ -10,6 +10,11 @@
 &lt;/UL&gt;</description>
   <keepDependencies>false</keepDependencies>
   <properties>
+    <hudson.security.AuthorizationMatrixProperty>
+      <permission>hudson.model.Item.Build:anonymous</permission>
+      <permission>hudson.model.Item.Read:anonymous</permission>
+      <permission>hudson.model.Item.Workspace:anonymous</permission>
+    </hudson.security.AuthorizationMatrixProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
