@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>This suite will execute ALL of the individual test groups. &lt;BR&gt;&#xd;
+&lt;H3&gt;MANUAL INSTRUCTIONS:&lt;/H3&gt; &#xd;
+&lt;UL&gt;&#xd;
+&lt;LI&gt; Click &apos;Build Now&apos; to manually begin a test run. &lt;/LI&gt;&#xd;
+&lt;LI&gt; From the list of fields, read their descriptions and set the values appropriate for your testing. &lt;/LI&gt;&#xd;
+&lt;LI&gt; Then click the &apos;Build&apos; button. &lt;/LI&gt;&#xd;
+&lt;LI&gt; Then to view the executing tests in live action, click the &apos;localslave&apos; link in the upper right corner on the building page for further VNC instructions.&lt;/LI&gt;&#xd;
+&lt;/UL&gt;&#xd;
+&#xd;
+&lt;font color=red&gt;WARNING:&lt;/font&gt; Do not use the TestNG Reports links on this page since their embedded screenshot links will not work.  Instead click to the build# of interest to you in the Build History table below and open its TestNG Report.</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.security.AuthorizationMatrixProperty>
+      <permission>hudson.model.Item.Workspace:anonymous</permission>
+      <permission>hudson.model.Item.Read:anonymous</permission>
+      <permission>hudson.model.Item.Release:anonymous</permission>
+    </hudson.security.AuthorizationMatrixProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>SERVER_URL</name>
+          <description>Your Server Hostname like http://yourServer.com:7080</description>
+          <defaultValue>http://auto-jon01.usersys.redhat.com:7080</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>VERSION</name>
+          <description>Version of JON server you&apos;re testing against</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>2.4.0</string>
+              <string>2.3.0</string>
+              <string>2.3.1</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>SUITE_FILE</name>
+          <description>Suite file to run.  Note the suite file needs to be designed to run against the version of JON you selected.</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>automatjon/jon/src/com/redhat/qe/rhq30/tests/functional-testng.xml</string>
+              <string>automatjon/jon/src/com/redhat/qe/jon23/tests/functional-testng.xml</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>USERNAME</name>
+          <description>admin for Jon or imanage</description>
+          <defaultValue>rhqadmin</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.PasswordParameterDefinition>
+          <name>PASSWORD</name>
+          <description>password for admin of Jon or imanage</description>
+          <defaultValue>BP89DRZfRIkPil2otq+C6SDw3bEkqgu/TJS2quV1SmE=</defaultValue>
+        </hudson.model.PasswordParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>SERVER_USER</name>
+          <description>The user that jon is installed and running under.
+Sometimes &quot;root&quot;, or &quot;jonqa&quot;, or another user
+jon.server.user=jonqa
+</description>
+          <defaultValue>rhq</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>AGENT_USER</name>
+          <description>The user that rhq-agent is running under.
+Sometimes &quot;root&quot;, or &quot;jonqa&quot;, or another user
+jon.agent.user=root</description>
+          <defaultValue>root</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>BRANCH</name>
+          <description>&lt;b&gt;Branch of automation code to run with.&lt;/b&gt;&lt;br&gt;</description>
+          <defaultValue>master</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <assignedNode>selenium</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector"/>
+  <concurrentBuild>true</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>echo &quot;===============&quot;
+echo  ${TEST_GROUP}
+echo &quot;===============&quot;
+rm -Rf *
+git clone git://github.com/weissjeffm/webui-framework.git
+git clone git://git.rhndev.redhat.com/automatjon
+chmod 600 $WORKSPACE/automatjon/jon/.ssh/id*</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Ant>
+      <targets>compile-jon</targets>
+      <antName>(Default)</antName>
+      <buildFile>automatjon/jon/build.xml</buildFile>
+      <properties>jon.server.url=${SERVER_HOSTNAME}
+jon.version=${VERSION}
+jon.admin.user=${USERNAME}
+jon.admin.password=${PASSWORD}
+jon.server.user=${SERVER_USER}
+jon.agent.user=${AGENT_USER}
+selenium.address=${SELENIUM_ADDRESS}</properties>
+    </hudson.tasks.Ant>
+    <hudson.plugins.groovy.Groovy>
+      <scriptSource class="hudson.plugins.groovy.FileScriptSource">
+        <scriptFile>automatjon/jon/src/hudson.groovy</scriptFile>
+      </scriptSource>
+      <groovyName>(Default)</groovyName>
+      <parameters>-Djon.server.url=$SERVER_URL
+-Djon.version=$VERSION
+-Djon.admin.user=$USERNAME
+-Djon.admin.password=$PASSWORD
+-Djon.server.user=$SERVER_USER
+-Djon.agent.user=$AGENT_USER
+-Dtestng.outputdir=automatjon/jon/test-output
+-Dselenium.address=$SELENIUM_ADDRESS
+-Dselenium.screenshot.dir=automatjon/jon/test-output/screenshots</parameters>
+      <scriptParameters>$SUITE_FILE</scriptParameters>
+      <properties></properties>
+    </hudson.plugins.groovy.Groovy>
+    <hudson.tasks.Ant>
+      <targets>overnight_reports</targets>
+      <antName>(Default)</antName>
+      <buildFile>automatjon/jon/build.xml</buildFile>
+    </hudson.tasks.Ant>
+  </builders>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>automatjon/jon/test-output/**/*</artifacts>
+      <latestOnly>false</latestOnly>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.tasks.junit.JUnitResultArchiver>
+      <testResults>automatjon/jon/test-output-reportng/*.xml</testResults>
+      <testDataPublishers/>
+    </hudson.tasks.junit.JUnitResultArchiver>
+    <htmlpublisher.HtmlPublisher>
+      <reportTargets>
+        <htmlpublisher.HtmlPublisherTarget>
+          <reportName>TestNG Report</reportName>
+          <reportDir>automatjon/jon/test-output/html/</reportDir>
+          <reportFiles>index.html</reportFiles>
+          <keepAll>true</keepAll>
+          <wrapperName>htmlpublisher-wrapper.html</wrapperName>
+        </htmlpublisher.HtmlPublisherTarget>
+      </reportTargets>
+    </htmlpublisher.HtmlPublisher>
+  </publishers>
+  <buildWrappers/>
+</project>
