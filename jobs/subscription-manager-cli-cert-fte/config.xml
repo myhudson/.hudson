@@ -3,6 +3,7 @@
   <actions/>
   <description>This suite executes an exhaustive set of tests against subscription-manager-cli based upon the following TCMS suite:&lt;BR/&gt;&#xd;
 &lt;a href=&quot;https://tcms.engineering.redhat.com/plan/2105/&quot;&gt;https://tcms.engineering.redhat.com/plan/2105/&lt;/a&gt;&lt;BR/&gt;&#xd;
+&lt;a href=&quot;https://engineering.redhat.com/trac/IntegratedMgmtQE/wiki/sm-stages&quot;&gt;Dependency Stages for CLI tests&lt;/a&gt;&lt;BR/&gt;&#xd;
 &lt;H3&gt; To View Results, click TestNG Report&lt;/H3&gt;&#xd;
 &lt;br&gt;&#xd;
 &lt;H3&gt;MANUAL INSTRUCTIONS:&lt;/H3&gt; &#xd;
@@ -14,16 +15,16 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
+      <permission>hudson.model.Item.Read:anonymous</permission>
       <permission>hudson.model.Item.Build:anonymous</permission>
       <permission>hudson.model.Item.Workspace:anonymous</permission>
-      <permission>hudson.model.Item.Read:anonymous</permission>
     </hudson.security.AuthorizationMatrixProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
           <name>RHSM_RPM</name>
           <description>url to latest subscription-manager RPM</description>
-          <defaultValue>http://download.devel.redhat.com/brewroot/packages/subscription-manager/0.37/1.el6/i686/subscription-manager-0.37-1.el6.i686.rpm</defaultValue>
+          <defaultValue>http://download.devel.redhat.com/brewroot/packages/subscription-manager/0.47/1.el6/i686/subscription-manager-0.47-1.el6.i686.rpm</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>CLIENT_HOSTNAME</name>
@@ -33,7 +34,7 @@
         <hudson.model.StringParameterDefinition>
           <name>CLIENT_USERNAME</name>
           <description>username used to register to a Candlepin server</description>
-          <defaultValue>HARDCODED</defaultValue>
+          <defaultValue>jsomara</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>CLIENT_PASSWORD</name>
@@ -61,7 +62,7 @@
   <scm class="hudson.scm.NullSCM"/>
   <assignedNode>selenium</assignedNode>
   <canRoam>false</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector">
     <hudson.triggers.TimerTrigger>
@@ -105,7 +106,6 @@ chmod 600 $WORKSPACE/automatjon/jon/.ssh/id*</command>
       </scriptSource>
       <groovyName>(Default)</groovyName>
       <parameters>-Drhsm.client.hostname=$CLIENT_HOSTNAME
--Drhsm.client.username=jsomara
 -Drhsm.client.password=redhat
 -Drhsm.client.certfrequency=$CLIENT_CERTFREQUENCY
 -Drhsm.server.hostname=cert-fte-candlepin.devlab.redhat.com
@@ -138,11 +138,8 @@ chmod 600 $WORKSPACE/automatjon/jon/.ssh/id*</command>
         </htmlpublisher.HtmlPublisherTarget>
       </reportTargets>
     </htmlpublisher.HtmlPublisher>
-    <hudson.plugins.chucknorris.CordellWalkerRecorder>
-      <factGenerator/>
-    </hudson.plugins.chucknorris.CordellWalkerRecorder>
     <hudson.plugins.emailext.ExtendedEmailPublisher>
-      <recipientList>entitlement-team-list@redhat.com</recipientList>
+      <recipientList>entitlement-team-list@redhat.com, ssalevan@redhat.com, spandey@redhat.com, calfonso@redhat.com</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.UnstableTrigger>
           <email>

@@ -16,9 +16,9 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
-      <permission>hudson.model.Item.Build:anonymous</permission>
       <permission>hudson.model.Item.Workspace:anonymous</permission>
       <permission>hudson.model.Item.Read:anonymous</permission>
+      <permission>hudson.model.Item.Build:anonymous</permission>
     </hudson.security.AuthorizationMatrixProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
@@ -60,9 +60,9 @@
               <string>JBossAS5 Plugin</string>
               <string>JMS</string>
               <string>Server Side Plugin Container</string>
-              <string>SNMP Alert Sender Plugin</string>
-              <string>Microblog Alert Sender Plugin</string>
-              <string>Email Alert Sender Plugin</string>
+              <string>Alert Sender SNMP Plugin</string>
+              <string>Alert Sender Microblog Plugin</string>
+              <string>Alert Sender Email Plugin</string>
             </a>
           </choices>
         </hudson.model.ChoiceParameterDefinition>
@@ -151,16 +151,10 @@ chmod 600 $WORKSPACE/automatjon/jon/.ssh/id*</command>
       <properties></properties>
     </hudson.plugins.groovy.Groovy>
     <hudson.tasks.Ant>
-      <targets>reports</targets>
+      <targets>overnight_reports</targets>
       <antName>(Default)</antName>
       <buildFile>automatjon/jon/build.xml</buildFile>
     </hudson.tasks.Ant>
-    <hudson.tasks.Shell>
-      <command>#!/bin/bash
-#kill all the leftover firefox processes that selenium started
-sudo -u vncuser killall -9 firefox
-exit 0</command>
-    </hudson.tasks.Shell>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>

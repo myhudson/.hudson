@@ -5,109 +5,124 @@
   <mode>NORMAL</mode>
   <useSecurity>true</useSecurity>
   <authorizationStrategy class="hudson.security.ProjectMatrixAuthorizationStrategy">
-    <permission>hudson.model.Item.Build:jshaughn</permission>
-    <permission>hudson.model.Item.Build:jsanda</permission>
-    <permission>hudson.model.Item.Build:ips</permission>
-    <permission>hudson.model.Item.Build:admin</permission>
-    <permission>hudson.model.Item.Build:jweiss</permission>
-    <permission>hudson.model.Item.Build:whayutin</permission>
-    <permission>hudson.model.Item.Build:jsefler</permission>
-    <permission>hudson.model.Item.Build:ssalevan</permission>
-    <permission>hudson.model.Computer.Configure:admin</permission>
-    <permission>hudson.model.Computer.Configure:jweiss</permission>
-    <permission>hudson.model.Computer.Configure:whayutin</permission>
-    <permission>hudson.model.Computer.Configure:jsefler</permission>
-    <permission>hudson.model.Computer.Configure:ssalevan</permission>
-    <permission>hudson.model.Item.Workspace:anonymous</permission>
-    <permission>hudson.model.Item.Workspace:jshaughn</permission>
-    <permission>hudson.model.Item.Workspace:jsanda</permission>
-    <permission>hudson.model.Item.Workspace:ips</permission>
-    <permission>hudson.model.Item.Workspace:admin</permission>
-    <permission>hudson.model.Item.Workspace:jweiss</permission>
-    <permission>hudson.model.Item.Workspace:whayutin</permission>
-    <permission>hudson.model.Item.Workspace:jsefler</permission>
-    <permission>hudson.model.Item.Workspace:ssalevan</permission>
+    <permission>hudson.model.Item.Delete:jesusr</permission>
     <permission>hudson.model.Item.Delete:admin</permission>
     <permission>hudson.model.Item.Delete:jweiss</permission>
     <permission>hudson.model.Item.Delete:whayutin</permission>
     <permission>hudson.model.Item.Delete:jsefler</permission>
     <permission>hudson.model.Item.Delete:ssalevan</permission>
-    <permission>hudson.model.Item.Read:jshaughn</permission>
-    <permission>hudson.model.Item.Read:jsanda</permission>
-    <permission>hudson.model.Item.Read:ips</permission>
-    <permission>hudson.model.Item.Read:admin</permission>
-    <permission>hudson.model.Item.Read:jweiss</permission>
-    <permission>hudson.model.Item.Read:whayutin</permission>
-    <permission>hudson.model.Item.Read:jsefler</permission>
-    <permission>hudson.model.Item.Read:ssalevan</permission>
-    <permission>hudson.model.View.Delete:admin</permission>
-    <permission>hudson.model.View.Delete:jweiss</permission>
-    <permission>hudson.model.View.Delete:whayutin</permission>
-    <permission>hudson.model.View.Delete:jsefler</permission>
-    <permission>hudson.model.View.Delete:ssalevan</permission>
-    <permission>hudson.model.Hudson.Administer:admin</permission>
-    <permission>hudson.model.Hudson.Administer:jweiss</permission>
-    <permission>hudson.model.Hudson.Administer:whayutin</permission>
-    <permission>hudson.model.Hudson.Administer:jsefler</permission>
-    <permission>hudson.model.Hudson.Administer:ssalevan</permission>
-    <permission>hudson.model.Run.Update:admin</permission>
-    <permission>hudson.model.Run.Update:jweiss</permission>
-    <permission>hudson.model.Run.Update:whayutin</permission>
-    <permission>hudson.model.Run.Update:jsefler</permission>
-    <permission>hudson.model.Run.Update:ssalevan</permission>
+    <permission>hudson.model.Computer.Delete:jesusr</permission>
     <permission>hudson.model.Computer.Delete:admin</permission>
     <permission>hudson.model.Computer.Delete:jweiss</permission>
     <permission>hudson.model.Computer.Delete:whayutin</permission>
     <permission>hudson.model.Computer.Delete:jsefler</permission>
     <permission>hudson.model.Computer.Delete:ssalevan</permission>
-    <permission>hudson.model.Item.Create:jshaughn</permission>
-    <permission>hudson.model.Item.Create:jsanda</permission>
-    <permission>hudson.model.Item.Create:ips</permission>
-    <permission>hudson.model.Item.Create:admin</permission>
-    <permission>hudson.model.Item.Create:jweiss</permission>
-    <permission>hudson.model.Item.Create:whayutin</permission>
-    <permission>hudson.model.Item.Create:jsefler</permission>
-    <permission>hudson.model.Item.Create:ssalevan</permission>
-    <permission>hudson.model.Run.Delete:admin</permission>
-    <permission>hudson.model.Run.Delete:jweiss</permission>
-    <permission>hudson.model.Run.Delete:whayutin</permission>
-    <permission>hudson.model.Run.Delete:jsefler</permission>
-    <permission>hudson.model.Run.Delete:ssalevan</permission>
-    <permission>hudson.model.View.Create:jshaughn</permission>
-    <permission>hudson.model.View.Create:jsanda</permission>
-    <permission>hudson.model.View.Create:ips</permission>
-    <permission>hudson.model.View.Create:admin</permission>
-    <permission>hudson.model.View.Create:jweiss</permission>
-    <permission>hudson.model.View.Create:whayutin</permission>
-    <permission>hudson.model.View.Create:jsefler</permission>
-    <permission>hudson.model.View.Create:ssalevan</permission>
-    <permission>hudson.model.View.Configure:jshaughn</permission>
-    <permission>hudson.model.View.Configure:jsanda</permission>
-    <permission>hudson.model.View.Configure:ips</permission>
-    <permission>hudson.model.View.Configure:admin</permission>
-    <permission>hudson.model.View.Configure:jweiss</permission>
-    <permission>hudson.model.View.Configure:whayutin</permission>
-    <permission>hudson.model.View.Configure:jsefler</permission>
-    <permission>hudson.model.View.Configure:ssalevan</permission>
-    <permission>hudson.scm.SCM.Tag:admin</permission>
-    <permission>hudson.scm.SCM.Tag:jweiss</permission>
-    <permission>hudson.scm.SCM.Tag:whayutin</permission>
-    <permission>hudson.scm.SCM.Tag:jsefler</permission>
-    <permission>hudson.scm.SCM.Tag:ssalevan</permission>
+    <permission>hudson.model.Item.Configure:jesusr</permission>
     <permission>hudson.model.Item.Configure:admin</permission>
     <permission>hudson.model.Item.Configure:jweiss</permission>
     <permission>hudson.model.Item.Configure:whayutin</permission>
     <permission>hudson.model.Item.Configure:jsefler</permission>
     <permission>hudson.model.Item.Configure:ssalevan</permission>
+    <permission>hudson.model.View.Create:jesusr</permission>
+    <permission>hudson.model.View.Create:jshaughn</permission>
+    <permission>hudson.model.View.Create:admin</permission>
+    <permission>hudson.model.View.Create:ips</permission>
+    <permission>hudson.model.View.Create:jsanda</permission>
+    <permission>hudson.model.View.Create:jweiss</permission>
+    <permission>hudson.model.View.Create:whayutin</permission>
+    <permission>hudson.model.View.Create:jsefler</permission>
+    <permission>hudson.model.View.Create:ssalevan</permission>
+    <permission>hudson.scm.SCM.Tag:jesusr</permission>
+    <permission>hudson.scm.SCM.Tag:admin</permission>
+    <permission>hudson.scm.SCM.Tag:jweiss</permission>
+    <permission>hudson.scm.SCM.Tag:whayutin</permission>
+    <permission>hudson.scm.SCM.Tag:jsefler</permission>
+    <permission>hudson.scm.SCM.Tag:ssalevan</permission>
+    <permission>hudson.model.Run.Delete:jesusr</permission>
+    <permission>hudson.model.Run.Delete:admin</permission>
+    <permission>hudson.model.Run.Delete:jweiss</permission>
+    <permission>hudson.model.Run.Delete:whayutin</permission>
+    <permission>hudson.model.Run.Delete:jsefler</permission>
+    <permission>hudson.model.Run.Delete:ssalevan</permission>
+    <permission>hudson.model.View.Delete:jesusr</permission>
+    <permission>hudson.model.View.Delete:admin</permission>
+    <permission>hudson.model.View.Delete:jweiss</permission>
+    <permission>hudson.model.View.Delete:whayutin</permission>
+    <permission>hudson.model.View.Delete:jsefler</permission>
+    <permission>hudson.model.View.Delete:ssalevan</permission>
     <permission>hudson.model.Hudson.Read:anonymous</permission>
+    <permission>hudson.model.Hudson.Read:jesusr</permission>
     <permission>hudson.model.Hudson.Read:jshaughn</permission>
-    <permission>hudson.model.Hudson.Read:jsanda</permission>
-    <permission>hudson.model.Hudson.Read:ips</permission>
     <permission>hudson.model.Hudson.Read:admin</permission>
+    <permission>hudson.model.Hudson.Read:ips</permission>
+    <permission>hudson.model.Hudson.Read:jsanda</permission>
     <permission>hudson.model.Hudson.Read:jweiss</permission>
     <permission>hudson.model.Hudson.Read:whayutin</permission>
     <permission>hudson.model.Hudson.Read:jsefler</permission>
     <permission>hudson.model.Hudson.Read:ssalevan</permission>
+    <permission>hudson.model.Item.Create:jesusr</permission>
+    <permission>hudson.model.Item.Create:jshaughn</permission>
+    <permission>hudson.model.Item.Create:admin</permission>
+    <permission>hudson.model.Item.Create:ips</permission>
+    <permission>hudson.model.Item.Create:jsanda</permission>
+    <permission>hudson.model.Item.Create:jweiss</permission>
+    <permission>hudson.model.Item.Create:whayutin</permission>
+    <permission>hudson.model.Item.Create:jsefler</permission>
+    <permission>hudson.model.Item.Create:ssalevan</permission>
+    <permission>hudson.model.Item.Read:jesusr</permission>
+    <permission>hudson.model.Item.Read:jshaughn</permission>
+    <permission>hudson.model.Item.Read:admin</permission>
+    <permission>hudson.model.Item.Read:ips</permission>
+    <permission>hudson.model.Item.Read:jsanda</permission>
+    <permission>hudson.model.Item.Read:jweiss</permission>
+    <permission>hudson.model.Item.Read:whayutin</permission>
+    <permission>hudson.model.Item.Read:jsefler</permission>
+    <permission>hudson.model.Item.Read:ssalevan</permission>
+    <permission>hudson.model.Item.Workspace:anonymous</permission>
+    <permission>hudson.model.Item.Workspace:jesusr</permission>
+    <permission>hudson.model.Item.Workspace:jshaughn</permission>
+    <permission>hudson.model.Item.Workspace:admin</permission>
+    <permission>hudson.model.Item.Workspace:ips</permission>
+    <permission>hudson.model.Item.Workspace:jsanda</permission>
+    <permission>hudson.model.Item.Workspace:jweiss</permission>
+    <permission>hudson.model.Item.Workspace:whayutin</permission>
+    <permission>hudson.model.Item.Workspace:jsefler</permission>
+    <permission>hudson.model.Item.Workspace:ssalevan</permission>
+    <permission>hudson.model.Run.Update:jesusr</permission>
+    <permission>hudson.model.Run.Update:admin</permission>
+    <permission>hudson.model.Run.Update:jweiss</permission>
+    <permission>hudson.model.Run.Update:whayutin</permission>
+    <permission>hudson.model.Run.Update:jsefler</permission>
+    <permission>hudson.model.Run.Update:ssalevan</permission>
+    <permission>hudson.model.Item.Build:jesusr</permission>
+    <permission>hudson.model.Item.Build:jshaughn</permission>
+    <permission>hudson.model.Item.Build:admin</permission>
+    <permission>hudson.model.Item.Build:ips</permission>
+    <permission>hudson.model.Item.Build:jsanda</permission>
+    <permission>hudson.model.Item.Build:jweiss</permission>
+    <permission>hudson.model.Item.Build:whayutin</permission>
+    <permission>hudson.model.Item.Build:jsefler</permission>
+    <permission>hudson.model.Item.Build:ssalevan</permission>
+    <permission>hudson.model.View.Configure:jesusr</permission>
+    <permission>hudson.model.View.Configure:jshaughn</permission>
+    <permission>hudson.model.View.Configure:admin</permission>
+    <permission>hudson.model.View.Configure:ips</permission>
+    <permission>hudson.model.View.Configure:jsanda</permission>
+    <permission>hudson.model.View.Configure:jweiss</permission>
+    <permission>hudson.model.View.Configure:whayutin</permission>
+    <permission>hudson.model.View.Configure:jsefler</permission>
+    <permission>hudson.model.View.Configure:ssalevan</permission>
+    <permission>hudson.model.Hudson.Administer:admin</permission>
+    <permission>hudson.model.Hudson.Administer:jweiss</permission>
+    <permission>hudson.model.Hudson.Administer:whayutin</permission>
+    <permission>hudson.model.Hudson.Administer:jsefler</permission>
+    <permission>hudson.model.Hudson.Administer:ssalevan</permission>
+    <permission>hudson.model.Computer.Configure:jesusr</permission>
+    <permission>hudson.model.Computer.Configure:admin</permission>
+    <permission>hudson.model.Computer.Configure:jweiss</permission>
+    <permission>hudson.model.Computer.Configure:whayutin</permission>
+    <permission>hudson.model.Computer.Configure:jsefler</permission>
+    <permission>hudson.model.Computer.Configure:ssalevan</permission>
   </authorizationStrategy>
   <securityRealm class="hudson.security.HudsonPrivateSecurityRealm">
     <disableSignup>false</disableSignup>
@@ -229,9 +244,13 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
             <unserializable-parents/>
             <tree-map>
               <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
+                <comparator class="hudson.util.CaseInsensitiveComparator"/>
               </default>
-              <int>1</int>
+              <int>3</int>
+              <string>FUNC_HOSTNAME</string>
+              <string>127.0.0.1</string>
+              <string>SCP_USERNAME</string>
+              <string>hudson</string>
               <string>SELENIUM_ADDRESS</string>
               <string>hudson-qe.rhq.rdu.redhat.com:4444</string>
             </tree-map>
@@ -288,7 +307,8 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
       <jobNames class="tree-set">
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
         <string>execute-any-group-jon23</string>
-        <string>overnight-test-all-groups-jon23</string>
+        <string>jon-install-latest</string>
+        <string>overnight-test-all-groups-jon</string>
         <string>populate-data</string>
       </jobNames>
       <columns>
@@ -356,9 +376,13 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
         <string>AgentCommands</string>
         <string>Alerts</string>
+        <string>AlertSenderEmaiPlugin</string>
+        <string>AlertSenderMicroblogPlugin</string>
+        <string>AlertSenderSNMPPlugin</string>
         <string>AlertTemplates</string>
         <string>AliasesFile</string>
         <string>ConfigurationHistory</string>
+        <string>ConnectionPropertiesEditingandHistory</string>
         <string>Content</string>
         <string>Cron</string>
         <string>DatasourceCreation</string>
@@ -375,7 +399,6 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
         <string>ManualAdditionofInventory</string>
         <string>MetricSchedules</string>
         <string>MetricTemplates</string>
-        <string>MicroblogAlertSenderPlugin</string>
         <string>Operations</string>
         <string>Postfix</string>
         <string>QuickLinks</string>
@@ -383,7 +406,6 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
         <string>Samba</string>
         <string>Search</string>
         <string>ServerSidePluginContainer</string>
-        <string>SNMPAlertSenderPlugin</string>
         <string>SortTablesByColumns</string>
         <string>StartPageLinks</string>
         <string>Sudoers</string>
@@ -497,6 +519,7 @@ The &lt;code&gt;server_user&lt;/code&gt; is the id of the user running the serve
         <string>subscription-manager-cli-cert-fte</string>
         <string>subscription-manager-cli-prad.rdu</string>
         <string>subscription-manager-cli-statler.usersys</string>
+        <string>subscription-manager-gui</string>
       </jobNames>
       <columns>
         <hudson.views.StatusColumn/>

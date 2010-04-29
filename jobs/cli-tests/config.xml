@@ -5,14 +5,23 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
-      <permission>hudson.model.Item.Build:jsanda</permission>
-      <permission>hudson.model.Run.Delete:jsanda</permission>
-      <permission>hudson.model.Item.Workspace:jsanda</permission>
-      <permission>hudson.model.Item.Release:jsanda</permission>
-      <permission>hudson.model.Item.Read:jsanda</permission>
       <permission>hudson.model.Item.Delete:jsanda</permission>
-      <permission>hudson.model.Run.Update:jsanda</permission>
+      <permission>hudson.model.Item.Delete:ips</permission>
+      <permission>hudson.model.Item.Workspace:jsanda</permission>
+      <permission>hudson.model.Item.Workspace:ips</permission>
+      <permission>hudson.model.Item.Read:anonymous</permission>
+      <permission>hudson.model.Item.Read:jsanda</permission>
+      <permission>hudson.model.Item.Read:ips</permission>
+      <permission>hudson.model.Item.Release:jsanda</permission>
+      <permission>hudson.model.Item.Release:ips</permission>
       <permission>hudson.model.Item.Configure:jsanda</permission>
+      <permission>hudson.model.Item.Configure:ips</permission>
+      <permission>hudson.model.Run.Update:jsanda</permission>
+      <permission>hudson.model.Run.Update:ips</permission>
+      <permission>hudson.model.Run.Delete:jsanda</permission>
+      <permission>hudson.model.Run.Delete:ips</permission>
+      <permission>hudson.model.Item.Build:jsanda</permission>
+      <permission>hudson.model.Item.Build:ips</permission>
     </hudson.security.AuthorizationMatrixProperty>
   </properties>
   <scm class="hudson.plugins.git.GitSCM">
@@ -35,7 +44,7 @@
     </remoteRepositories>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>**</name>
+        <name>master</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <mergeOptions/>
@@ -47,20 +56,75 @@
   <canRoam>true</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector"/>
+  <triggers class="vector">
+    <hudson.triggers.SCMTrigger>
+      <spec># every 45 minutes
+*/45 * * * *</spec>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
   <concurrentBuild>false</concurrentBuild>
   <rootModule>
     <groupId>org.rhq</groupId>
-    <artifactId>rhq-remoting-cli-scripts</artifactId>
+    <artifactId>rhq-parent</artifactId>
   </rootModule>
-  <goals>test -Dtest=test_SubjectManager.js -Drhq.server.name=10.16.120.233 -Pcli-tests</goals>
+  <goals>test -Dtest=test_SubjectManager.js -Drhq.server.name=10.16.120.233 -Dcli-tests -P!enterprise</goals>
+  <alternateSettings>settings.xml</alternateSettings>
   <defaultGoals>install</defaultGoals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>
   <usePrivateRepository>false</usePrivateRepository>
-  <ignoreUpstremChanges>false</ignoreUpstremChanges>
+  <ignoreUpstremChanges>true</ignoreUpstremChanges>
   <archivingDisabled>false</archivingDisabled>
   <reporters/>
-  <publishers/>
-  <buildWrappers/>
+  <publishers>
+    <htmlpublisher.HtmlPublisher>
+      <reportTargets>
+        <htmlpublisher.HtmlPublisherTarget>
+          <reportName>CLI Test Report</reportName>
+          <reportDir>modules/cli-tests/target/surefire-reports/</reportDir>
+          <reportFiles>index.html</reportFiles>
+          <keepAll>true</keepAll>
+          <wrapperName>htmlpublisher-wrapper.html</wrapperName>
+        </htmlpublisher.HtmlPublisherTarget>
+      </reportTargets>
+    </htmlpublisher.HtmlPublisher>
+    <hudson.plugins.emailext.ExtendedEmailPublisher>
+      <recipientList>jsanda@redhat.com</recipientList>
+      <configuredTriggers>
+        <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+          <email>
+            <recipientList></recipientList>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <sendToDevelopers>false</sendToDevelopers>
+            <includeCulprits>false</includeCulprits>
+            <sendToRecipientList>true</sendToRecipientList>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+      </configuredTriggers>
+      <contentType>text/plain</contentType>
+      <defaultSubject>CLI Tests run completed</defaultSubject>
+      <defaultContent>$DEFAULT_CONTENT</defaultContent>
+    </hudson.plugins.emailext.ExtendedEmailPublisher>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.m2extrasteps.M2ExtraStepsWrapper>
+      <preBuildSteps>
+        <hudson.tasks.Shell>
+          <command># Print some environment info.
+echo WORKSPACE=${WORKSPACE}
+echo JAVA_HOME=${JAVA_HOME}
+#M2_HOME=/qa/tools/opt/maven-2.1.0
+echo M2_HOME=${M2_HOME}
+echo MAVEN_OPTS=${MAVEN_OPTS}
+
+echo &quot;Checking out settings.xml from JON SVN...&quot;
+echo t | svn export --username jonadmin --password jmazzite42! https://svn.devel.redhat.com/repos/jboss-jon/trunk/etc/m2/settings.xml
+</command>
+        </hudson.tasks.Shell>
+      </preBuildSteps>
+      <postBuildSteps/>
+      <runIfResult>allCases</runIfResult>
+    </hudson.plugins.m2extrasteps.M2ExtraStepsWrapper>
+  </buildWrappers>
 </maven2-moduleset>

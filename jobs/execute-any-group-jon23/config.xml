@@ -15,9 +15,9 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
-      <permission>hudson.model.Item.Build:anonymous</permission>
       <permission>hudson.model.Item.Workspace:anonymous</permission>
       <permission>hudson.model.Item.Read:anonymous</permission>
+      <permission>hudson.model.Item.Build:anonymous</permission>
     </hudson.security.AuthorizationMatrixProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
@@ -91,6 +91,11 @@
 &lt;b&gt;Common users: &quot;root&quot;, &quot;jonqa&quot;, &quot;rhq&quot;&lt;/b&gt;</description>
           <defaultValue>root</defaultValue>
         </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>BRANCH</name>
+          <description>&lt;b&gt;Branch of automation code to run with.&lt;/b&gt;&lt;br&gt;</description>
+          <defaultValue>master</defaultValue>
+        </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
@@ -108,7 +113,7 @@ echo  ${TEST_GROUP}
 echo &quot;===============&quot;
 rm -Rf *
 git clone git://github.com/weissjeffm/webui-framework.git
-git clone git://git.rhndev.redhat.com/automatjon
+git clone -b $BRANCH git://git.rhndev.redhat.com/automatjon
 chmod 600 $WORKSPACE/automatjon/jon/.ssh/id*</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Ant>

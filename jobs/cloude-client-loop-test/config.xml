@@ -5,9 +5,9 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
-      <permission>hudson.model.Item.Build:anonymous</permission>
       <permission>hudson.model.Item.Workspace:anonymous</permission>
       <permission>hudson.model.Item.Read:anonymous</permission>
+      <permission>hudson.model.Item.Build:anonymous</permission>
     </hudson.security.AuthorizationMatrixProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
@@ -38,11 +38,7 @@
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector">
-    <hudson.triggers.TimerTrigger>
-      <spec>0,30	*	*	*	*</spec>
-    </hudson.triggers.TimerTrigger>
-  </triggers>
+  <triggers class="vector"/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
@@ -93,7 +89,7 @@ cp $WORKSPACE/automatjon/cloude/stage/mush* $WORKSPACE/cloude-key.pem</command>
 -Dcloude.dev.user=cloude
 -Dcloude.dev.sshPrivateKey=$WORKSPACE/automatjon/jon/.ssh/id_auto_dsa
 -Dcloude.dev.sshPassphrase=dog8code
--Dcloude.dev.repo.dir=/home/cloude/workspace/
+-Dcloude.dev.repo.dir=/home/cloude/workspace
 </parameters>
       <scriptParameters>automatjon/cloude/src/com/redhat/qe/cloude/tests/ec2-client-test.xml</scriptParameters>
       <properties>testng.project.dir=automatjon/cloude
@@ -123,9 +119,6 @@ cp $WORKSPACE/automatjon/cloude/stage/mush* $WORKSPACE/cloude-key.pem</command>
         </htmlpublisher.HtmlPublisherTarget>
       </reportTargets>
     </htmlpublisher.HtmlPublisher>
-    <hudson.plugins.chucknorris.CordellWalkerRecorder>
-      <factGenerator/>
-    </hudson.plugins.chucknorris.CordellWalkerRecorder>
     <hudson.tasks.Mailer>
       <recipients>whayutin@redhat.com mushroom-devel@redhat.com</recipients>
       <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>

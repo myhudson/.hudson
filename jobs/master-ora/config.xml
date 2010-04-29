@@ -16,33 +16,33 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
-      <permission>hudson.model.Item.Build:ccrouch</permission>
-      <permission>hudson.model.Item.Build:anonymous</permission>
-      <permission>hudson.model.Item.Build:jshaughn</permission>
-      <permission>hudson.model.Item.Build:ips</permission>
-      <permission>hudson.model.Run.Delete:ccrouch</permission>
-      <permission>hudson.model.Run.Delete:jshaughn</permission>
-      <permission>hudson.model.Run.Delete:ips</permission>
-      <permission>hudson.model.Item.Release:ccrouch</permission>
-      <permission>hudson.model.Item.Release:jshaughn</permission>
-      <permission>hudson.model.Item.Release:ips</permission>
+      <permission>hudson.model.Item.Delete:ccrouch</permission>
+      <permission>hudson.model.Item.Delete:jshaughn</permission>
+      <permission>hudson.model.Item.Delete:ips</permission>
       <permission>hudson.model.Item.Workspace:ccrouch</permission>
       <permission>hudson.model.Item.Workspace:anonymous</permission>
       <permission>hudson.model.Item.Workspace:jshaughn</permission>
       <permission>hudson.model.Item.Workspace:ips</permission>
-      <permission>hudson.model.Item.Delete:ccrouch</permission>
-      <permission>hudson.model.Item.Delete:jshaughn</permission>
-      <permission>hudson.model.Item.Delete:ips</permission>
       <permission>hudson.model.Item.Read:ccrouch</permission>
       <permission>hudson.model.Item.Read:anonymous</permission>
       <permission>hudson.model.Item.Read:jshaughn</permission>
       <permission>hudson.model.Item.Read:ips</permission>
-      <permission>hudson.model.Run.Update:ccrouch</permission>
-      <permission>hudson.model.Run.Update:jshaughn</permission>
-      <permission>hudson.model.Run.Update:ips</permission>
+      <permission>hudson.model.Item.Release:ccrouch</permission>
+      <permission>hudson.model.Item.Release:jshaughn</permission>
+      <permission>hudson.model.Item.Release:ips</permission>
       <permission>hudson.model.Item.Configure:ccrouch</permission>
       <permission>hudson.model.Item.Configure:jshaughn</permission>
       <permission>hudson.model.Item.Configure:ips</permission>
+      <permission>hudson.model.Run.Update:ccrouch</permission>
+      <permission>hudson.model.Run.Update:jshaughn</permission>
+      <permission>hudson.model.Run.Update:ips</permission>
+      <permission>hudson.model.Run.Delete:ccrouch</permission>
+      <permission>hudson.model.Run.Delete:jshaughn</permission>
+      <permission>hudson.model.Run.Delete:ips</permission>
+      <permission>hudson.model.Item.Build:ccrouch</permission>
+      <permission>hudson.model.Item.Build:anonymous</permission>
+      <permission>hudson.model.Item.Build:jshaughn</permission>
+      <permission>hudson.model.Item.Build:ips</permission>
     </hudson.security.AuthorizationMatrixProperty>
   </properties>
   <scm class="hudson.plugins.git.GitSCM">
@@ -98,15 +98,12 @@
       <sendToIndividuals>false</sendToIndividuals>
     </hudson.maven.reporters.MavenMailer>
   </reporters>
-  <publishers>
-    <hudson.plugins.chucknorris.CordellWalkerRecorder>
-      <factGenerator/>
-    </hudson.plugins.chucknorris.CordellWalkerRecorder>
-  </publishers>
+  <publishers/>
   <buildWrappers>
     <hudson.plugins.setenv.SetEnvBuildWrapper>
       <localVarText>LANG=en_US.iso88591
 
+java5.home=/usr/java/jdk1.5.0_21/jre
 </localVarText>
     </hudson.plugins.setenv.SetEnvBuildWrapper>
     <hudson.plugins.m2extrasteps.M2ExtraStepsWrapper>

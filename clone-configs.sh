@@ -1,5 +1,5 @@
 #!/bin/bash
-ALL_CONFIGS="Start Page Links,Quick Links,LDAP Login,Inventory Control,Resource Groups,Group Configuration,Datasource Creation,User Administration,Content,Configuration History,Search,Favorites,Connection Properties Editing and History,Events,Operations,Group Roles,DynaGroups,Alert Templates,Metric Templates,Metric Schedules,Postfix,Cron,Hosts File,Aliases File,Sudoers,Samba,General Properties,Agent Commands,Manual Addition of Inventory,Sort Tables By Columns,JBossAS5 Plugin,JMS"
+ALL_CONFIGS="Start Page Links,Quick Links,LDAP Login,Inventory Control,Resource Groups,Group Configuration,Datasource Creation,User Administration,Content,Configuration History,Search,Favorites,Connection Properties Editing and History,Events,Operations,Group Roles,DynaGroups,Alert Templates,Metric Templates,Metric Schedules,Postfix,Cron,Hosts File,Aliases File,Sudoers,Samba,General Properties,Agent Commands,Manual Addition of Inventory,Sort Tables By Columns,JBossAS5 Plugin,JMS,Server Side Plugin Container,Alert Sender SNMP Plugin,Alert Sender Microblog Plugin,Alert Sender Email Plugin"
 IFS=,
 
 for CONFIG in $ALL_CONFIGS; do
