@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson.plugins.audit__trail.AuditTrailPlugin>
+  <log>/home/hudson/hudson-audit.log</log>
+  <pattern>.*/(?:configSubmit|doDelete|postBuildResult|cancelQueue|stop|toggleLogKeep|doWipeOutWorkspace|createItem|createView|toggleOffline)</pattern>
+  <limit>1</limit>
+  <count>1</count>
+  <logBuildCause>true</logBuildCause>
+</hudson.plugins.audit__trail.AuditTrailPlugin>

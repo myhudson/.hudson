@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson.plugins.git.GitSCM_-DescriptorImpl>
+  <generation>190</generation>
+  <gitExe>git</gitExe>
+</hudson.plugins.git.GitSCM_-DescriptorImpl>

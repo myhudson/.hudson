@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson.plugins.groovy.Groovy_-DescriptorImpl>
+  <instanceCounter>
+    <value>1923</value>
+  </instanceCounter>
+  <installations>
+    <hudson.plugins.groovy.Groovy_-GroovyInstallation>
+      <name>Groovy1.7.0</name>
+      <home>/usr/local/groovy-1.7.0</home>
+    </hudson.plugins.groovy.Groovy_-GroovyInstallation>
+  </installations>
+</hudson.plugins.groovy.Groovy_-DescriptorImpl>

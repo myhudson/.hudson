@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson.tasks.Mailer_-DescriptorImpl>
+  <hudsonUrl>http://hudson-qe.rhq.rdu.redhat.com:8080/</hudsonUrl>
+  <adminAddress>ChuckNorris@hudson-qe.rhq.rdu.redhat.com</adminAddress>
+  <useSsl>false</useSsl>
+</hudson.tasks.Mailer_-DescriptorImpl>
