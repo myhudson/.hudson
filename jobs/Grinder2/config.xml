@@ -1,0 +1,207 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>This suite will execute more exhaustive grinder tests independent of any cloude on a RHEL 5 hostname of your choice.&lt;BR&gt;&#xd;
+Grinder2 tests both the YUM and RHN modules.&#xd;
+&lt;H3&gt;MANUAL INSTRUCTIONS:&lt;/H3&gt; &#xd;
+&lt;UL&gt;&#xd;
+&lt;LI&gt; Click &apos;Build Now&apos; to manually begin a test run. &lt;/LI&gt;&#xd;
+&lt;LI&gt; From the list of fields, read their descriptions and set the values appropriate for your testing. &lt;/LI&gt;&#xd;
+&lt;LI&gt; Then click the &apos;Build&apos; button. &lt;/LI&gt;&#xd;
+&lt;/UL&gt;</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.security.AuthorizationMatrixProperty>
+      <permission>hudson.model.Item.Workspace:anonymous</permission>
+      <permission>hudson.model.Item.Read:anonymous</permission>
+      <permission>hudson.model.Item.Build:anonymous</permission>
+    </hudson.security.AuthorizationMatrixProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>HOSTNAME</name>
+          <description>&lt;b&gt;&lt;big&gt;RHEL 5  machine on which grinder will be installed and tested.&lt;/big&gt;&lt;/b&gt;&lt;br&gt;
+
+&lt;H3&gt;&lt;font color=red&gt; PREREQUISITE INSTRUCTIONS: &lt;/font&gt;&lt;/H3&gt; 
+&lt;UL&gt;
+&lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://hudson-qe.rhq.rdu.redhat.com/auto-ssh/id_auto_dsa.pub&gt;this_publickey&lt;/A&gt; root@HOSTNAME.redhat.com&lt;/CODE&gt;  &lt;/LI&gt;
+&lt;code&gt;root&lt;/code&gt; is the user id that will be executing the grinder tests.
+&lt;LI&gt;The &lt;code&gt;HOSTNAME&lt;/code&gt; must be a fully qualified domain name and resolvable by DNS.&lt;/LI&gt;
+&lt;/UL&gt;</description>
+          <defaultValue>rlx-0-04.rhndev.redhat.com</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>GRINDER_RPM</name>
+          <description>Grinder rpm that will be installed and tested. &lt;BR&gt;
+Note: The default value above (gibson) is used to fetch the latest rpmname=grinder from the brew hub 
+http://download.devel.redhat.com/brewroot/packages/grinder</description>
+          <defaultValue>http://gibson.usersys.redhat.com/latestrpm/?arch=noarch&amp;rpmname=grinder</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>RHN_SERVERURL</name>
+          <description>RHN server url to which the hostname will be registered with rhnreg_ks.</description>
+          <defaultValue>http://xmlrpc.rhn.redhat.com/XMLRPC</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>RHN_FORCE</name>
+          <description>Use the --force option when registering to the RHN server using rhnreg_ks.&lt;BR&gt;</description>
+          <defaultValue>false</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>RHN_USERNAME</name>
+          <description>RHN user to whom the hostname will be registered using rhnreg_ks.&lt;BR&gt;</description>
+          <defaultValue>rhx-wes</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.PasswordParameterDefinition>
+          <name>RHN_PASSWORD</name>
+          <description>RHN password for the username specified above.</description>
+          <defaultValue>1fXtIUTGGLuKa6WEDbI00UDSrVafiBRXGX8KgxwadXk=</defaultValue>
+        </hudson.model.PasswordParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>CERTIFICATE</name>
+          <description>Entitlements certificate that will be used by grinder.</description>
+          <defaultValue>http://svn.rhndev.redhat.com/viewcvs/*checkout*/trunk/pm/satellite-certs/satellite-5.3/shughes-test-entitlementCount.cert?rev=187482</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>FETCH_FAILURE_TOLERANCE</name>
+          <description>This parameter is used to specify a fetch failure tolerance percentage.&lt;br&gt;
+If registering your HOSTNAME to an unreliable RHN_SERVERURL, some of the packages that grinder marks for fetching may actually fail to be fetched.    If the actual count of fetched packages is within this percentage of all the packages marked for fetching, tests will pass.</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>20</string>
+              <string>0</string>
+              <string>10</string>
+              <string>20</string>
+              <string>30</string>
+              <string>40</string>
+              <string>50</string>
+              <string>60</string>
+              <string>70</string>
+              <string>80</string>
+              <string>90</string>
+              <string>100</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <assignedNode>selenium</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector"/>
+  <concurrentBuild>true</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash -xe
+
+cd $WORKSPACE
+if [ -d automatjon ]; then 
+ cd automatjon
+ git clean -df
+ git pull
+else
+ git clone git://git.rhndev.redhat.com/automatjon
+fi
+
+cd $WORKSPACE
+
+if [ -d webui-framework ]; then 
+ cd webui-framework
+ git clean -df
+ git pull
+else
+ git clone git://github.com/weissjeffm/webui-framework.git
+fi
+
+chmod 600 $WORKSPACE/automatjon/jon/.ssh/id*</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Ant>
+      <targets>compile</targets>
+      <antName>(Default)</antName>
+      <buildFile>$WORKSPACE/automatjon/cloude/build.xml</buildFile>
+    </hudson.tasks.Ant>
+    <hudson.plugins.groovy.Groovy>
+      <scriptSource class="hudson.plugins.groovy.FileScriptSource">
+        <scriptFile>webui-framework/groovy/src/hudson.groovy</scriptFile>
+      </scriptSource>
+      <groovyName>(Default)</groovyName>
+      <parameters>-Dworkspace.dir=$WORKSPACE
+-Dgrinder.hostname=$HOSTNAME
+-Dgrinder.rpm=$GRINDER_RPM
+-Dgrinder.rhnreg_ks.serverUrl=$RHN_SERVERURL
+-Dgrinder.rhnreg_ks.force=$RHN_FORCE
+-Dgrinder.rhnreg_ks.username=$RHN_USERNAME
+-Dgrinder.rhnreg_ks.password=$RHN_PASSWORD
+-Dgrinder.certificate=$CERTIFICATE
+-Dgrinder.fetchfailuretolerance=$FETCH_FAILURE_TOLERANCE
+-Dgrinder.ssh.user=root
+-Dgrinder.sshkey.passphrase=dog8code
+-Dgrinder.sshkey.private=$WORKSPACE/automatjon/jon/.ssh/id_auto_dsa</parameters>
+      <scriptParameters>automatjon/cloude/src/com/redhat/qe/grinder/tests/GrinderTests.xml</scriptParameters>
+      <properties>testng.project.dir=automatjon/cloude</properties>
+    </hudson.plugins.groovy.Groovy>
+  </builders>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>automatjon/cloude/test-output/**/*</artifacts>
+      <latestOnly>false</latestOnly>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.tasks.junit.JUnitResultArchiver>
+      <testResults>automatjon/cloude/test-output-junit/*.xml</testResults>
+      <testDataPublishers/>
+    </hudson.tasks.junit.JUnitResultArchiver>
+    <htmlpublisher.HtmlPublisher>
+      <reportTargets>
+        <htmlpublisher.HtmlPublisherTarget>
+          <reportName>TestNG Report</reportName>
+          <reportDir>automatjon/cloude/test-output/html</reportDir>
+          <reportFiles>index.html</reportFiles>
+          <keepAll>true</keepAll>
+          <wrapperName>htmlpublisher-wrapper.html</wrapperName>
+        </htmlpublisher.HtmlPublisherTarget>
+      </reportTargets>
+    </htmlpublisher.HtmlPublisher>
+    <hudson.plugins.emailext.ExtendedEmailPublisher>
+      <recipientList>whayutin@redhat.com, jsefler@redhat.com</recipientList>
+      <configuredTriggers>
+        <hudson.plugins.emailext.plugins.trigger.UnstableTrigger>
+          <email>
+            <recipientList></recipientList>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <sendToDevelopers>true</sendToDevelopers>
+            <includeCulprits>false</includeCulprits>
+            <sendToRecipientList>true</sendToRecipientList>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.UnstableTrigger>
+        <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+          <email>
+            <recipientList></recipientList>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <sendToDevelopers>true</sendToDevelopers>
+            <includeCulprits>false</includeCulprits>
+            <sendToRecipientList>true</sendToRecipientList>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+        <hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
+          <email>
+            <recipientList></recipientList>
+            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>$PROJECT_DEFAULT_CONTENT</body>
+            <sendToDevelopers>true</sendToDevelopers>
+            <includeCulprits>false</includeCulprits>
+            <sendToRecipientList>true</sendToRecipientList>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
+      </configuredTriggers>
+      <contentType>default</contentType>
+      <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
+      <defaultContent>$DEFAULT_CONTENT</defaultContent>
+    </hudson.plugins.emailext.ExtendedEmailPublisher>
+  </publishers>
+  <buildWrappers/>
+</project>
