@@ -14,9 +14,9 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
-      <permission>hudson.model.Item.Workspace:anonymous</permission>
       <permission>hudson.model.Item.Read:anonymous</permission>
       <permission>hudson.model.Item.Release:anonymous</permission>
+      <permission>hudson.model.Item.Workspace:anonymous</permission>
     </hudson.security.AuthorizationMatrixProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
@@ -41,7 +41,7 @@
           <description>Suite file to run.  Note the suite file needs to be designed to run against the version of JON you selected.</description>
           <choices class="java.util.Arrays$ArrayList">
             <a class="string-array">
-              <string>automatjon/jon/src/com/redhat/qe/rhq30/tests/functional-testng.xml</string>
+              <string>automatjon/jon/src/com/redhat/qe/rhq30/tests/functional-jon-testng.xml</string>
               <string>automatjon/jon/src/com/redhat/qe/jon23/tests/functional-testng.xml</string>
             </a>
           </choices>

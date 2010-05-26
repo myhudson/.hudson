@@ -11,8 +11,8 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
-      <permission>hudson.model.Item.Read:anonymous</permission>
       <permission>hudson.model.Item.Workspace:anonymous</permission>
+      <permission>hudson.model.Item.Read:anonymous</permission>
     </hudson.security.AuthorizationMatrixProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
@@ -39,7 +39,7 @@
         <hudson.model.StringParameterDefinition>
           <name>JON_LICENSE_URL</name>
           <description></description>
-          <defaultValue>http://hudson-qe.rhq.rdu.redhat.com/license/jon-license.xml</defaultValue>
+          <defaultValue>http://auto-services.usersys.redhat.com/license/jon-license.xml</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>

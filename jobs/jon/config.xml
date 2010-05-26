@@ -15,30 +15,30 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
-      <permission>hudson.model.Item.Delete:jshaughn</permission>
-      <permission>hudson.model.Item.Delete:ips</permission>
-      <permission>hudson.model.Item.Workspace:ccrouch</permission>
-      <permission>hudson.model.Item.Workspace:jshaughn</permission>
-      <permission>hudson.model.Item.Workspace:ips</permission>
+      <permission>hudson.model.Run.Update:ccrouch</permission>
+      <permission>hudson.model.Run.Update:jshaughn</permission>
+      <permission>hudson.model.Run.Update:ips</permission>
       <permission>hudson.model.Item.Read:ccrouch</permission>
       <permission>hudson.model.Item.Read:anonymous</permission>
       <permission>hudson.model.Item.Read:jshaughn</permission>
       <permission>hudson.model.Item.Read:ips</permission>
-      <permission>hudson.model.Item.Release:ccrouch</permission>
-      <permission>hudson.model.Item.Release:jshaughn</permission>
-      <permission>hudson.model.Item.Release:ips</permission>
-      <permission>hudson.model.Item.Configure:ccrouch</permission>
-      <permission>hudson.model.Item.Configure:jshaughn</permission>
-      <permission>hudson.model.Item.Configure:ips</permission>
-      <permission>hudson.model.Run.Update:ccrouch</permission>
-      <permission>hudson.model.Run.Update:jshaughn</permission>
-      <permission>hudson.model.Run.Update:ips</permission>
-      <permission>hudson.model.Run.Delete:ccrouch</permission>
-      <permission>hudson.model.Run.Delete:jshaughn</permission>
-      <permission>hudson.model.Run.Delete:ips</permission>
+      <permission>hudson.model.Item.Delete:jshaughn</permission>
+      <permission>hudson.model.Item.Delete:ips</permission>
       <permission>hudson.model.Item.Build:ccrouch</permission>
       <permission>hudson.model.Item.Build:anonymous</permission>
       <permission>hudson.model.Item.Build:ips</permission>
+      <permission>hudson.model.Run.Delete:ccrouch</permission>
+      <permission>hudson.model.Run.Delete:jshaughn</permission>
+      <permission>hudson.model.Run.Delete:ips</permission>
+      <permission>hudson.model.Item.Configure:ccrouch</permission>
+      <permission>hudson.model.Item.Configure:jshaughn</permission>
+      <permission>hudson.model.Item.Configure:ips</permission>
+      <permission>hudson.model.Item.Release:ccrouch</permission>
+      <permission>hudson.model.Item.Release:jshaughn</permission>
+      <permission>hudson.model.Item.Release:ips</permission>
+      <permission>hudson.model.Item.Workspace:ccrouch</permission>
+      <permission>hudson.model.Item.Workspace:jshaughn</permission>
+      <permission>hudson.model.Item.Workspace:ips</permission>
     </hudson.security.AuthorizationMatrixProperty>
   </properties>
   <scm class="hudson.scm.SubversionSCM">
@@ -55,7 +55,7 @@
     <excludedRevprop></excludedRevprop>
     <excludedCommitMessages></excludedCommitMessages>
   </scm>
-  <assignedNode>maven</assignedNode>
+  <assignedNode>opos13.rhq.rdu.redhat.com01</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
@@ -65,8 +65,8 @@
     <groupId>org.jboss.on</groupId>
     <artifactId>jboss-on-parent</artifactId>
   </rootModule>
-  <goals>-P$JOB_NAME -Dmaven.repo.local=${HOME}/.m2/jon-repository clean install</goals>
-  <alternateSettings>etc/m2/settings.xml</alternateSettings>
+  <goals>--settings etc/m2/settings.xml -P$JOB_NAME -Dmaven.repo.local=${HOME}/.m2/jon-repository clean install</goals>
+  <alternateSettings>etc/m2/jon-bootstrap-settings.xml</alternateSettings>
   <defaultGoals>install</defaultGoals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>
@@ -103,6 +103,7 @@ echo MAVEN_OPTS=${MAVEN_OPTS}
 
 LOCAL_REPO=${HOME}/.m2/jon-repository
 mkdir -p $LOCAL_REPO
+find $LOCAL_REPO 
 </command>
         </hudson.tasks.Shell>
       </preBuildSteps>
