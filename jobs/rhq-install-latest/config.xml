@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>installs the latest build rhq master branch</description>
+  <description>installs the latest RHQ build (the default parameters point to project ci-rhq-release)&lt;br&gt;&#xd;
+Reference: &lt;a href=http://jon01.qa.atl2.redhat.com:8080/display/DEV/JON+Hudson&gt;http://jon01.qa.atl2.redhat.com:8080/display/DEV/JON+Hudson&lt;/a&gt;</description>
   <logRotator>
     <daysToKeep>30</daysToKeep>
     <numToKeep>-1</numToKeep>
@@ -11,8 +12,8 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
-      <permission>hudson.model.Item.Read:anonymous</permission>
       <permission>hudson.model.Item.Workspace:anonymous</permission>
+      <permission>hudson.model.Item.Read:anonymous</permission>
     </hudson.security.AuthorizationMatrixProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
@@ -24,12 +25,12 @@
         <hudson.model.StringParameterDefinition>
           <name>JON_URL</name>
           <description>URL of where the target machine can download the jon/rhq build</description>
-          <defaultValue>http://hudson-qe.rhq.rdu.redhat.com:8080/view/RHQ/job/master/lastSuccessfulBuild/artifact/modules/enterprise/server/container/target/rhq-server-3.0.0-SNAPSHOT.zip</defaultValue>
+          <defaultValue>http://hudson-qe.rhq.rdu.redhat.com:8080/view/RHQ/job/ci-rhq-master/lastSuccessfulBuild/artifact/modules/enterprise/server/container/target/rhq-server-4.0.0-SNAPSHOT.zip</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>JON_PLUGINPACK_URLS</name>
           <description>Where the target machine can download plugin packs (comma separated if more than one)</description>
-          <defaultValue>http://hudson-qe.rhq.rdu.redhat.com:8080/view/RHQ/job/master/lastSuccessfulBuild/artifact/modules/rhq-plugin-pack-all-SNAPSHOT.zip</defaultValue>
+          <defaultValue>http://hudson-qe.rhq.rdu.redhat.com:8080/view/RHQ/job/ci-rhq-master/lastSuccessfulBuild/artifact/modules/rhq-plugin-pack-all-SNAPSHOT.zip</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>JON_USER</name>
@@ -45,8 +46,8 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector">
     <hudson.triggers.TimerTrigger>
-      <spec>0 22 * * *
-#10pm daily</spec>
+      <spec>0 19 * * *
+#7pm daily</spec>
     </hudson.triggers.TimerTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
@@ -64,7 +65,7 @@ EOF
   </builders>
   <publishers>
     <hudson.tasks.BuildTrigger>
-      <childProjects>overnight-test-all-groups-rhq, cli-tests</childProjects>
+      <childProjects>cli-tests, overnight-test-all-groups-rhq</childProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>

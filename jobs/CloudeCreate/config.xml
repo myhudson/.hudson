@@ -48,7 +48,7 @@
 cd $WORKSPACE
 if [ -d automatjon ]; then 
  cd automatjon
- git clean -df
+ git clean -dxf
  git pull
 else
  git clone git://git.rhndev.redhat.com/automatjon
@@ -58,7 +58,7 @@ cd $WORKSPACE
 
 if [ -d webui-framework ]; then 
  cd webui-framework
- git clean -df
+ git clean -dxf
  git pull
 else
  git clone git://github.com/weissjeffm/webui-framework.git

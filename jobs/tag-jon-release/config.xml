@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <logRotator>
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>10</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.security.AuthorizationMatrixProperty>
+      <permission>hudson.model.Run.Update:jshaughn</permission>
+      <permission>hudson.model.Run.Update:ips</permission>
+      <permission>hudson.model.Item.Release:jshaughn</permission>
+      <permission>hudson.model.Item.Release:ips</permission>
+      <permission>hudson.model.Item.Configure:jshaughn</permission>
+      <permission>hudson.model.Item.Configure:ips</permission>
+      <permission>hudson.model.Run.Delete:jshaughn</permission>
+      <permission>hudson.model.Run.Delete:ips</permission>
+      <permission>hudson.model.Item.Workspace:jshaughn</permission>
+      <permission>hudson.model.Item.Workspace:ips</permission>
+      <permission>hudson.model.Item.Delete:jshaughn</permission>
+      <permission>hudson.model.Item.Delete:ips</permission>
+      <permission>hudson.model.Item.Build:jshaughn</permission>
+      <permission>hudson.model.Item.Build:ips</permission>
+      <permission>hudson.model.Item.Read:anonymous</permission>
+      <permission>hudson.model.Item.Read:jshaughn</permission>
+      <permission>hudson.model.Item.Read:ips</permission>
+    </hudson.security.AuthorizationMatrixProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>RELEASE_VERSION</name>
+          <description>Usage    :  $EXE RELEASE_VERSION DEVELOPMENT_VERSION RHQ_VERSION
+Example : $EXE 2.4.0.GA_QA  2.4.0-SNAPSHOT  3.0.0.GA_QA
+Example Tag : 2.4.0.GA_QA will generate a JBossON_2_4_0_GA_QA Tag</description>
+          <defaultValue>2.4.0.GA</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>DEVELOPMENT_VERSION</name>
+          <description>Usage    :  $EXE RELEASE_VERSION DEVELOPMENT_VERSION RHQ_VERSION
+Example : $EXE 2.4.0.GA_QA  2.4.0-SNAPSHOT  3.0.0.GA_QA</description>
+          <defaultValue>2.4.0-SNAPSHOT</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>RHQ_VERSION</name>
+          <description>Usage    :  $EXE RELEASE_VERSION DEVELOPMENT_VERSION RHQ_VERSION
+Example : $EXE 2.4.0.GA_QA  2.4.0-SNAPSHOT  3.0.0.GA_QA</description>
+          <defaultValue>3.0.0.GA</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>SVN_USERNAME</name>
+          <description></description>
+          <defaultValue>jshaughn</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.PasswordParameterDefinition>
+          <name>SVN_PASSWORD</name>
+          <description></description>
+          <defaultValue>UBwPoaB705p77vEGs5h4LfkTQMRM1vF/jNoKmzlDGHhFRwEgM9Vdb+FeSOJt0DVu</defaultValue>
+        </hudson.model.PasswordParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>MODE</name>
+          <description>the mode in which to run the release script
+</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>production</string>
+              <string>test</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>DEBUG</name>
+          <description>if DEBUG=true the SVN password will get echoed in the console output!  Use only when debugging the release.sh script</description>
+          <defaultValue>false</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.SubversionSCM">
+    <locations>
+      <hudson.scm.SubversionSCM_-ModuleLocation>
+        <remote>https://svn.devel.redhat.com/repos/jboss-jon/trunk</remote>
+      </hudson.scm.SubversionSCM_-ModuleLocation>
+    </locations>
+    <useUpdate>true</useUpdate>
+    <doRevert>false</doRevert>
+    <excludedRegions></excludedRegions>
+    <includedRegions></includedRegions>
+    <excludedUsers></excludedUsers>
+    <excludedRevprop></excludedRevprop>
+    <excludedCommitMessages></excludedCommitMessages>
+  </scm>
+  <assignedNode>master</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector"/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>JAVA_HOME=&quot;/mnt/qa/tools/opt/jdk1.6.0_18&quot;
+M2_HOME=&quot;/mnt/qa/tools/opt/maven-2.1.0&quot;
+MAVEN_OPTS=&quot;-Xms512M -Xmx1024M -XX:PermSize=128M -XX:MaxPermSize=256M&quot;
+#SUBVERSION_HOME=&quot;/mnt/qa/tools/opt/subversion-1.4.0&quot;
+SUBVERSION_HOME=&quot;/usr&quot;
+export JAVA_HOME SUBVERSION_HOME M2_HOME MAVEN_OPTS
+
+export RHQ_RELEASE_QUIET=1
+export RHQ_RELEASE_ADDITIONAL_MAVEN_ARGS=&quot;-Dmaven.test.skip=true&quot;
+
+# Tag and build the release.
+set +x
+echo &quot;./trunk/release.sh $RELEASE_VERSION $DEVELOPMENT_VERSION $RHQ_VERSION $SVN_USERNAME $MODE $DEBUG&quot;
+./trunk/release.sh &quot;$RELEASE_VERSION&quot; &quot;$DEVELOPMENT_VERSION&quot; &quot;$RHQ_VERSION&quot; &quot;$SVN_USERNAME&quot; &quot;$SVN_PASSWORD&quot; &quot;$MODE&quot; &quot;$DEBUG&quot;
+
+# Validate the release.
+./trunk/etc/build/chkjondist jon/tag/jon/dist/server/target/jon-server-*.zip
+</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>**/jon/tag/jon/dist/server/target/jon-server-*.zip, **/jon/tag/jon/dist/plugin-packs/**/target/*.zip</artifacts>
+      <latestOnly>false</latestOnly>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.tasks.Mailer>
+      <recipients>ips@redhat.com jshaughn@redhat.com</recipients>
+      <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
+      <sendToIndividuals>false</sendToIndividuals>
+    </hudson.tasks.Mailer>
+  </publishers>
+  <buildWrappers/>
+</project>

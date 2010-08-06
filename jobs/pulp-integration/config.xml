@@ -11,16 +11,16 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
-      <permission>hudson.model.Item.Delete:mmccune</permission>
+      <permission>hudson.model.Run.Delete:mmccune</permission>
+      <permission>hudson.model.Item.Release:mmccune</permission>
+      <permission>hudson.model.Run.Update:mmccune</permission>
+      <permission>hudson.model.Item.Workspace:mmccune</permission>
       <permission>hudson.model.Item.Build:anonymous</permission>
       <permission>hudson.model.Item.Build:mmccune</permission>
-      <permission>hudson.model.Run.Update:mmccune</permission>
       <permission>hudson.model.Item.Configure:mmccune</permission>
+      <permission>hudson.model.Item.Delete:mmccune</permission>
       <permission>hudson.model.Item.Read:anonymous</permission>
       <permission>hudson.model.Item.Read:mmccune</permission>
-      <permission>hudson.model.Item.Release:mmccune</permission>
-      <permission>hudson.model.Item.Workspace:mmccune</permission>
-      <permission>hudson.model.Run.Delete:mmccune</permission>
     </hudson.security.AuthorizationMatrixProperty>
   </properties>
   <scm class="hudson.plugins.git.GitSCM">
@@ -64,8 +64,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>nosetests -w test/ unit/
-</command>
+      <command>python test/integration/fake_integration.py</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>

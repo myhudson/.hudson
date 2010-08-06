@@ -1,2 +1,10 @@
-*
+jobs/*/builds
+workspace
+lastSuccessful
+lastStable
+nextBuildNumber
+*.log
+javadoc
+modules
+htmlreports
 

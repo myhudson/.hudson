@@ -1,19 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<maven2-moduleset>
+<project>
   <actions/>
   <description></description>
-  <logRotator>
-    <daysToKeep>31</daysToKeep>
-    <numToKeep>14</numToKeep>
-  </logRotator>
   <keepDependencies>false</keepDependencies>
-  <properties>
-    <hudson.security.AuthorizationMatrixProperty>
-      <permission>hudson.model.Item.Workspace:anonymous</permission>
-      <permission>hudson.model.Item.Read:anonymous</permission>
-    </hudson.security.AuthorizationMatrixProperty>
-  </properties>
+  <properties/>
   <scm class="hudson.plugins.git.GitSCM">
+    <configVersion>1</configVersion>
     <remoteRepositories>
       <org.spearce.jgit.transport.RemoteConfig>
         <string>origin</string>
@@ -25,45 +17,59 @@
         <string>uploadpack</string>
         <string>git-upload-pack</string>
         <string>url</string>
-        <string>git://git.fedorahosted.org/rhq/rhq.git</string>
+        <string>git://axiom.rdu.redhat.com/scm/git/subscription-manager</string>
         <string>tagopt</string>
         <string></string>
       </org.spearce.jgit.transport.RemoteConfig>
     </remoteRepositories>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>origin/master</name>
+        <name>**</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <mergeOptions/>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <authorOrCommitter>false</authorOrCommitter>
+    <clean>false</clean>
+    <wipeOutWorkspace>false</wipeOutWorkspace>
+    <buildChooser class="hudson.plugins.git.util.DefaultBuildChooser"/>
+    <gitTool>Default</gitTool>
     <submoduleCfg class="list"/>
   </scm>
   <canRoam>true</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector"/>
+  <triggers class="vector">
+    <hudson.triggers.SCMTrigger>
+      <spec>*/10 * * * *</spec>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
   <concurrentBuild>false</concurrentBuild>
-  <rootModule>
-    <groupId>org.rhq</groupId>
-    <artifactId>rhq-parent</artifactId>
-  </rootModule>
-  <goals>-Penterprise,dev -Dmaven.test.skip=true -Ddbsetup install</goals>
-  <defaultGoals>install</defaultGoals>
-  <aggregatorStyleBuild>true</aggregatorStyleBuild>
-  <incrementalBuild>false</incrementalBuild>
-  <usePrivateRepository>false</usePrivateRepository>
-  <ignoreUpstremChanges>true</ignoreUpstremChanges>
-  <archivingDisabled>false</archivingDisabled>
-  <reporters/>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash -xe
+cd $WORKSPACE
+REPONAME=subscription-manager
+if [ -d $REPONAME ]; then 
+ cd $REPONAME
+ git clean -dxf
+ git pull
+else
+ git clone git://axiom.rdu.redhat.com/scm/git/subscription-manager
+fi
+cd $WORKSPACE/$REPONAME
+tito build --test --rpm
+cd /tmp/tito/i386
+for file in *.rpm; do 
+ mv $file $WORKSPACE/`echo $file | sed &apos;s/\(subscription-manager\(-gnome\)\?\).*/\1.i386.rpm/&apos;`
+done</command>
+    </hudson.tasks.Shell>
+  </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>modules/enterprise/server/container/target/rhq-server*.zip</artifacts>
+      <artifacts>*.rpm</artifacts>
       <latestOnly>false</latestOnly>
     </hudson.tasks.ArtifactArchiver>
-    <hudson.plugins.chucknorris.CordellWalkerRecorder>
-      <factGenerator/>
-    </hudson.plugins.chucknorris.CordellWalkerRecorder>
   </publishers>
   <buildWrappers/>
-</maven2-moduleset>
+</project>

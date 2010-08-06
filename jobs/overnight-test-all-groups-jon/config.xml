@@ -11,12 +11,19 @@
 &lt;/UL&gt;&#xd;
 &#xd;
 &lt;font color=red&gt;WARNING:&lt;/font&gt; Do not use the TestNG Reports links on this page since their embedded screenshot links will not work.  Instead click to the build# of interest to you in the Build History table below and open its TestNG Report.</description>
+  <logRotator>
+    <daysToKeep>60</daysToKeep>
+    <numToKeep>-1</numToKeep>
+    <artifactDaysToKeep>15</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
-      <permission>hudson.model.Item.Read:anonymous</permission>
       <permission>hudson.model.Item.Release:anonymous</permission>
       <permission>hudson.model.Item.Workspace:anonymous</permission>
+      <permission>hudson.model.Item.Read:anonymous</permission>
+      <permission>hudson.model.Item.Build:anonymous</permission>
     </hudson.security.AuthorizationMatrixProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
@@ -120,7 +127,7 @@ selenium.address=${SELENIUM_ADDRESS}</properties>
 -Djon.server.user=$SERVER_USER
 -Djon.agent.user=$AGENT_USER
 -Dtestng.outputdir=automatjon/jon/test-output
--Dselenium.address=$SELENIUM_ADDRESS
+-Dselenium.address=$SELENIUM_ADDRESS_PREFIX$EXECUTOR_NUMBER
 -Dselenium.screenshot.dir=automatjon/jon/test-output/screenshots</parameters>
       <scriptParameters>$SUITE_FILE</scriptParameters>
       <properties></properties>
@@ -151,6 +158,11 @@ selenium.address=${SELENIUM_ADDRESS}</properties>
         </htmlpublisher.HtmlPublisherTarget>
       </reportTargets>
     </htmlpublisher.HtmlPublisher>
+    <hudson.tasks.Mailer>
+      <recipients>whayutin@redhat.com</recipients>
+      <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
+      <sendToIndividuals>false</sendToIndividuals>
+    </hudson.tasks.Mailer>
   </publishers>
   <buildWrappers/>
 </project>

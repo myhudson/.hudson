@@ -12,9 +12,9 @@ Grinder2 tests both the YUM and RHN modules.&#xd;
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
+      <permission>hudson.model.Item.Build:anonymous</permission>
       <permission>hudson.model.Item.Workspace:anonymous</permission>
       <permission>hudson.model.Item.Read:anonymous</permission>
-      <permission>hudson.model.Item.Build:anonymous</permission>
     </hudson.security.AuthorizationMatrixProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
@@ -28,7 +28,7 @@ Grinder2 tests both the YUM and RHN modules.&#xd;
 &lt;code&gt;root&lt;/code&gt; is the user id that will be executing the grinder tests.
 &lt;LI&gt;The &lt;code&gt;HOSTNAME&lt;/code&gt; must be a fully qualified domain name and resolvable by DNS.&lt;/LI&gt;
 &lt;/UL&gt;</description>
-          <defaultValue>rlx-0-04.rhndev.redhat.com</defaultValue>
+          <defaultValue>rlx-2-04.rhndev.redhat.com</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>GRINDER_RPM</name>
@@ -44,7 +44,9 @@ http://download.devel.redhat.com/brewroot/packages/grinder</description>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>RHN_FORCE</name>
-          <description>Use the --force option when registering to the RHN server using rhnreg_ks.&lt;BR&gt;</description>
+          <description>Use the --force option when registering to the RHN server using rhnreg_ks.&lt;BR&gt;
+It is a good idea to test with force once in awhile.  When testing with force, the grinder satellite activation functionality will be tested in the configuration setup.  When not testing with force, the grinder activation functionality is not tested because the HOSTNAME will have been activated from a prior run.&lt;BR&gt;
+Note: When testing with force, it is a good idea to log into the rhn server and manually delete old registrations of the HOSTNAME system to free up used entitlements.</description>
           <defaultValue>false</defaultValue>
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.StringParameterDefinition>
@@ -100,7 +102,7 @@ If registering your HOSTNAME to an unreliable RHN_SERVERURL, some of the package
 cd $WORKSPACE
 if [ -d automatjon ]; then 
  cd automatjon
- git clean -df
+ git clean -dxf
  git pull
 else
  git clone git://git.rhndev.redhat.com/automatjon
@@ -110,7 +112,7 @@ cd $WORKSPACE
 
 if [ -d webui-framework ]; then 
  cd webui-framework
- git clean -df
+ git clean -dxf
  git pull
 else
  git clone git://github.com/weissjeffm/webui-framework.git
@@ -140,7 +142,7 @@ chmod 600 $WORKSPACE/automatjon/jon/.ssh/id*</command>
 -Dgrinder.ssh.user=root
 -Dgrinder.sshkey.passphrase=dog8code
 -Dgrinder.sshkey.private=$WORKSPACE/automatjon/jon/.ssh/id_auto_dsa</parameters>
-      <scriptParameters>automatjon/cloude/src/com/redhat/qe/grinder/tests/GrinderTests.xml</scriptParameters>
+      <scriptParameters>automatjon/cloude/src/com/redhat/qe/grinder/tests/Grinder2Tests.xml</scriptParameters>
       <properties>testng.project.dir=automatjon/cloude</properties>
     </hudson.plugins.groovy.Groovy>
   </builders>
@@ -151,6 +153,7 @@ chmod 600 $WORKSPACE/automatjon/jon/.ssh/id*</command>
     </hudson.tasks.ArtifactArchiver>
     <hudson.tasks.junit.JUnitResultArchiver>
       <testResults>automatjon/cloude/test-output-junit/*.xml</testResults>
+      <keepLongStdio>false</keepLongStdio>
       <testDataPublishers/>
     </hudson.tasks.junit.JUnitResultArchiver>
     <htmlpublisher.HtmlPublisher>
@@ -164,44 +167,11 @@ chmod 600 $WORKSPACE/automatjon/jon/.ssh/id*</command>
         </htmlpublisher.HtmlPublisherTarget>
       </reportTargets>
     </htmlpublisher.HtmlPublisher>
-    <hudson.plugins.emailext.ExtendedEmailPublisher>
-      <recipientList>whayutin@redhat.com, jsefler@redhat.com</recipientList>
-      <configuredTriggers>
-        <hudson.plugins.emailext.plugins.trigger.UnstableTrigger>
-          <email>
-            <recipientList></recipientList>
-            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
-            <body>$PROJECT_DEFAULT_CONTENT</body>
-            <sendToDevelopers>true</sendToDevelopers>
-            <includeCulprits>false</includeCulprits>
-            <sendToRecipientList>true</sendToRecipientList>
-          </email>
-        </hudson.plugins.emailext.plugins.trigger.UnstableTrigger>
-        <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
-          <email>
-            <recipientList></recipientList>
-            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
-            <body>$PROJECT_DEFAULT_CONTENT</body>
-            <sendToDevelopers>true</sendToDevelopers>
-            <includeCulprits>false</includeCulprits>
-            <sendToRecipientList>true</sendToRecipientList>
-          </email>
-        </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
-        <hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
-          <email>
-            <recipientList></recipientList>
-            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
-            <body>$PROJECT_DEFAULT_CONTENT</body>
-            <sendToDevelopers>true</sendToDevelopers>
-            <includeCulprits>false</includeCulprits>
-            <sendToRecipientList>true</sendToRecipientList>
-          </email>
-        </hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
-      </configuredTriggers>
-      <contentType>default</contentType>
-      <defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
-      <defaultContent>$DEFAULT_CONTENT</defaultContent>
-    </hudson.plugins.emailext.ExtendedEmailPublisher>
+    <hudson.tasks.Mailer>
+      <recipients>whayutin@redhat.com, pthomas@redhat.com, jsefler@redhat.com</recipients>
+      <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
+      <sendToIndividuals>false</sendToIndividuals>
+    </hudson.tasks.Mailer>
   </publishers>
   <buildWrappers/>
 </project>

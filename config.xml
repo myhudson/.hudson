@@ -1,58 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <hudson>
   <version>1.352</version>
-  <numExecutors>2</numExecutors>
+  <numExecutors>4</numExecutors>
   <mode>NORMAL</mode>
   <useSecurity>true</useSecurity>
   <authorizationStrategy class="hudson.security.ProjectMatrixAuthorizationStrategy">
-    <permission>hudson.model.View.Create:ccrouch</permission>
-    <permission>hudson.model.View.Create:jesusr</permission>
-    <permission>hudson.model.View.Create:jshaughn</permission>
-    <permission>hudson.model.View.Create:admin</permission>
-    <permission>hudson.model.View.Create:ips</permission>
-    <permission>hudson.model.View.Create:jsanda</permission>
-    <permission>hudson.model.View.Create:jweiss</permission>
-    <permission>hudson.model.View.Create:whayutin</permission>
-    <permission>hudson.model.View.Create:jsefler</permission>
-    <permission>hudson.model.View.Create:mmccune</permission>
-    <permission>hudson.model.View.Create:ssalevan</permission>
-    <permission>hudson.model.Computer.Delete:jesusr</permission>
-    <permission>hudson.model.Computer.Delete:admin</permission>
-    <permission>hudson.model.Computer.Delete:jweiss</permission>
-    <permission>hudson.model.Computer.Delete:whayutin</permission>
-    <permission>hudson.model.Computer.Delete:jsefler</permission>
-    <permission>hudson.model.Computer.Delete:ssalevan</permission>
-    <permission>hudson.model.View.Delete:jesusr</permission>
-    <permission>hudson.model.View.Delete:admin</permission>
-    <permission>hudson.model.View.Delete:jweiss</permission>
-    <permission>hudson.model.View.Delete:whayutin</permission>
-    <permission>hudson.model.View.Delete:jsefler</permission>
-    <permission>hudson.model.View.Delete:ssalevan</permission>
-    <permission>hudson.scm.SCM.Tag:ccrouch</permission>
-    <permission>hudson.scm.SCM.Tag:jesusr</permission>
-    <permission>hudson.scm.SCM.Tag:admin</permission>
-    <permission>hudson.scm.SCM.Tag:jweiss</permission>
-    <permission>hudson.scm.SCM.Tag:whayutin</permission>
-    <permission>hudson.scm.SCM.Tag:jsefler</permission>
-    <permission>hudson.scm.SCM.Tag:mmccune</permission>
-    <permission>hudson.scm.SCM.Tag:ssalevan</permission>
-    <permission>hudson.model.Item.Configure:jesusr</permission>
-    <permission>hudson.model.Item.Configure:admin</permission>
-    <permission>hudson.model.Item.Configure:jweiss</permission>
-    <permission>hudson.model.Item.Configure:whayutin</permission>
-    <permission>hudson.model.Item.Configure:jsefler</permission>
-    <permission>hudson.model.Item.Configure:mmccune</permission>
-    <permission>hudson.model.Item.Configure:ssalevan</permission>
-    <permission>hudson.model.Item.Read:ccrouch</permission>
-    <permission>hudson.model.Item.Read:jesusr</permission>
-    <permission>hudson.model.Item.Read:jshaughn</permission>
-    <permission>hudson.model.Item.Read:admin</permission>
-    <permission>hudson.model.Item.Read:ips</permission>
-    <permission>hudson.model.Item.Read:jsanda</permission>
-    <permission>hudson.model.Item.Read:jweiss</permission>
-    <permission>hudson.model.Item.Read:whayutin</permission>
-    <permission>hudson.model.Item.Read:jsefler</permission>
-    <permission>hudson.model.Item.Read:ssalevan</permission>
     <permission>hudson.model.Run.Update:jesusr</permission>
     <permission>hudson.model.Run.Update:admin</permission>
     <permission>hudson.model.Run.Update:jweiss</permission>
@@ -60,11 +12,12 @@
     <permission>hudson.model.Run.Update:jsefler</permission>
     <permission>hudson.model.Run.Update:mmccune</permission>
     <permission>hudson.model.Run.Update:ssalevan</permission>
-    <permission>hudson.model.Hudson.Administer:admin</permission>
-    <permission>hudson.model.Hudson.Administer:jweiss</permission>
-    <permission>hudson.model.Hudson.Administer:whayutin</permission>
-    <permission>hudson.model.Hudson.Administer:jsefler</permission>
-    <permission>hudson.model.Hudson.Administer:ssalevan</permission>
+    <permission>hudson.model.View.Delete:jesusr</permission>
+    <permission>hudson.model.View.Delete:admin</permission>
+    <permission>hudson.model.View.Delete:jweiss</permission>
+    <permission>hudson.model.View.Delete:whayutin</permission>
+    <permission>hudson.model.View.Delete:jsefler</permission>
+    <permission>hudson.model.View.Delete:ssalevan</permission>
     <permission>hudson.model.Hudson.Read:anonymous</permission>
     <permission>hudson.model.Hudson.Read:ccrouch</permission>
     <permission>hudson.model.Hudson.Read:jesusr</permission>
@@ -77,6 +30,100 @@
     <permission>hudson.model.Hudson.Read:jsefler</permission>
     <permission>hudson.model.Hudson.Read:mmccune</permission>
     <permission>hudson.model.Hudson.Read:ssalevan</permission>
+    <permission>hudson.scm.SCM.Tag:ccrouch</permission>
+    <permission>hudson.scm.SCM.Tag:jesusr</permission>
+    <permission>hudson.scm.SCM.Tag:admin</permission>
+    <permission>hudson.scm.SCM.Tag:jweiss</permission>
+    <permission>hudson.scm.SCM.Tag:whayutin</permission>
+    <permission>hudson.scm.SCM.Tag:jsefler</permission>
+    <permission>hudson.scm.SCM.Tag:mmccune</permission>
+    <permission>hudson.scm.SCM.Tag:ssalevan</permission>
+    <permission>hudson.model.Item.Release:whayutin</permission>
+    <permission>hudson.model.Computer.Configure:jesusr</permission>
+    <permission>hudson.model.Computer.Configure:admin</permission>
+    <permission>hudson.model.Computer.Configure:jweiss</permission>
+    <permission>hudson.model.Computer.Configure:whayutin</permission>
+    <permission>hudson.model.Computer.Configure:jsefler</permission>
+    <permission>hudson.model.Computer.Configure:ssalevan</permission>
+    <permission>hudson.model.Computer.Delete:jesusr</permission>
+    <permission>hudson.model.Computer.Delete:admin</permission>
+    <permission>hudson.model.Computer.Delete:jweiss</permission>
+    <permission>hudson.model.Computer.Delete:whayutin</permission>
+    <permission>hudson.model.Computer.Delete:jsefler</permission>
+    <permission>hudson.model.Computer.Delete:ssalevan</permission>
+    <permission>hudson.model.Hudson.Administer:admin</permission>
+    <permission>hudson.model.Hudson.Administer:jweiss</permission>
+    <permission>hudson.model.Hudson.Administer:whayutin</permission>
+    <permission>hudson.model.Hudson.Administer:jsefler</permission>
+    <permission>hudson.model.Hudson.Administer:ssalevan</permission>
+    <permission>hudson.model.Item.Create:ccrouch</permission>
+    <permission>hudson.model.Item.Create:jesusr</permission>
+    <permission>hudson.model.Item.Create:jshaughn</permission>
+    <permission>hudson.model.Item.Create:admin</permission>
+    <permission>hudson.model.Item.Create:ips</permission>
+    <permission>hudson.model.Item.Create:jsanda</permission>
+    <permission>hudson.model.Item.Create:jweiss</permission>
+    <permission>hudson.model.Item.Create:whayutin</permission>
+    <permission>hudson.model.Item.Create:jsefler</permission>
+    <permission>hudson.model.Item.Create:mmccune</permission>
+    <permission>hudson.model.Item.Create:ssalevan</permission>
+    <permission>hudson.model.Item.Read:ccrouch</permission>
+    <permission>hudson.model.Item.Read:jesusr</permission>
+    <permission>hudson.model.Item.Read:jshaughn</permission>
+    <permission>hudson.model.Item.Read:admin</permission>
+    <permission>hudson.model.Item.Read:ips</permission>
+    <permission>hudson.model.Item.Read:jsanda</permission>
+    <permission>hudson.model.Item.Read:jweiss</permission>
+    <permission>hudson.model.Item.Read:whayutin</permission>
+    <permission>hudson.model.Item.Read:jsefler</permission>
+    <permission>hudson.model.Item.Read:ssalevan</permission>
+    <permission>hudson.model.View.Configure:ccrouch</permission>
+    <permission>hudson.model.View.Configure:jesusr</permission>
+    <permission>hudson.model.View.Configure:jshaughn</permission>
+    <permission>hudson.model.View.Configure:admin</permission>
+    <permission>hudson.model.View.Configure:ips</permission>
+    <permission>hudson.model.View.Configure:jsanda</permission>
+    <permission>hudson.model.View.Configure:jweiss</permission>
+    <permission>hudson.model.View.Configure:whayutin</permission>
+    <permission>hudson.model.View.Configure:jsefler</permission>
+    <permission>hudson.model.View.Configure:mmccune</permission>
+    <permission>hudson.model.View.Configure:ssalevan</permission>
+    <permission>hudson.model.Item.Build:ccrouch</permission>
+    <permission>hudson.model.Item.Build:jesusr</permission>
+    <permission>hudson.model.Item.Build:jshaughn</permission>
+    <permission>hudson.model.Item.Build:admin</permission>
+    <permission>hudson.model.Item.Build:ips</permission>
+    <permission>hudson.model.Item.Build:jsanda</permission>
+    <permission>hudson.model.Item.Build:jweiss</permission>
+    <permission>hudson.model.Item.Build:whayutin</permission>
+    <permission>hudson.model.Item.Build:jsefler</permission>
+    <permission>hudson.model.Item.Build:mmccune</permission>
+    <permission>hudson.model.Item.Build:ssalevan</permission>
+    <permission>hudson.model.View.Create:ccrouch</permission>
+    <permission>hudson.model.View.Create:jesusr</permission>
+    <permission>hudson.model.View.Create:jshaughn</permission>
+    <permission>hudson.model.View.Create:admin</permission>
+    <permission>hudson.model.View.Create:ips</permission>
+    <permission>hudson.model.View.Create:jsanda</permission>
+    <permission>hudson.model.View.Create:jweiss</permission>
+    <permission>hudson.model.View.Create:whayutin</permission>
+    <permission>hudson.model.View.Create:jsefler</permission>
+    <permission>hudson.model.View.Create:mmccune</permission>
+    <permission>hudson.model.View.Create:ssalevan</permission>
+    <permission>hudson.model.Run.Delete:jesusr</permission>
+    <permission>hudson.model.Run.Delete:admin</permission>
+    <permission>hudson.model.Run.Delete:jweiss</permission>
+    <permission>hudson.model.Run.Delete:whayutin</permission>
+    <permission>hudson.model.Run.Delete:jsefler</permission>
+    <permission>hudson.model.Run.Delete:mmccune</permission>
+    <permission>hudson.model.Run.Delete:ssalevan</permission>
+    <permission>hudson.model.Item.Delete:jesusr</permission>
+    <permission>hudson.model.Item.Delete:admin</permission>
+    <permission>hudson.model.Item.Delete:jweiss</permission>
+    <permission>hudson.model.Item.Delete:whayutin</permission>
+    <permission>hudson.model.Item.Delete:jsefler</permission>
+    <permission>hudson.model.Item.Delete:mmccune</permission>
+    <permission>hudson.model.Item.Delete:ssalevan</permission>
     <permission>hudson.model.Item.Workspace:anonymous</permission>
     <permission>hudson.model.Item.Workspace:ccrouch</permission>
     <permission>hudson.model.Item.Workspace:jesusr</permission>
@@ -89,59 +136,13 @@
     <permission>hudson.model.Item.Workspace:jsefler</permission>
     <permission>hudson.model.Item.Workspace:mmccune</permission>
     <permission>hudson.model.Item.Workspace:ssalevan</permission>
-    <permission>hudson.model.Item.Delete:jesusr</permission>
-    <permission>hudson.model.Item.Delete:admin</permission>
-    <permission>hudson.model.Item.Delete:jweiss</permission>
-    <permission>hudson.model.Item.Delete:whayutin</permission>
-    <permission>hudson.model.Item.Delete:jsefler</permission>
-    <permission>hudson.model.Item.Delete:mmccune</permission>
-    <permission>hudson.model.Item.Delete:ssalevan</permission>
-    <permission>hudson.model.Item.Create:ccrouch</permission>
-    <permission>hudson.model.Item.Create:jesusr</permission>
-    <permission>hudson.model.Item.Create:jshaughn</permission>
-    <permission>hudson.model.Item.Create:admin</permission>
-    <permission>hudson.model.Item.Create:ips</permission>
-    <permission>hudson.model.Item.Create:jsanda</permission>
-    <permission>hudson.model.Item.Create:jweiss</permission>
-    <permission>hudson.model.Item.Create:whayutin</permission>
-    <permission>hudson.model.Item.Create:jsefler</permission>
-    <permission>hudson.model.Item.Create:mmccune</permission>
-    <permission>hudson.model.Item.Create:ssalevan</permission>
-    <permission>hudson.model.Run.Delete:jesusr</permission>
-    <permission>hudson.model.Run.Delete:admin</permission>
-    <permission>hudson.model.Run.Delete:jweiss</permission>
-    <permission>hudson.model.Run.Delete:whayutin</permission>
-    <permission>hudson.model.Run.Delete:jsefler</permission>
-    <permission>hudson.model.Run.Delete:mmccune</permission>
-    <permission>hudson.model.Run.Delete:ssalevan</permission>
-    <permission>hudson.model.Item.Build:ccrouch</permission>
-    <permission>hudson.model.Item.Build:jesusr</permission>
-    <permission>hudson.model.Item.Build:jshaughn</permission>
-    <permission>hudson.model.Item.Build:admin</permission>
-    <permission>hudson.model.Item.Build:ips</permission>
-    <permission>hudson.model.Item.Build:jsanda</permission>
-    <permission>hudson.model.Item.Build:jweiss</permission>
-    <permission>hudson.model.Item.Build:whayutin</permission>
-    <permission>hudson.model.Item.Build:jsefler</permission>
-    <permission>hudson.model.Item.Build:mmccune</permission>
-    <permission>hudson.model.Item.Build:ssalevan</permission>
-    <permission>hudson.model.Computer.Configure:jesusr</permission>
-    <permission>hudson.model.Computer.Configure:admin</permission>
-    <permission>hudson.model.Computer.Configure:jweiss</permission>
-    <permission>hudson.model.Computer.Configure:whayutin</permission>
-    <permission>hudson.model.Computer.Configure:jsefler</permission>
-    <permission>hudson.model.Computer.Configure:ssalevan</permission>
-    <permission>hudson.model.View.Configure:ccrouch</permission>
-    <permission>hudson.model.View.Configure:jesusr</permission>
-    <permission>hudson.model.View.Configure:jshaughn</permission>
-    <permission>hudson.model.View.Configure:admin</permission>
-    <permission>hudson.model.View.Configure:ips</permission>
-    <permission>hudson.model.View.Configure:jsanda</permission>
-    <permission>hudson.model.View.Configure:jweiss</permission>
-    <permission>hudson.model.View.Configure:whayutin</permission>
-    <permission>hudson.model.View.Configure:jsefler</permission>
-    <permission>hudson.model.View.Configure:mmccune</permission>
-    <permission>hudson.model.View.Configure:ssalevan</permission>
+    <permission>hudson.model.Item.Configure:jesusr</permission>
+    <permission>hudson.model.Item.Configure:admin</permission>
+    <permission>hudson.model.Item.Configure:jweiss</permission>
+    <permission>hudson.model.Item.Configure:whayutin</permission>
+    <permission>hudson.model.Item.Configure:jsefler</permission>
+    <permission>hudson.model.Item.Configure:mmccune</permission>
+    <permission>hudson.model.Item.Configure:ssalevan</permission>
   </authorizationStrategy>
   <securityRealm class="hudson.security.HudsonPrivateSecurityRealm">
     <disableSignup>false</disableSignup>
@@ -173,110 +174,6 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
   </jdks>
   <clouds/>
   <slaves>
-    <slave>
-      <name>localslave1</name>
-      <description>&lt;br&gt;To use VNC to view jobs executing on this slave:&lt;UL&gt;&lt;LI&gt;Open your browser to &lt;a href=&apos;http://hudson-qe.rhq.rdu.redhat.com:6001&apos; target=&apos;_blank&apos;&gt;http://hudson-qe.rhq.rdu.redhat.com:6001&lt;/a&gt; (if you have a java plugin)&lt;/LI&gt; or &lt;LI&gt;On the command line type: &lt;code&gt;vncviewer hudson-qe.rhq.rdu.redhat.com:1&lt;/code&gt;&lt;/LI&gt;&lt;/UL&gt;</description>
-      <remoteFS>/home/hudson/localslave1</remoteFS>
-      <numExecutors>1</numExecutors>
-      <mode>NORMAL</mode>
-      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.slaves.JNLPLauncher"/>
-      <label>selenium</label>
-      <nodeProperties>
-        <hudson.slaves.EnvironmentVariablesNodeProperty>
-          <envVars serialization="custom">
-            <unserializable-parents/>
-            <tree-map>
-              <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator"/>
-              </default>
-              <int>1</int>
-              <string>SELENIUM_ADDRESS</string>
-              <string>hudson-qe.rhq.rdu.redhat.com:4441</string>
-            </tree-map>
-          </envVars>
-        </hudson.slaves.EnvironmentVariablesNodeProperty>
-      </nodeProperties>
-    </slave>
-    <slave>
-      <name>localslave2</name>
-      <description>&lt;br&gt;To use VNC to view jobs executing on this slave:&lt;UL&gt;&lt;LI&gt;Open your browser to &lt;a href=&apos;http://hudson-qe.rhq.rdu.redhat.com:6002&apos; target=&apos;_blank&apos;&gt;http://hudson-qe.rhq.rdu.redhat.com:6002&lt;/a&gt; (if you have a java plugin)&lt;/LI&gt; or &lt;LI&gt;On the command line type: &lt;code&gt;vncviewer hudson-qe.rhq.rdu.redhat.com:2&lt;/code&gt;&lt;/LI&gt;&lt;/UL&gt;</description>
-      <remoteFS>/home/hudson/localslave2</remoteFS>
-      <numExecutors>1</numExecutors>
-      <mode>NORMAL</mode>
-      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.slaves.JNLPLauncher"/>
-      <label>selenium</label>
-      <nodeProperties>
-        <hudson.slaves.EnvironmentVariablesNodeProperty>
-          <envVars serialization="custom">
-            <unserializable-parents/>
-            <tree-map>
-              <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator"/>
-              </default>
-              <int>1</int>
-              <string>SELENIUM_ADDRESS</string>
-              <string>hudson-qe.rhq.rdu.redhat.com:4442</string>
-            </tree-map>
-          </envVars>
-        </hudson.slaves.EnvironmentVariablesNodeProperty>
-      </nodeProperties>
-    </slave>
-    <slave>
-      <name>localslave3</name>
-      <description>&lt;br&gt;To use VNC to view jobs executing on this slave:&lt;UL&gt;&lt;LI&gt;Open your browser to &lt;a href=&apos;http://hudson-qe.rhq.rdu.redhat.com:6003&apos; target=&apos;_blank&apos;&gt;http://hudson-qe.rhq.rdu.redhat.com:6003&lt;/a&gt; (if you have a java plugin)&lt;/LI&gt; or &lt;LI&gt;On the command line type: &lt;code&gt;vncviewer hudson-qe.rhq.rdu.redhat.com:3&lt;/code&gt;&lt;/LI&gt;&lt;/UL&gt;</description>
-      <remoteFS>/home/hudson/localslave3</remoteFS>
-      <numExecutors>1</numExecutors>
-      <mode>NORMAL</mode>
-      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.slaves.JNLPLauncher"/>
-      <label>selenium</label>
-      <nodeProperties>
-        <hudson.slaves.EnvironmentVariablesNodeProperty>
-          <envVars serialization="custom">
-            <unserializable-parents/>
-            <tree-map>
-              <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../../../../../slave/nodeProperties/hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator"/>
-              </default>
-              <int>1</int>
-              <string>SELENIUM_ADDRESS</string>
-              <string>hudson-qe.rhq.rdu.redhat.com:4443</string>
-            </tree-map>
-          </envVars>
-        </hudson.slaves.EnvironmentVariablesNodeProperty>
-      </nodeProperties>
-    </slave>
-    <slave>
-      <name>localslave4</name>
-      <description>&lt;br&gt;To use VNC to view jobs executing on this slave:&lt;UL&gt;&lt;LI&gt;Open your browser to &lt;a href=&apos;http://hudson-qe.rhq.rdu.redhat.com:6004&apos; target=&apos;_blank&apos;&gt;http://hudson-qe.rhq.rdu.redhat.com:6004&lt;/a&gt; (if you have a java plugin)&lt;/LI&gt; or &lt;LI&gt;On the command line type: &lt;code&gt;vncviewer hudson-qe.rhq.rdu.redhat.com:4&lt;/code&gt;&lt;/LI&gt;&lt;/UL&gt;</description>
-      <remoteFS>/home/hudson/localslave4</remoteFS>
-      <numExecutors>1</numExecutors>
-      <mode>NORMAL</mode>
-      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
-      <launcher class="hudson.slaves.JNLPLauncher"/>
-      <label>selenium</label>
-      <nodeProperties>
-        <hudson.slaves.EnvironmentVariablesNodeProperty>
-          <envVars serialization="custom">
-            <unserializable-parents/>
-            <tree-map>
-              <default>
-                <comparator class="hudson.util.CaseInsensitiveComparator"/>
-              </default>
-              <int>3</int>
-              <string>FUNC_HOSTNAME</string>
-              <string>127.0.0.1</string>
-              <string>SCP_USERNAME</string>
-              <string>hudson</string>
-              <string>SELENIUM_ADDRESS</string>
-              <string>hudson-qe.rhq.rdu.redhat.com:4444</string>
-            </tree-map>
-          </envVars>
-        </hudson.slaves.EnvironmentVariablesNodeProperty>
-      </nodeProperties>
-    </slave>
     <slave>
       <name>opos13.rhq.rdu.redhat.com01</name>
       <description>opos13.rhq.rdu.redhat.com01</description>
@@ -330,6 +227,7 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
         <string>overnight-test-all-groups-jon</string>
         <string>populate-data</string>
       </jobNames>
+      <jobFilters/>
       <columns>
         <hudson.views.StatusColumn/>
         <hudson.views.WeatherColumn/>
@@ -368,10 +266,10 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
       <jobNames class="tree-set">
         <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView/jobNames/comparator"/>
         <string>execute-any-group-rhq</string>
-        <string>install-master-disabled</string>
         <string>overnight-test-all-groups-rhq</string>
         <string>rhq-install-latest</string>
       </jobNames>
+      <jobFilters/>
       <columns>
         <hudson.views.StatusColumn/>
         <hudson.views.WeatherColumn/>
@@ -395,7 +293,6 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
         <string>AgentCommands</string>
         <string>Alerts</string>
-        <string>AlertSenderEmaiPlugin</string>
         <string>AlertSenderMicroblogPlugin</string>
         <string>AlertSenderSNMPPlugin</string>
         <string>AlertTemplates</string>
@@ -412,9 +309,10 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
         <string>GroupConfiguration</string>
         <string>GroupRoles</string>
         <string>HostsFile</string>
+        <string>InventoryControl</string>
         <string>JBossAS5Plugin</string>
         <string>JMS</string>
-        <string>LDAPLogin</string>
+        <string>LDAP</string>
         <string>ManualAdditionofInventory</string>
         <string>MetricSchedules</string>
         <string>MetricTemplates</string>
@@ -428,8 +326,11 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
         <string>SortTablesByColumns</string>
         <string>StartPageLinks</string>
         <string>Sudoers</string>
+        <string>Tomcat5Server</string>
+        <string>Tomcat6Server</string>
         <string>UserAdministration</string>
       </jobNames>
+      <jobFilters/>
       <columns>
         <hudson.views.StatusColumn/>
         <hudson.views.WeatherColumn/>
@@ -448,10 +349,13 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
       <filterQueue>false</filterQueue>
       <jobNames class="tree-set">
         <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView[3]/jobNames/comparator"/>
-        <string>bugfixes</string>
-        <string>gwt</string>
-        <string>master</string>
+        <string>ci-rhq-master</string>
+        <string>ci-rhq-master-ora</string>
+        <string>ci-rhq-release</string>
+        <string>ci-rhq-release-ora</string>
+        <string>tag-rhq-release</string>
       </jobNames>
+      <jobFilters/>
       <columns>
         <hudson.views.StatusColumn/>
         <hudson.views.WeatherColumn/>
@@ -486,15 +390,13 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
       <filterQueue>false</filterQueue>
       <jobNames class="tree-set">
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
-        <string>bugfixes</string>
         <string>candlepin</string>
-        <string>gwt</string>
-        <string>jon</string>
-        <string>master</string>
-        <string>master-ora</string>
+        <string>candlepin-schemadiff</string>
         <string>pulp-dev</string>
+        <string>pulp-integration</string>
         <string>python_candlepin</string>
       </jobNames>
+      <jobFilters/>
       <columns>
         <hudson.views.StatusColumn/>
         <hudson.views.WeatherColumn/>
@@ -509,23 +411,16 @@ The &lt;code&gt;agent_user&lt;/code&gt; is the id of the user running the agent 
       <owner class="hudson" reference="../../.."/>
       <name>Entitlement</name>
       <description>&lt;H3&gt;OVERVIEW:&lt;/H3&gt; &#xd;
-&lt;B&gt; subscription-manager-cli &lt;/B&gt; contains test cases from &lt;A HREF=https://tcms.engineering.redhat.com/plan/2105/&gt;CLI CASES&lt;/A&gt;&lt;BR&gt;&#xd;
+&lt;B&gt; subscription-manager-cli &lt;/B&gt; will execute automated test cases from &lt;A HREF=https://tcms.engineering.redhat.com/cases/?a=search&amp;product=157&amp;is_automated=1&amp;case_status=2&amp;=Search&gt;TCMS&lt;/A&gt;&lt;BR&gt;&#xd;
 &#xd;
 &lt;H3&gt; PREREQUISITE INSTRUCTIONS: &lt;/H3&gt; &#xd;
 &lt;UL&gt;&#xd;
 &lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://hudson-qe.rhq.rdu.redhat.com/auto-ssh/id_auto_dsa.pub&gt;this_publickey&lt;/A&gt; server_user@server.redhat.com&lt;/CODE&gt;  &lt;/LI&gt;&#xd;
 The &lt;code&gt;server_user&lt;/code&gt; is the id of the user running the server process.&#xd;
 &lt;LI&gt;&lt;CODE&gt; ssh-copy-id -i &lt;A HREF=http://hudson-qe.rhq.rdu.redhat.com/auto-ssh/id_auto_dsa.pub&gt;this_publickey&lt;/A&gt; agent_user@agent.redhat.com&lt;/CODE&gt;  &lt;/LI&gt;&#xd;
-&#xd;
 &lt;LI&gt;The &lt;code&gt;server&lt;/code&gt; and the &lt;code&gt;client&lt;/code&gt; must be the fully qualified domain name and resolvable by DNS.&lt;/LI&gt;&#xd;
-&#xd;
-&#xd;
 &lt;/UL&gt;&#xd;
-&#xd;
-&lt;H3&gt; VIEWING INSTRUCTIONS FOR EXECUTING JOBS: &lt;/H3&gt; &#xd;
-&lt;UL&gt;&#xd;
-&lt;LI&gt;Jobs that are currently being executed can be viewed in action using a VNC Viewer.  Click on the running localslave in the &lt;a href=http://hudson-qe.rhq.rdu.redhat.com:8080/computer/&gt;Build Executor Status&lt;/a&gt; and follow the links to open a viewer for that slave. &lt;/LI&gt;&#xd;
-&lt;/UL&gt;</description>
+</description>
       <filterExecutors>false</filterExecutors>
       <filterQueue>false</filterQueue>
       <jobNames class="tree-set">
@@ -535,12 +430,12 @@ The &lt;code&gt;server_user&lt;/code&gt; is the id of the user running the serve
         <string>IT-candlepin-utility</string>
         <string>IT-certificate-service</string>
         <string>IT-cp-services</string>
-        <string>subscription-manager-cli</string>
-        <string>subscription-manager-cli-cert-fte</string>
-        <string>subscription-manager-cli-prad.rdu</string>
-        <string>subscription-manager-cli-statler.usersys</string>
+        <string>subscription-manager-cli (IT)</string>
+        <string>subscription-manager-cli (OnPremises)</string>
         <string>subscription-manager-gui</string>
+        <string>subscription-manager-latest</string>
       </jobNames>
+      <jobFilters/>
       <columns>
         <hudson.views.StatusColumn/>
         <hudson.views.WeatherColumn/>
@@ -563,6 +458,7 @@ The &lt;code&gt;server_user&lt;/code&gt; is the id of the user running the serve
         <string>Grinder</string>
         <string>Grinder2</string>
       </jobNames>
+      <jobFilters/>
       <columns>
         <hudson.views.StatusColumn/>
         <hudson.views.WeatherColumn/>
@@ -580,8 +476,10 @@ The &lt;code&gt;server_user&lt;/code&gt; is the id of the user running the serve
       <filterQueue>false</filterQueue>
       <jobNames class="tree-set">
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
-        <string>jon</string>
+        <string>ci-jon-release</string>
+        <string>tag-jon-release</string>
       </jobNames>
+      <jobFilters/>
       <columns>
         <hudson.views.StatusColumn/>
         <hudson.views.WeatherColumn/>
@@ -593,11 +491,74 @@ The &lt;code&gt;server_user&lt;/code&gt; is the id of the user running the serve
         <de.fspengler.hudson.pview.ConsoleViewColumn/>
       </columns>
     </listView>
+    <listView>
+      <owner class="hudson" reference="../../.."/>
+      <name>Other</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <jobNames class="tree-set">
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+        <string>candlepin</string>
+        <string>pulp-dev</string>
+        <string>python_candlepin</string>
+      </jobNames>
+      <jobFilters/>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
+        <hudson.views.BuildButtonColumn/>
+        <org.tomfolga.PomModulesShortColumn>
+          <columnName>Maven Modules (Short)</columnName>
+          <showGroupId>false</showGroupId>
+          <showArtifactId>true</showArtifactId>
+          <showVersion>true</showVersion>
+        </org.tomfolga.PomModulesShortColumn>
+        <org.tomfolga.PomModulesVersionColumn>
+          <columnName>Maven Modules (Version)</columnName>
+          <showGroupId>false</showGroupId>
+          <showArtifactId>false</showArtifactId>
+          <showVersion>true</showVersion>
+        </org.tomfolga.PomModulesVersionColumn>
+        <org.tomfolga.PomDependenciesWithinGroupIdColumn>
+          <onlyWithinGroupId>true</onlyWithinGroupId>
+          <columnName>Maven Dependencies (within groupId)</columnName>
+        </org.tomfolga.PomDependenciesWithinGroupIdColumn>
+        <org.tomfolga.PomDependenciesColumn>
+          <onlyWithinGroupId>false</onlyWithinGroupId>
+          <columnName>Maven Dependencies</columnName>
+        </org.tomfolga.PomDependenciesColumn>
+        <org.tomfolga.PomModulesFullColumn>
+          <columnName>Maven Modules (Full)</columnName>
+          <showGroupId>true</showGroupId>
+          <showArtifactId>true</showArtifactId>
+          <showVersion>true</showVersion>
+        </org.tomfolga.PomModulesFullColumn>
+        <de.fspengler.hudson.pview.ConsoleViewColumn/>
+      </columns>
+    </listView>
   </views>
   <primaryView>All</primaryView>
   <slaveAgentPort>0</slaveAgentPort>
-  <label>maven</label>
+  <label>selenium maven</label>
   <nodeProperties/>
-  <globalNodeProperties/>
+  <globalNodeProperties>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents/>
+        <tree-map>
+          <default>
+            <comparator class="hudson.util.CaseInsensitiveComparator"/>
+          </default>
+          <int>1</int>
+          <string>SELENIUM_ADDRESS_PREFIX</string>
+          <string>hudson-qe.rhq.rdu.redhat.com:444</string>
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+  </globalNodeProperties>
   <disabledAdministrativeMonitors/>
 </hudson>

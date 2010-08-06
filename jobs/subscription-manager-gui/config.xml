@@ -1,55 +1,59 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>This suite executes an exhaustive set of tests against subscription-manager-cli based upon the following TCMS suite:&lt;BR/&gt;&#xd;
-&lt;a href=&quot;https://tcms.engineering.redhat.com/plan/2105/&quot;&gt;https://tcms.engineering.redhat.com/plan/2105/&lt;/a&gt;&lt;BR/&gt;&#xd;
-&lt;a href=&quot;https://engineering.redhat.com/trac/IntegratedMgmtQE/wiki/sm-stages&quot;&gt;Dependency Stages for CLI tests&lt;/a&gt;&lt;BR/&gt;&#xd;
-&lt;H3&gt; To View Results, click TestNG Report&lt;/H3&gt;&#xd;
-&lt;br&gt;&#xd;
+  <description>This suite executes an exhaustive set of tests against subscription-manager-gui based upon the following TCMS suite:&lt;BR/&gt;&#xd;
+&lt;a href=&quot;https://tcms.engineering.redhat.com/plan/2110/&quot;&gt;https://tcms.engineering.redhat.com/plan/2110/&lt;/a&gt;&lt;BR/&gt;&#xd;
+&lt;br/&gt;&#xd;
 &lt;H3&gt;MANUAL INSTRUCTIONS:&lt;/H3&gt; &#xd;
 &lt;UL&gt;&#xd;
 &lt;LI&gt; Click &apos;Build Now&apos; to manually begin a test run. &lt;/LI&gt;&#xd;
 &lt;LI&gt; From the list of fields, read their descriptions and set the values appropriate for your testing. &lt;/LI&gt;&#xd;
 &lt;LI&gt; Then click the &apos;Build&apos; button. &lt;/LI&gt;&#xd;
-&lt;/UL&gt;</description>
+&lt;/UL&gt;&#xd;
+&lt;br/&gt;&#xd;
+</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
-      <permission>hudson.model.Item.Workspace:anonymous</permission>
       <permission>hudson.model.Item.Read:anonymous</permission>
       <permission>hudson.model.Item.Build:anonymous</permission>
     </hudson.security.AuthorizationMatrixProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
-        <hudson.model.ChoiceParameterDefinition>
-          <name>TEST_SCRIPT</name>
-          <description>XML file containing the test script one wishes to execute (sm-tests.xml, sprint&lt;x&gt;-script.xml, etc.)</description>
-          <choices class="java.util.Arrays$ArrayList">
-            <a class="string-array">
-              <string>sm-tests.xml</string>
-              <string>sprint9-script.xml</string>
-            </a>
-          </choices>
-        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>CLIENT_HOSTNAME</name>
+          <description>hostname of client running VNC server/funcd</description>
+          <defaultValue>oldceremony.rhndev.redhat.com</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>CLIENT_LOCALUSER</name>
+          <description>local user on client to run test under</description>
+          <defaultValue>rhsmtest</defaultValue>
+        </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>RHSM_RPM</name>
           <description>url to latest subscription-manager RPM</description>
           <defaultValue>http://gibson.usersys.redhat.com/latestrpm/?arch=i686&amp;rpmname=subscription-manager</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
-          <name>CLIENT_HOSTNAME</name>
-          <description>hostname of the client running subscription-manager-cli</description>
-          <defaultValue>oldceremony.rhndev.redhat.com</defaultValue>
+          <name>RHSM_GUI_RPM</name>
+          <description>url to latest subscription-manager-gnome RPM</description>
+          <defaultValue>http://gibson.usersys.redhat.com/latestrpm/?arch=i686&amp;rpmname=subscription-manager-gnome&amp;basegrp=subscription-manager</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>CLIENT_USERNAME</name>
           <description>username used to register to a Candlepin server</description>
-          <defaultValue>jsomara</defaultValue>
+          <defaultValue>isu-sukhoy</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>CLIENT_PASSWORD</name>
           <description>password used to register to a Candlepin server</description>
-          <defaultValue>HARDCODED</defaultValue>
+          <defaultValue>redhat</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>SERVER_HOSTNAME</name>
+          <description>hostname of a functional Candlepin server</description>
+          <defaultValue>candlepin1.devlab.phx1.redhat.com</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>SERVER_PORT</name>
@@ -57,14 +61,19 @@
           <defaultValue>443</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
-          <name>CLIENT_CERTFREQUENCY</name>
-          <description>default certificate refresh frequency as set in /etc/rhsm/rhsm.conf (you can usually leave this one alone)</description>
-          <defaultValue>240</defaultValue>
+          <name>RHSM_LOCALCERT</name>
+          <description>URL where one can download a valid Candlepin entitlement certificate</description>
+          <defaultValue>http://git.rhndev.redhat.com/git/?p=automatjon.git&amp;a=blob_plain&amp;f=subscription-manager-gui/testcerts/product/rhds.pem&amp;hb=HEAD</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>RHSM_REGTOKEN</name>
+          <description>Registration token one can use to register to a Candlepin server</description>
+          <defaultValue>1</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>SERVER_BASEURL</name>
           <description>base URL to Candlepin server as set in /etc/rhsm/rhsm.conf (you can usually leave this one alone)</description>
-          <defaultValue>http://redhat.com/content</defaultValue>
+          <defaultValue>http:\/\/redhat.com\/content</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -83,11 +92,10 @@
   <builders>
     <hudson.tasks.Shell>
       <command>#!/bin/bash -xe
-
 cd $WORKSPACE
 if [ -d automatjon ]; then 
  cd automatjon
- git clean -df
+ git clean -dxf
  git pull
 else
  git clone git://git.rhndev.redhat.com/automatjon
@@ -97,58 +105,59 @@ cd $WORKSPACE
 
 if [ -d webui-framework ]; then 
  cd webui-framework
- git clean -df
+ git clean -dxf
  git pull
 else
  git clone git://github.com/weissjeffm/webui-framework.git
 fi
 
-chmod 600 $WORKSPACE/automatjon/jon/.ssh/id*</command>
+chmod 600 $WORKSPACE/automatjon/jon/.ssh/id*
+
+cd $WORKSPACE/automatjon
+rm -rf smgui.tgz sm-tests.properties subscription-manager-gui/test-output/ subscription-manager-gui/results.tgz
+tar cvzf smgui.tgz subscription-manager-gui/
+
+echo &quot;#auto-generated sm-tests.properties via Hudson
+rhsm.client.username: $CLIENT_USERNAME
+rhsm.client.password: $CLIENT_PASSWORD
+rhsm.client.regtoken: $RHSM_REGTOKEN
+rhsm.server.hostname: $SERVER_HOSTNAME
+rhsm.server.port: $SERVER_PORT
+rhsm.server.baseurl: $SERVER_BASEURL
+rhsm.rpm: $RHSM_RPM
+rhsm.gui.rpm: $RHSM_GUI_RPM
+rhsm.insecure: true
+rhsm.localcert: $RHSM_LOCALCERT
+&quot; &gt; $WORKSPACE/sm-tests.properties
+
+sudo func &quot;$CLIENT_HOSTNAME&quot; call command run &quot;rm -rf /tmp/smgui.tgz /tmp/subscription-manager-gui&quot;
+scp $WORKSPACE/automatjon/smgui.tgz $CLIENT_LOCALUSER@$CLIENT_HOSTNAME:/tmp/smgui.tgz
+scp $WORKSPACE/sm-tests.properties $CLIENT_LOCALUSER@$CLIENT_HOSTNAME:/tmp/sm-tests.properties
+sudo func &quot;$CLIENT_HOSTNAME&quot; call command run &quot;tar -C /tmp -xvzf /tmp/smgui.tgz&quot;
+sudo func &quot;$CLIENT_HOSTNAME&quot; call command run &quot;mkdir /tmp/subscription-manager-gui/test-output&quot;
+sudo func &quot;$CLIENT_HOSTNAME&quot; call command run &quot;touch /tmp/subscription-manager-gui/test-output/smgui-results.xml&quot;
+sudo func &quot;$CLIENT_HOSTNAME&quot; call command run &quot;sudo nosetests --with-xunit --xunit-file=/tmp/subscription-manager-gui/test-output/smgui-results.xml /tmp/subscription-manager-gui/*tests.py&quot;
+sudo func &quot;$CLIENT_HOSTNAME&quot; call command run &quot;tar cvzf /tmp/subscription-manager-gui/results.tgz /tmp/subscription-manager-gui/test-output/*&quot;
+
+mkdir -p $WORKSPACE/automatjon/subscription-manager-gui/test-output/
+scp $CLIENT_LOCALUSER@$CLIENT_HOSTNAME:/tmp/subscription-manager-gui/results.tgz $WORKSPACE/automatjon/subscription-manager-gui/test-output/results.tgz
+cd $WORKSPACE/automatjon/subscription-manager-gui/test-output/
+tar xvzf results.tgz
+mv $WORKSPACE/automatjon/subscription-manager-gui/test-output/tmp/subscription-manager-gui/test-output/* .
+rm -rf $WORKSPACE/automatjon/subscription-manager-gui/test-output/tmp/
+touch $WORKSPACE/automatjon/subscription-manager-gui/test-output/smgui-results.xml</command>
     </hudson.tasks.Shell>
-    <hudson.tasks.Ant>
-      <targets>compile</targets>
-      <antName>(Default)</antName>
-      <buildFile>$WORKSPACE/automatjon/sm/build.xml</buildFile>
-    </hudson.tasks.Ant>
-    <hudson.plugins.groovy.Groovy>
-      <scriptSource class="hudson.plugins.groovy.FileScriptSource">
-        <scriptFile>webui-framework/groovy/src/hudson.groovy</scriptFile>
-      </scriptSource>
-      <groovyName>(Default)</groovyName>
-      <parameters>-Drhsm.client.hostname=$CLIENT_HOSTNAME
--Drhsm.client.username=$CLIENT_USERNAME
--Drhsm.client.password=redhat
--Drhsm.client.certfrequency=$CLIENT_CERTFREQUENCY
--Drhsm.server.hostname=cert-fte-candlepin.devlab.redhat.com
--Drhsm.server.port=$SERVER_PORT
--Drhsm.server.baseurl=$SERVER_BASEURL
--Drhsm.rpm=$RHSM_RPM
--Drhsm.sshkey.private=automatjon/jon/.ssh/id_auto_dsa
--Drhsm.sshkey.passphrase=dog8code</parameters>
-      <scriptParameters>automatjon/sm/src/com/redhat/qe/sm/tests/$TEST_SCRIPT</scriptParameters>
-      <properties>testng.project.dir=automatjon/sm</properties>
-    </hudson.plugins.groovy.Groovy>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>automatjon/sm/test-output/**/*</artifacts>
+      <artifacts>automatjon/subscription-manager-gui/test-output/**</artifacts>
       <latestOnly>false</latestOnly>
     </hudson.tasks.ArtifactArchiver>
     <hudson.tasks.junit.JUnitResultArchiver>
-      <testResults>automatjon/sm/test-output-junit/*.xml</testResults>
+      <testResults>automatjon/subscription-manager-gui/test-output/smgui-results.xml</testResults>
+      <keepLongStdio>false</keepLongStdio>
       <testDataPublishers/>
     </hudson.tasks.junit.JUnitResultArchiver>
-    <htmlpublisher.HtmlPublisher>
-      <reportTargets>
-        <htmlpublisher.HtmlPublisherTarget>
-          <reportName>TestNG Report</reportName>
-          <reportDir>automatjon/sm/test-output/html/</reportDir>
-          <reportFiles>index.html</reportFiles>
-          <keepAll>true</keepAll>
-          <wrapperName>htmlpublisher-wrapper.html</wrapperName>
-        </htmlpublisher.HtmlPublisherTarget>
-      </reportTargets>
-    </htmlpublisher.HtmlPublisher>
     <hudson.plugins.emailext.ExtendedEmailPublisher>
       <recipientList>ssalevan@redhat.com, spandey@redhat.com, whayutin@redhat.com</recipientList>
       <configuredTriggers>
@@ -172,7 +181,7 @@ chmod 600 $WORKSPACE/automatjon/jon/.ssh/id*</command>
             <sendToRecipientList>true</sendToRecipientList>
           </email>
         </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
-        <hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
+        <hudson.plugins.emailext.plugins.trigger.StillUnstableTrigger>
           <email>
             <recipientList></recipientList>
             <subject>$PROJECT_DEFAULT_SUBJECT</subject>
@@ -181,12 +190,11 @@ chmod 600 $WORKSPACE/automatjon/jon/.ssh/id*</command>
             <includeCulprits>false</includeCulprits>
             <sendToRecipientList>true</sendToRecipientList>
           </email>
-        </hudson.plugins.emailext.plugins.trigger.SuccessTrigger>
+        </hudson.plugins.emailext.plugins.trigger.StillUnstableTrigger>
       </configuredTriggers>
       <contentType>default</contentType>
-      <defaultSubject>cert-fte-candlepin: latest entitlement-qe test execution </defaultSubject>
-      <defaultContent>$DEFAULT_CONTENT
-</defaultContent>
+      <defaultSubject>subscription-manager-gui: latest entitlement-qe test execution </defaultSubject>
+      <defaultContent>$DEFAULT_CONTENT</defaultContent>
     </hudson.plugins.emailext.ExtendedEmailPublisher>
   </publishers>
   <buildWrappers/>

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <hudson.plugins.groovy.Groovy_-DescriptorImpl>
   <instanceCounter>
-    <value>1923</value>
+    <value>2066</value>
   </instanceCounter>
   <installations>
     <hudson.plugins.groovy.Groovy_-GroovyInstallation>

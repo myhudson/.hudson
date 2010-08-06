@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Builds and tags an RHQ release&#xd;
+</description>
+  <logRotator>
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>10</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.security.AuthorizationMatrixProperty>
+      <permission>hudson.model.Run.Delete:jshaughn</permission>
+      <permission>hudson.model.Run.Delete:ips</permission>
+      <permission>hudson.model.Item.Workspace:jshaughn</permission>
+      <permission>hudson.model.Item.Workspace:ips</permission>
+      <permission>hudson.model.Item.Read:anonymous</permission>
+      <permission>hudson.model.Item.Read:jshaughn</permission>
+      <permission>hudson.model.Item.Read:ips</permission>
+      <permission>hudson.model.Item.Configure:jshaughn</permission>
+      <permission>hudson.model.Item.Configure:ips</permission>
+      <permission>hudson.model.Item.Release:jshaughn</permission>
+      <permission>hudson.model.Item.Release:ips</permission>
+      <permission>hudson.model.Item.Build:jshaughn</permission>
+      <permission>hudson.model.Item.Build:ips</permission>
+      <permission>hudson.model.Run.Update:jshaughn</permission>
+      <permission>hudson.model.Run.Update:ips</permission>
+      <permission>hudson.model.Item.Delete:ips</permission>
+    </hudson.security.AuthorizationMatrixProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>RELEASE_VERSION</name>
+          <description>the release version (e.g. 3.0.0.GA)
+</description>
+          <defaultValue>3.0.0.GA_QA</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>DEVELOPMENT_VERSION</name>
+          <description>the next development version (e.g. 3.0.0-SNAPSHOT)
+</description>
+          <defaultValue>3.0.0-SNAPSHOT</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>RELEASE_BRANCH</name>
+          <description>the name of the release branch (e.g. release-3.0.0)</description>
+          <defaultValue>release-3.0.0</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>MODE</name>
+          <description>the mode in which to run this script - either &apos;test&apos; (if tag already exists, delete and then recreate it; do not publish the Maven artifacts to the JBoss repo) or &apos;production&apos; (f tag already exists, abort; publish the Maven artifacts to the JBoss repo)
+</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>test</string>
+              <string>production</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>RELEASE_TYPE</name>
+          <description>the type of the release (&apos;enterprise&apos; for a release to be included in a JON release, and &apos;community&apos; for a release to be released to the general public
+</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>enterprise</string>
+              <string>community</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>JBOSS_ORG_USERNAME</name>
+          <description>jboss.org username</description>
+          <defaultValue>jonadmin</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.PasswordParameterDefinition>
+          <name>JBOSS_ORG_PASSWORD</name>
+          <description>jboss.org password
+</description>
+          <defaultValue>dXCl+kj20/EIiIk6l8uQ8A==</defaultValue>
+        </hudson.model.PasswordParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM">
+    <configVersion>1</configVersion>
+    <remoteRepositories>
+      <org.spearce.jgit.transport.RemoteConfig>
+        <string>origin</string>
+        <int>5</int>
+        <string>fetch</string>
+        <string>+refs/heads/*:refs/remotes/origin/*</string>
+        <string>receivepack</string>
+        <string>git-upload-pack</string>
+        <string>uploadpack</string>
+        <string>git-upload-pack</string>
+        <string>url</string>
+        <string>ssh://ips@git.fedorahosted.org/git/rhq/rhq.git</string>
+        <string>tagopt</string>
+        <string></string>
+      </org.spearce.jgit.transport.RemoteConfig>
+    </remoteRepositories>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>origin/$RELEASE_BRANCH</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <mergeOptions/>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <authorOrCommitter>false</authorOrCommitter>
+    <clean>false</clean>
+    <wipeOutWorkspace>false</wipeOutWorkspace>
+    <buildChooser class="hudson.plugins.git.util.DefaultBuildChooser"/>
+    <gitTool>Default</gitTool>
+    <submoduleCfg class="list"/>
+  </scm>
+  <assignedNode>master</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector"/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>JAVA_HOME=&quot;/mnt/qa/tools/opt/jdk1.6.0_21&quot;
+JAVA5_HOME=&quot;/mnt/qa/tools/opt/jdk1.5.0_22&quot;
+M2_HOME=&quot;/mnt/qa/tools/opt/maven-2.1.0&quot;
+MAVEN_OPTS=&quot;-Xms512M -Xmx1024M -XX:PermSize=128M -XX:MaxPermSize=256M&quot;
+export JAVA_HOME JAVA5_HOME M2_HOME MAVEN_OPTS
+
+GIT_USERNAME=&quot;ips&quot;
+bash release.sh &quot;$RELEASE_TYPE&quot; &quot;$RELEASE_VERSION&quot; &quot;$DEVELOPMENT_VERSION&quot; &quot;$RELEASE_BRANCH&quot; &quot;$GIT_USERNAME&quot; &quot;$MODE&quot;
+</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>**/target/*.zip</artifacts>
+      <latestOnly>false</latestOnly>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.tasks.BuildTrigger>
+      <childProjects>tag-jon-release</childProjects>
+      <threshold>
+        <name>SUCCESS</name>
+        <ordinal>0</ordinal>
+        <color>BLUE</color>
+      </threshold>
+    </hudson.tasks.BuildTrigger>
+    <hudson.tasks.Mailer>
+      <recipients>ips@redhat.com jshaughn@redhat.com</recipients>
+      <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
+      <sendToIndividuals>false</sendToIndividuals>
+    </hudson.tasks.Mailer>
+  </publishers>
+  <buildWrappers/>
+</project>

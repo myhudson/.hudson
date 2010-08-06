@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>installs the latest build rhq master branch</description>
+  <description>installs the latest jon build (the default parameters point to project tag-jon-release)&lt;br&gt;&#xd;
+Reference: &lt;a href=http://jon01.qa.atl2.redhat.com:8080/display/DEV/JON+Hudson&gt;http://jon01.qa.atl2.redhat.com:8080/display/DEV/JON+Hudson&lt;/a&gt;</description>
   <logRotator>
     <daysToKeep>30</daysToKeep>
     <numToKeep>-1</numToKeep>
@@ -24,12 +25,12 @@
         <hudson.model.StringParameterDefinition>
           <name>JON_URL</name>
           <description>URL of where the target machine can download the jon/rhq build</description>
-          <defaultValue>http://hudson-qe.rhq.rdu.redhat.com:8080/view/JON/job/jon/lastSuccessfulBuild/artifact/jon/dist/server/target/jon-server-2.4.0-SNAPSHOT.zip</defaultValue>
+          <defaultValue>http://hudson-qe.rhq.rdu.redhat.com:8080/view/JON/job/tag-jon-release/lastSuccessfulBuild/artifact/jon/tag/jon/dist/server/target/jon-server-2.4.0.GA.zip</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>JON_PLUGINPACK_URLS</name>
           <description>Where the target machine can download plugin packs (comma separated if more than one)</description>
-          <defaultValue>http://hudson-qe.rhq.rdu.redhat.com:8080/view/JON/job/jon/lastSuccessfulBuild/artifact/jon/dist/plugin-packs/eap/target/jon-plugin-pack-eap-2.4.0-SNAPSHOT.zip,http://hudson-qe.rhq.rdu.redhat.com:8080/view/JON/job/jon/lastSuccessfulBuild/artifact/jon/dist/plugin-packs/ews/target/jon-plugin-pack-ews-2.4.0-SNAPSHOT.zip,http://hudson-qe.rhq.rdu.redhat.com:8080/view/JON/job/jon/lastSuccessfulBuild/artifact/jon/dist/plugin-packs/soa/target/jon-plugin-pack-soa-2.4.0-SNAPSHOT.zip</defaultValue>
+          <defaultValue>http://hudson-qe.rhq.rdu.redhat.com:8080/view/JON/job/tag-jon-release/lastSuccessfulBuild/artifact/jon/tag/jon/dist/plugin-packs/eap/target/jon-plugin-pack-eap-2.4.0.GA.zip,http://hudson-qe.rhq.rdu.redhat.com:8080/view/JON/job/tag-jon-release/lastSuccessfulBuild/artifact/jon/tag/jon/dist/plugin-packs/ews/target/jon-plugin-pack-ews-2.4.0.GA.zip,http://hudson-qe.rhq.rdu.redhat.com:8080/view/JON/job/tag-jon-release/lastSuccessfulBuild/artifact/jon/tag/jon/dist/plugin-packs/soa/target/jon-plugin-pack-soa-2.4.0.GA.zip</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>JON_USER</name>
@@ -50,8 +51,8 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector">
     <hudson.triggers.TimerTrigger>
-      <spec>30 22 * * *
-#10:30pm daily</spec>
+      <spec>30 19 * * *
+#7:30pm daily</spec>
     </hudson.triggers.TimerTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>

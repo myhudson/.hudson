@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <maven2-moduleset>
   <actions/>
-  <description>&lt;h2&gt;RHQ master branch CI Build - Builds RHQ Oracle XE 10g&lt;/h2&gt;&#xd;
+  <description>&lt;h2&gt;RHQ release-3.0.0 branch CI Build - Builds RHQ Oracle XE 10g&lt;/h2&gt;&#xd;
 &#xd;
 &lt;h4&gt;No artifacts published by this build. It is Java5 API enforcement and unit test execution against Oracle.&lt;/h4&gt;&#xd;
 &#xd;
@@ -19,30 +19,30 @@
       <permission>hudson.model.Run.Update:ccrouch</permission>
       <permission>hudson.model.Run.Update:jshaughn</permission>
       <permission>hudson.model.Run.Update:ips</permission>
-      <permission>hudson.model.Item.Read:ccrouch</permission>
-      <permission>hudson.model.Item.Read:anonymous</permission>
-      <permission>hudson.model.Item.Read:jshaughn</permission>
-      <permission>hudson.model.Item.Read:ips</permission>
-      <permission>hudson.model.Item.Delete:ccrouch</permission>
-      <permission>hudson.model.Item.Delete:jshaughn</permission>
-      <permission>hudson.model.Item.Delete:ips</permission>
-      <permission>hudson.model.Item.Build:ccrouch</permission>
-      <permission>hudson.model.Item.Build:anonymous</permission>
-      <permission>hudson.model.Item.Build:jshaughn</permission>
-      <permission>hudson.model.Item.Build:ips</permission>
       <permission>hudson.model.Run.Delete:ccrouch</permission>
       <permission>hudson.model.Run.Delete:jshaughn</permission>
       <permission>hudson.model.Run.Delete:ips</permission>
-      <permission>hudson.model.Item.Configure:ccrouch</permission>
-      <permission>hudson.model.Item.Configure:jshaughn</permission>
-      <permission>hudson.model.Item.Configure:ips</permission>
       <permission>hudson.model.Item.Release:ccrouch</permission>
       <permission>hudson.model.Item.Release:jshaughn</permission>
       <permission>hudson.model.Item.Release:ips</permission>
+      <permission>hudson.model.Item.Configure:ccrouch</permission>
+      <permission>hudson.model.Item.Configure:jshaughn</permission>
+      <permission>hudson.model.Item.Configure:ips</permission>
       <permission>hudson.model.Item.Workspace:ccrouch</permission>
       <permission>hudson.model.Item.Workspace:anonymous</permission>
       <permission>hudson.model.Item.Workspace:jshaughn</permission>
       <permission>hudson.model.Item.Workspace:ips</permission>
+      <permission>hudson.model.Item.Delete:ccrouch</permission>
+      <permission>hudson.model.Item.Delete:jshaughn</permission>
+      <permission>hudson.model.Item.Delete:ips</permission>
+      <permission>hudson.model.Item.Read:ccrouch</permission>
+      <permission>hudson.model.Item.Read:anonymous</permission>
+      <permission>hudson.model.Item.Read:jshaughn</permission>
+      <permission>hudson.model.Item.Read:ips</permission>
+      <permission>hudson.model.Item.Build:ccrouch</permission>
+      <permission>hudson.model.Item.Build:anonymous</permission>
+      <permission>hudson.model.Item.Build:jshaughn</permission>
+      <permission>hudson.model.Item.Build:ips</permission>
     </hudson.security.AuthorizationMatrixProperty>
   </properties>
   <scm class="hudson.plugins.git.GitSCM">
@@ -65,7 +65,7 @@
     </remoteRepositories>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>origin/master</name>
+        <name>origin/release-3.0.0</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <mergeOptions/>
@@ -78,13 +78,19 @@
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector"/>
+  <triggers class="vector">
+    <hudson.triggers.TimerTrigger>
+      <spec># every day at 2am
+0 2 * * *
+</spec>
+    </hudson.triggers.TimerTrigger>
+  </triggers>
   <concurrentBuild>false</concurrentBuild>
   <rootModule>
     <groupId>org.rhq</groupId>
     <artifactId>rhq-parent</artifactId>
   </rootModule>
-  <goals>--settings=settings.xml -P$JOB_NAME,enterprise,ojdbc-driver -Dpackage-connectors -Dexclude-webdav -Ddbsetup  -Djava5.home=/usr/java/jdk1.5.0_22/jre clean install</goals>
+  <goals>--settings=settings.xml -P$JOB_NAME,enterprise,ojdbc-driver -Dexclude-webdav -Ddbsetup  -Djava5.home=/usr/java/jdk1.5.0_22/jre clean install</goals>
   <defaultGoals>install</defaultGoals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>

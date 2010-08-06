@@ -1,44 +1,54 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <maven2-moduleset>
   <actions/>
-  <description>Continuous Build - Builds RHQ &apos;gwt&apos; branch on Postgres 8.4&#xd;
+  <description>&lt;h2&gt;RHQ release branch CI Build - Builds RHQ Distro with Postgres 8.4&lt;/h2&gt;&#xd;
+&#xd;
+&lt;h4&gt;Current Release: 3.0.0&#xd;
+&#xd;
+&lt;h4&gt;Shares a repo with the ci-jon-release (${HOME}/.m2/release-repository) build so that jon can be built off of this build.&lt;/h4&gt;&#xd;
+&#xd;
+&lt;h5&gt;maintained by &lt;a href=&quot;mailto:ips@redhat.com&quot;&gt;Ian Springer&lt;/a&gt;, &lt;a href=&quot;mailto:jshaughn@redhat.com&quot;&gt;Jay Shaughnessy&lt;/a&gt; and &lt;a href=&quot;mailto:jweiss@redhat.com&quot;&gt;Jeff Weiss&lt;/a&gt;&lt;/h5&gt;&#xd;
 </description>
   <logRotator>
-    <daysToKeep>-1</daysToKeep>
-    <numToKeep>5</numToKeep>
-    <artifactDaysToKeep>-1</artifactDaysToKeep>
-    <artifactNumToKeep>5</artifactNumToKeep>
+    <daysToKeep>30</daysToKeep>
+    <numToKeep>10</numToKeep>
+    <artifactDaysToKeep>20</artifactDaysToKeep>
+    <artifactNumToKeep>50</artifactNumToKeep>
   </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
-      <permission>hudson.model.Item.Build:ccrouch</permission>
-      <permission>hudson.model.Item.Build:anonymous</permission>
-      <permission>hudson.model.Item.Build:jshaughn</permission>
-      <permission>hudson.model.Item.Build:ips</permission>
-      <permission>hudson.model.Run.Delete:ccrouch</permission>
-      <permission>hudson.model.Run.Delete:jshaughn</permission>
-      <permission>hudson.model.Run.Delete:ips</permission>
-      <permission>hudson.model.Item.Release:ccrouch</permission>
-      <permission>hudson.model.Item.Release:jshaughn</permission>
-      <permission>hudson.model.Item.Release:ips</permission>
       <permission>hudson.model.Item.Workspace:ccrouch</permission>
       <permission>hudson.model.Item.Workspace:anonymous</permission>
       <permission>hudson.model.Item.Workspace:jshaughn</permission>
+      <permission>hudson.model.Item.Workspace:jsanda</permission>
       <permission>hudson.model.Item.Workspace:ips</permission>
-      <permission>hudson.model.Item.Delete:ccrouch</permission>
-      <permission>hudson.model.Item.Delete:jshaughn</permission>
-      <permission>hudson.model.Item.Delete:ips</permission>
+      <permission>hudson.model.Run.Delete:ccrouch</permission>
+      <permission>hudson.model.Run.Delete:jshaughn</permission>
+      <permission>hudson.model.Run.Delete:ips</permission>
+      <permission>hudson.model.Item.Configure:ccrouch</permission>
+      <permission>hudson.model.Item.Configure:jshaughn</permission>
+      <permission>hudson.model.Item.Configure:jsanda</permission>
+      <permission>hudson.model.Item.Configure:ips</permission>
       <permission>hudson.model.Item.Read:ccrouch</permission>
       <permission>hudson.model.Item.Read:anonymous</permission>
       <permission>hudson.model.Item.Read:jshaughn</permission>
+      <permission>hudson.model.Item.Read:jsanda</permission>
       <permission>hudson.model.Item.Read:ips</permission>
+      <permission>hudson.model.Item.Build:ccrouch</permission>
+      <permission>hudson.model.Item.Build:anonymous</permission>
+      <permission>hudson.model.Item.Build:jshaughn</permission>
+      <permission>hudson.model.Item.Build:jsanda</permission>
+      <permission>hudson.model.Item.Build:ips</permission>
+      <permission>hudson.model.Item.Delete:ccrouch</permission>
+      <permission>hudson.model.Item.Delete:jshaughn</permission>
+      <permission>hudson.model.Item.Delete:ips</permission>
       <permission>hudson.model.Run.Update:ccrouch</permission>
       <permission>hudson.model.Run.Update:jshaughn</permission>
       <permission>hudson.model.Run.Update:ips</permission>
-      <permission>hudson.model.Item.Configure:ccrouch</permission>
-      <permission>hudson.model.Item.Configure:jshaughn</permission>
-      <permission>hudson.model.Item.Configure:ips</permission>
+      <permission>hudson.model.Item.Release:ccrouch</permission>
+      <permission>hudson.model.Item.Release:jshaughn</permission>
+      <permission>hudson.model.Item.Release:ips</permission>
     </hudson.security.AuthorizationMatrixProperty>
   </properties>
   <scm class="hudson.plugins.git.GitSCM">
@@ -61,13 +71,16 @@
     </remoteRepositories>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>origin/gwt</name>
+        <name>origin/release-3.0.0</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <mergeOptions/>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <authorOrCommitter>false</authorOrCommitter>
     <clean>false</clean>
-    <choosingStrategy>Default</choosingStrategy>
+    <wipeOutWorkspace>false</wipeOutWorkspace>
+    <buildChooser class="hudson.plugins.git.util.DefaultBuildChooser"/>
+    <gitTool>Default</gitTool>
     <submoduleCfg class="list"/>
   </scm>
   <assignedNode>opos13.rhq.rdu.redhat.com01</assignedNode>
@@ -75,11 +88,10 @@
   <disabled>false</disabled>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector">
-    <hudson.triggers.TimerTrigger>
-      <spec>30 13 * * 1-5</spec>
-    </hudson.triggers.TimerTrigger>
     <hudson.triggers.SCMTrigger>
-      <spec>*/15 * * * *</spec>
+      <spec># every 5 minutes
+*/5 * * * *
+</spec>
     </hudson.triggers.SCMTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
@@ -87,11 +99,11 @@
     <groupId>org.rhq</groupId>
     <artifactId>rhq-parent</artifactId>
   </rootModule>
-  <goals>--settings=settings.xml -P$JOB_NAME,enterprise -Ddbreset clean install</goals>
+  <goals>--settings settings.xml --activate-profiles $JOB_NAME,enterprise,dist --errors -Ddbreset -Dmaven.repo.local=${HOME}/.m2/release-repository clean install</goals>
   <defaultGoals>install</defaultGoals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>
-  <usePrivateRepository>true</usePrivateRepository>
+  <usePrivateRepository>false</usePrivateRepository>
   <ignoreUpstremChanges>false</ignoreUpstremChanges>
   <archivingDisabled>true</archivingDisabled>
   <reporters>
@@ -106,11 +118,12 @@
       <artifacts>modules/enterprise/server/container/target/rhq-server*.zip,modules/rhq-plugin-pack*.zip</artifacts>
       <latestOnly>false</latestOnly>
     </hudson.tasks.ArtifactArchiver>
-    <hudson.plugins.chucknorris.CordellWalkerRecorder>
-      <factGenerator/>
-    </hudson.plugins.chucknorris.CordellWalkerRecorder>
   </publishers>
   <buildWrappers>
+    <hudson.plugins.setenv.SetEnvBuildWrapper>
+      <localVarText>LANG=en_US.iso88591
+</localVarText>
+    </hudson.plugins.setenv.SetEnvBuildWrapper>
     <hudson.plugins.m2extrasteps.M2ExtraStepsWrapper>
       <preBuildSteps>
         <hudson.tasks.Shell>

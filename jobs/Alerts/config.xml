@@ -14,8 +14,8 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
-      <permission>hudson.model.Item.Read:anonymous</permission>
       <permission>hudson.model.Item.Workspace:anonymous</permission>
+      <permission>hudson.model.Item.Read:anonymous</permission>
       <permission>hudson.model.Item.Build:anonymous</permission>
     </hudson.security.AuthorizationMatrixProperty>
     <hudson.model.ParametersDefinitionProperty>
@@ -32,7 +32,7 @@
         <hudson.model.StringParameterDefinition>
           <name>SERVER_URL</name>
           <description>&lt;b&gt;&lt;big&gt;URL to your RHQ server: http://yourserver.com:7080&lt;/big&gt;&lt;/b&gt;</description>
-          <defaultValue>http://auto-rhq.usersys.redhat.com:7080</defaultValue>
+          <defaultValue>http://auto-rhq01.usersys.redhat.com:7080</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.ChoiceParameterDefinition>
           <name>VERSION</name>
@@ -111,7 +111,7 @@ chmod 600 $WORKSPACE/automatjon/jon/.ssh/id*</command>
 -Dtestng.outputdir=automatjon/jon/test-output
 -Dselenium.screenshot.dir=automatjon/jon/test-output/screenshots
 -Dselenium.screenshot.link.path=../artifact/automatjon/jon/test-output/screenshots
--Dselenium.address=$SELENIUM_ADDRESS
+-Dselenium.address=$SELENIUM_ADDRESS_PREFIX$EXECUTOR_NUMBER
 -Dselenium.screenshot.dir=automatjon/jon/test-output/screenshots</parameters>
       <scriptParameters>automatjon/jon/src/com/redhat/qe/rhq30/tests/functional-testng.xml $TEST_GROUP</scriptParameters>
       <properties></properties>

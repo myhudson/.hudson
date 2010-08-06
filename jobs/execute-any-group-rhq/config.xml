@@ -58,6 +58,8 @@
               <string>Sort Tables By Columns</string>
               <string>Agent Commands</string>
               <string>JBossAS5 Plugin</string>
+              <string>Tomcat5 Server</string>
+              <string>Tomcat6 Server</string>
               <string>JMS</string>
               <string>Server Side Plugin Container</string>
               <string>Alert Sender SNMP Plugin</string>
@@ -145,7 +147,7 @@ chmod 600 $WORKSPACE/automatjon/jon/.ssh/id*</command>
 -Djon.server.user=$SERVER_USER
 -Djon.agent.user=$AGENT_USER
 -Dtestng.outputdir=automatjon/jon/test-output
--Dselenium.address=$SELENIUM_ADDRESS
+-Dselenium.address=$SELENIUM_ADDRESS_PREFIX$EXECUTOR_NUMBER
 -Dselenium.screenshot.dir=automatjon/jon/test-output/screenshots</parameters>
       <scriptParameters>automatjon/jon/src/com/redhat/qe/rhq30/tests/functional-testng.xml $TEST_GROUP </scriptParameters>
       <properties></properties>
