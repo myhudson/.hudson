@@ -12,22 +12,29 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
-      <permission>hudson.model.Run.Delete:jshaughn</permission>
-      <permission>hudson.model.Run.Delete:ips</permission>
-      <permission>hudson.model.Item.Workspace:jshaughn</permission>
-      <permission>hudson.model.Item.Workspace:ips</permission>
-      <permission>hudson.model.Item.Read:anonymous</permission>
-      <permission>hudson.model.Item.Read:jshaughn</permission>
-      <permission>hudson.model.Item.Read:ips</permission>
-      <permission>hudson.model.Item.Configure:jshaughn</permission>
-      <permission>hudson.model.Item.Configure:ips</permission>
-      <permission>hudson.model.Item.Release:jshaughn</permission>
-      <permission>hudson.model.Item.Release:ips</permission>
-      <permission>hudson.model.Item.Build:jshaughn</permission>
-      <permission>hudson.model.Item.Build:ips</permission>
+      <permission>hudson.model.Run.Update:spinder</permission>
       <permission>hudson.model.Run.Update:jshaughn</permission>
       <permission>hudson.model.Run.Update:ips</permission>
+      <permission>hudson.model.Item.Read:anonymous</permission>
+      <permission>hudson.model.Item.Read:spinder</permission>
+      <permission>hudson.model.Item.Read:jshaughn</permission>
+      <permission>hudson.model.Item.Read:ips</permission>
+      <permission>hudson.model.Item.Build:spinder</permission>
+      <permission>hudson.model.Item.Build:jshaughn</permission>
+      <permission>hudson.model.Item.Build:ips</permission>
+      <permission>hudson.model.Run.Delete:spinder</permission>
+      <permission>hudson.model.Run.Delete:jshaughn</permission>
+      <permission>hudson.model.Run.Delete:ips</permission>
       <permission>hudson.model.Item.Delete:ips</permission>
+      <permission>hudson.model.Item.Workspace:spinder</permission>
+      <permission>hudson.model.Item.Workspace:jshaughn</permission>
+      <permission>hudson.model.Item.Workspace:ips</permission>
+      <permission>hudson.model.Item.Release:spinder</permission>
+      <permission>hudson.model.Item.Release:jshaughn</permission>
+      <permission>hudson.model.Item.Release:ips</permission>
+      <permission>hudson.model.Item.Configure:spinder</permission>
+      <permission>hudson.model.Item.Configure:jshaughn</permission>
+      <permission>hudson.model.Item.Configure:ips</permission>
     </hudson.security.AuthorizationMatrixProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>

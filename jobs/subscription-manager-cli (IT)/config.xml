@@ -11,16 +11,16 @@ The default arguments are set to dedicated hardware intended for continuous nigh
 &lt;LI&gt; Then click the &apos;Build&apos; button. &lt;/LI&gt;&#xd;
 &lt;/UL&gt;</description>
   <logRotator>
-    <daysToKeep>-1</daysToKeep>
-    <numToKeep>100</numToKeep>
+    <daysToKeep>60</daysToKeep>
+    <numToKeep>-1</numToKeep>
     <artifactDaysToKeep>-1</artifactDaysToKeep>
     <artifactNumToKeep>-1</artifactNumToKeep>
   </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
-      <permission>hudson.model.Item.Workspace:anonymous</permission>
       <permission>hudson.model.Item.Read:anonymous</permission>
+      <permission>hudson.model.Item.Workspace:anonymous</permission>
       <permission>hudson.model.Item.Build:anonymous</permission>
     </hudson.security.AuthorizationMatrixProperty>
     <hudson.model.ParametersDefinitionProperty>
@@ -53,15 +53,35 @@ usually 8443 for an On Premises (stand-alone) Candlepin server</description>
         <hudson.model.StringParameterDefinition>
           <name>SERVER_INSTALLDIR</name>
           <description>directory where your On Premises Candlepin server is installed and running on your SERVER_HOSTNAME&lt;BR&gt;
-This is used to git the latest tagged code from the git repository and deploy it.&lt;BR&gt;
-Setting this value will update your On Premises Candlepin server updated to the most recent git tag.&lt;BR&gt;
+
+This parameter is ignored when SERVER_ON_PREMISES is false.</description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>SERVER_IMPORTDIR</name>
+          <description>directory on your On Premises Candlepin server where we can import candlepin product data to populate the candlepin database during the deploy process... git://git.engineering.redhat.com/users/alikins/cp_product_utils.git
+&lt;BR/&gt;
+This is used to set IMPORTDIR which is used by the candlepin/proxy/buildconf/scripts/import_products.rb script to import product data for testing a standalone on-premise candlepin.
+&lt;BR/&gt;
+This parameter is ignored when SERVER_ON_PREMISES is false.</description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>SERVER_BRANCH</name>
+          <description>This value is used to deploy the specified branch (or master tag) from the git repository onto your On Premises Candlepin server.&lt;BR&gt;
+The most common values are:
+&lt;UL&gt;
+&lt;LI&gt;master&lt;/LI&gt;
+&lt;LI&gt;candlepin-latest-tag (THIS IS ACTUALLY A SPECIAL VALUE USED TO FIND THE LATEST GIT TAG)&lt;/LI&gt;
+&lt;LI&gt;candlepin-0.0.29-1 (THIS IS JUST AN EXAMPLE CANDLEPIN TAG)&lt;/LI&gt;
+&lt;/UL&gt;
 This parameter is ignored when SERVER_ON_PREMISES is false.</description>
           <defaultValue></defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>CLIENT1_HOSTNAME</name>
           <description>hostname of the primary client on which the subscription-manager rpm will be installed and the subscription-manager-cli will be tested</description>
-          <defaultValue>jsefler-rhel6-client01.usersys.redhat.com</defaultValue>
+          <defaultValue>jsefler-rhel6-consumer01.usersys.redhat.com</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>CLIENT1_USERNAME</name>
@@ -70,27 +90,36 @@ This parameter is ignored when SERVER_ON_PREMISES is false.</description>
         </hudson.model.StringParameterDefinition>
         <hudson.model.PasswordParameterDefinition>
           <name>CLIENT1_PASSWORD</name>
-          <description>password of the primary username used to register to the Candlepin server</description>
+          <description></description>
           <defaultValue>1fXtIUTGGLuKa6WEDbI00UDSrVafiBRXGX8KgxwadXk=</defaultValue>
         </hudson.model.PasswordParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>CLIENT2_HOSTNAME</name>
           <description>hostname of the secondary client on which the subscription-manager rpm will be installed and the subscription-manager-cli will be tested&lt;BR/&gt;
 &lt;FONT color=red&gt;NOTE: Specifying CLIENT2_* values will invoke multi-client testing. To skip multi-client tests, do NOT set a value for this parameter.&lt;/FONT&gt;</description>
-          <defaultValue>jsefler-rhel6-client02.usersys.redhat.com</defaultValue>
+          <defaultValue>jsefler-rhel6-consumer02.usersys.redhat.com</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>CLIENT2_USERNAME</name>
           <description>secondary username used to register to the Candlepin server&lt;BR/&gt;
-&lt;FONT color=red&gt;CLIENT2_USERNAME  must belong to the same account as CLIENT1_USERNAME.&lt;/FONT&gt;&lt;BR/&gt;
+&lt;FONT color=red&gt;CLIENT2_USERNAME  must belong to the same owner account as CLIENT1_USERNAME.&lt;/FONT&gt;&lt;BR/&gt;
 &lt;FONT color=red&gt;NOTE: Specifying CLIENT2_* values will invoke multi-client testing. To skip multi-client tests, do NOT set a value for this parameter.&lt;/FONT&gt;</description>
           <defaultValue>xeop-stenjoa</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.PasswordParameterDefinition>
           <name>CLIENT2_PASSWORD</name>
-          <description>password of the secondary username used to register to the Candlepin server&lt;BR/&gt;
-&lt;FONT color=red&gt;NOTE: Specifying CLIENT2_* values will invoke multi-client testing. To skip multi-client tests, do NOT set a value for this parameter.&lt;/FONT&gt;</description>
+          <description></description>
           <defaultValue>1fXtIUTGGLuKa6WEDbI00UDSrVafiBRXGX8KgxwadXk=</defaultValue>
+        </hudson.model.PasswordParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>CLIENT_OWNERNAME</name>
+          <description>owner account for both CLIENT1_USERNAME and CLIENT2_USERNAME</description>
+          <defaultValue>candlepin-system-admin</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.PasswordParameterDefinition>
+          <name>CLIENT_OWNERPASSWORD</name>
+          <description></description>
+          <defaultValue>INHAf6A4dsXccDysuclvlEVHASAz1V1v4V5I4m3QNW4=</defaultValue>
         </hudson.model.PasswordParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>CLIENT_REPOFORDEPENDENCIES</name>
@@ -99,15 +128,15 @@ This parameter is ignored when SERVER_ON_PREMISES is false.</description>
           <defaultValue>rhel-beta</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
-          <name>CLIENT_CERTFREQUENCY</name>
-          <description>default certificate refresh frequency as set in /etc/rhsm/rhsm.conf (you can usually leave this one alone)</description>
-          <defaultValue>240</defaultValue>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
           <name>RPM_URL</name>
           <description>URL to the latest subscription-manager RPM that will be installed and tested on the client(s)&lt;BR/&gt;
-For example: http://download.devel.redhat.com/brewroot/packages/subscription-manager/0.72/1.el6/i686/subscription-manager-0.72-1.el6.i686.rpm</description>
-          <defaultValue>http://gibson.usersys.redhat.com/latestrpm/?arch=i686&amp;rpmname=subscription-manager</defaultValue>
+For example:
+&lt;UL&gt;
+&lt;LI&gt;http://download.devel.redhat.com/brewroot/packages/subscription-manager/0.72/1.el6/i686/subscription-manager-0.72-1.el6.i686.rpm&lt;/LI&gt;
+&lt;LI&gt;http://gibson.usersys.redhat.com/latestrpm/?arch=i686&amp;rpmname=subscription-manager&lt;/LI&gt;
+&lt;LI&gt;http://hudson-qe.rhq.rdu.redhat.com:8080/view/Entitlement/job/subscription-manager-latest/lastSuccessfulBuild/artifact/subscription-manager.i386.rpm&lt;/LI&gt;
+&lt;/UL&gt;</description>
+          <defaultValue>http://hudson-qe.rhq.rdu.redhat.com:8080/view/Entitlement/job/subscription-manager-latest/lastSuccessfulBuild/artifact/subscription-manager.i386.rpm</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>PRODCERT_URL</name>
@@ -134,6 +163,41 @@ For example: http://download.devel.redhat.com/brewroot/packages/subscription-man
           <description>password corresponding to a user who has NOT accepted their Red Hat terms and conditions (only works in an IT environment, will be disregarded if running against an On Premises Candlepin server)</description>
           <defaultValue>1fXtIUTGGLuKa6WEDbI00UDSrVafiBRXGX8KgxwadXk=</defaultValue>
         </hudson.model.PasswordParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>DB_HOSTNAME</name>
+          <description>hostname where the candlepin server database resides</description>
+          <defaultValue>candlepin1.devlab.phx1.redhat.com</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>DB_SQLDRIVER</name>
+          <description>JDBC driver used to connect to the candlepin server database</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>org.postgresql.Driver</string>
+              <string>oracle.jdbc.driver.OracleDriver</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>DB_PORT</name>
+          <description>port on which to connect to the candlepin server database</description>
+          <defaultValue>5432</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>DB_NAME</name>
+          <description>name of the candlepin server database</description>
+          <defaultValue>candlepin</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>DB_USERNAME</name>
+          <description>username used to connect to the candlepin server database</description>
+          <defaultValue>candlepin</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.PasswordParameterDefinition>
+          <name>DB_PASSWORD</name>
+          <description></description>
+          <defaultValue>zlUVSMfFe0FSNXrs2J9z5IQXHYKGXdin/Onh8wauzZ4=</defaultValue>
+        </hudson.model.PasswordParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
@@ -144,8 +208,8 @@ For example: http://download.devel.redhat.com/brewroot/packages/subscription-man
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector">
     <hudson.triggers.TimerTrigger>
-      <spec>0 5 * * *
-# 5:00am daily</spec>
+      <spec>0 4 * * *
+# 4:00am daily</spec>
     </hudson.triggers.TimerTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
@@ -189,6 +253,8 @@ chmod 600 &quot;$WORKSPACE&quot;/automatjon/sm/.ssh/id*</command>
 -Drhsm.server.port=$SERVER_PORT
 -Drhsm.server.onpremises=$SERVER_ON_PREMISES
 -Drhsm.server.installdir=$SERVER_INSTALLDIR
+-Drhsm.server.importdir=$SERVER_IMPORTDIR
+-Drhsm.server.branch=$SERVER_BRANCH
 -Drhsm.server.baseurl=$SERVER_BASEURL
 -Drhsm.client1.hostname=$CLIENT1_HOSTNAME
 -Drhsm.client1.username=$CLIENT1_USERNAME
@@ -196,7 +262,7 @@ chmod 600 &quot;$WORKSPACE&quot;/automatjon/sm/.ssh/id*</command>
 -Drhsm.client2.hostname=$CLIENT2_HOSTNAME
 -Drhsm.client2.username=$CLIENT2_USERNAME
 -Drhsm.client2.password=$CLIENT2_PASSWORD
--Drhsm.client.certfrequency=$CLIENT_CERTFREQUENCY
+-Drhsm.client.certfrequency=240
 -Drhsm.client.enablerepofordeps=$CLIENT_REPOFORDEPENDENCIES
 -Drhsm.client.username.tcunaccepted=$USERNAME_TCUNACCEPTED
 -Drhsm.client.password.tcunaccepted=$PASSWORD_TCUNACCEPTED
@@ -206,6 +272,14 @@ chmod 600 &quot;$WORKSPACE&quot;/automatjon/sm/.ssh/id*</command>
 -Drhsm.sshkey.private=automatjon/sm/.ssh/id_auto_dsa
 -Drhsm.sshkey.passphrase=dog8code
 -Drhsm.client.regtoken=1
+-Drhsm.server.db.hostname=$DB_HOSTNAME
+-Drhsm.server.db.sqldriver=$DB_SQLDRIVER
+-Drhsm.server.db.port=$DB_PORT
+-Drhsm.server.db.name=$DB_NAME
+-Drhsm.server.db.username=$DB_USERNAME
+-Drhsm.server.db.password=$DB_PASSWORD
+-Drhsm.client.owner.username=$CLIENT_OWNERNAME
+-Drhsm.client.owner.password=$CLIENT_OWNERPASSWORD
 </parameters>
       <scriptParameters>automatjon/sm/src/com/redhat/qe/sm/tests/$TEST_SCRIPT</scriptParameters>
       <properties>testng.project.dir=automatjon/sm</properties>
@@ -232,11 +306,6 @@ chmod 600 &quot;$WORKSPACE&quot;/automatjon/sm/.ssh/id*</command>
         </htmlpublisher.HtmlPublisherTarget>
       </reportTargets>
     </htmlpublisher.HtmlPublisher>
-    <hudson.tasks.Mailer>
-      <recipients>jsefler@redhat.com</recipients>
-      <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
-      <sendToIndividuals>false</sendToIndividuals>
-    </hudson.tasks.Mailer>
   </publishers>
   <buildWrappers/>
 </project>

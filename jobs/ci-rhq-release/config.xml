@@ -7,7 +7,7 @@
 &#xd;
 &lt;h4&gt;Shares a repo with the ci-jon-release (${HOME}/.m2/release-repository) build so that jon can be built off of this build.&lt;/h4&gt;&#xd;
 &#xd;
-&lt;h5&gt;maintained by &lt;a href=&quot;mailto:ips@redhat.com&quot;&gt;Ian Springer&lt;/a&gt;, &lt;a href=&quot;mailto:jshaughn@redhat.com&quot;&gt;Jay Shaughnessy&lt;/a&gt; and &lt;a href=&quot;mailto:jweiss@redhat.com&quot;&gt;Jeff Weiss&lt;/a&gt;&lt;/h5&gt;&#xd;
+&lt;h5&gt;maintained by &lt;a href=&quot;mailto:ips@redhat.com&quot;&gt;Ian Springer&lt;/a&gt;, &lt;a href=&quot;mailto:jshaughn@redhat.com&quot;&gt;Jay Shaughnessy&lt;/a&gt; &lt;/h5&gt;&#xd;
 </description>
   <logRotator>
     <daysToKeep>30</daysToKeep>
@@ -18,37 +18,37 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
-      <permission>hudson.model.Item.Workspace:ccrouch</permission>
-      <permission>hudson.model.Item.Workspace:anonymous</permission>
-      <permission>hudson.model.Item.Workspace:jshaughn</permission>
-      <permission>hudson.model.Item.Workspace:jsanda</permission>
-      <permission>hudson.model.Item.Workspace:ips</permission>
-      <permission>hudson.model.Run.Delete:ccrouch</permission>
-      <permission>hudson.model.Run.Delete:jshaughn</permission>
-      <permission>hudson.model.Run.Delete:ips</permission>
-      <permission>hudson.model.Item.Configure:ccrouch</permission>
-      <permission>hudson.model.Item.Configure:jshaughn</permission>
-      <permission>hudson.model.Item.Configure:jsanda</permission>
-      <permission>hudson.model.Item.Configure:ips</permission>
-      <permission>hudson.model.Item.Read:ccrouch</permission>
       <permission>hudson.model.Item.Read:anonymous</permission>
+      <permission>hudson.model.Item.Read:ccrouch</permission>
       <permission>hudson.model.Item.Read:jshaughn</permission>
-      <permission>hudson.model.Item.Read:jsanda</permission>
       <permission>hudson.model.Item.Read:ips</permission>
-      <permission>hudson.model.Item.Build:ccrouch</permission>
-      <permission>hudson.model.Item.Build:anonymous</permission>
-      <permission>hudson.model.Item.Build:jshaughn</permission>
-      <permission>hudson.model.Item.Build:jsanda</permission>
-      <permission>hudson.model.Item.Build:ips</permission>
-      <permission>hudson.model.Item.Delete:ccrouch</permission>
-      <permission>hudson.model.Item.Delete:jshaughn</permission>
-      <permission>hudson.model.Item.Delete:ips</permission>
+      <permission>hudson.model.Item.Read:jsanda</permission>
       <permission>hudson.model.Run.Update:ccrouch</permission>
       <permission>hudson.model.Run.Update:jshaughn</permission>
       <permission>hudson.model.Run.Update:ips</permission>
+      <permission>hudson.model.Run.Delete:ccrouch</permission>
+      <permission>hudson.model.Run.Delete:jshaughn</permission>
+      <permission>hudson.model.Run.Delete:ips</permission>
       <permission>hudson.model.Item.Release:ccrouch</permission>
       <permission>hudson.model.Item.Release:jshaughn</permission>
       <permission>hudson.model.Item.Release:ips</permission>
+      <permission>hudson.model.Item.Delete:ccrouch</permission>
+      <permission>hudson.model.Item.Delete:jshaughn</permission>
+      <permission>hudson.model.Item.Delete:ips</permission>
+      <permission>hudson.model.Item.Workspace:anonymous</permission>
+      <permission>hudson.model.Item.Workspace:ccrouch</permission>
+      <permission>hudson.model.Item.Workspace:jshaughn</permission>
+      <permission>hudson.model.Item.Workspace:ips</permission>
+      <permission>hudson.model.Item.Workspace:jsanda</permission>
+      <permission>hudson.model.Item.Build:anonymous</permission>
+      <permission>hudson.model.Item.Build:ccrouch</permission>
+      <permission>hudson.model.Item.Build:jshaughn</permission>
+      <permission>hudson.model.Item.Build:ips</permission>
+      <permission>hudson.model.Item.Build:jsanda</permission>
+      <permission>hudson.model.Item.Configure:ccrouch</permission>
+      <permission>hudson.model.Item.Configure:jshaughn</permission>
+      <permission>hudson.model.Item.Configure:ips</permission>
+      <permission>hudson.model.Item.Configure:jsanda</permission>
     </hudson.security.AuthorizationMatrixProperty>
   </properties>
   <scm class="hudson.plugins.git.GitSCM">

@@ -11,16 +11,24 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
-      <permission>hudson.model.Run.Delete:mmccune</permission>
-      <permission>hudson.model.Item.Release:mmccune</permission>
+      <permission>hudson.model.Run.Update:jdob</permission>
       <permission>hudson.model.Run.Update:mmccune</permission>
-      <permission>hudson.model.Item.Workspace:mmccune</permission>
-      <permission>hudson.model.Item.Build:anonymous</permission>
-      <permission>hudson.model.Item.Build:mmccune</permission>
-      <permission>hudson.model.Item.Configure:mmccune</permission>
-      <permission>hudson.model.Item.Delete:mmccune</permission>
       <permission>hudson.model.Item.Read:anonymous</permission>
+      <permission>hudson.model.Item.Read:jdob</permission>
       <permission>hudson.model.Item.Read:mmccune</permission>
+      <permission>hudson.model.Item.Build:anonymous</permission>
+      <permission>hudson.model.Item.Build:jdob</permission>
+      <permission>hudson.model.Item.Build:mmccune</permission>
+      <permission>hudson.model.Run.Delete:jdob</permission>
+      <permission>hudson.model.Run.Delete:mmccune</permission>
+      <permission>hudson.model.Item.Delete:jdob</permission>
+      <permission>hudson.model.Item.Delete:mmccune</permission>
+      <permission>hudson.model.Item.Workspace:jdob</permission>
+      <permission>hudson.model.Item.Workspace:mmccune</permission>
+      <permission>hudson.model.Item.Release:jdob</permission>
+      <permission>hudson.model.Item.Release:mmccune</permission>
+      <permission>hudson.model.Item.Configure:jdob</permission>
+      <permission>hudson.model.Item.Configure:mmccune</permission>
     </hudson.security.AuthorizationMatrixProperty>
   </properties>
   <scm class="hudson.plugins.git.GitSCM">
@@ -48,8 +56,11 @@
     </branches>
     <mergeOptions/>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <authorOrCommitter>false</authorOrCommitter>
     <clean>true</clean>
-    <choosingStrategy>Default</choosingStrategy>
+    <wipeOutWorkspace>false</wipeOutWorkspace>
+    <buildChooser class="hudson.plugins.git.util.DefaultBuildChooser"/>
+    <gitTool>Default</gitTool>
     <submoduleCfg class="list"/>
   </scm>
   <assignedNode>opos13.rhq.rdu.redhat.com01</assignedNode>

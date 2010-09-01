@@ -12,6 +12,12 @@
 &lt;/UL&gt;&#xd;
 &lt;br/&gt;&#xd;
 </description>
+  <logRotator>
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>10</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
@@ -23,22 +29,22 @@
         <hudson.model.StringParameterDefinition>
           <name>CLIENT_HOSTNAME</name>
           <description>hostname of client running VNC server/funcd</description>
-          <defaultValue>oldceremony.rhndev.redhat.com</defaultValue>
+          <defaultValue>auto-smgui.usersys.redhat.com</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>CLIENT_LOCALUSER</name>
           <description>local user on client to run test under</description>
-          <defaultValue>rhsmtest</defaultValue>
+          <defaultValue>rhsm</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>RHSM_RPM</name>
           <description>url to latest subscription-manager RPM</description>
-          <defaultValue>http://gibson.usersys.redhat.com/latestrpm/?arch=i686&amp;rpmname=subscription-manager</defaultValue>
+          <defaultValue>http://hudson-qe.rhq.rdu.redhat.com:8080/view/Entitlement/job/subscription-manager-latest/lastSuccessfulBuild/artifact/subscription-manager.i386.rpm</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>RHSM_GUI_RPM</name>
           <description>url to latest subscription-manager-gnome RPM</description>
-          <defaultValue>http://gibson.usersys.redhat.com/latestrpm/?arch=i686&amp;rpmname=subscription-manager-gnome&amp;basegrp=subscription-manager</defaultValue>
+          <defaultValue>http://hudson-qe.rhq.rdu.redhat.com:8080/view/Entitlement/job/subscription-manager-latest/lastSuccessfulBuild/artifact/subscription-manager-gnome.i386.rpm</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>CLIENT_USERNAME</name>
@@ -83,11 +89,7 @@
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector">
-    <hudson.triggers.TimerTrigger>
-      <spec>0 2 * * *</spec>
-    </hudson.triggers.TimerTrigger>
-  </triggers>
+  <triggers class="vector"/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
@@ -111,7 +113,9 @@ else
  git clone git://github.com/weissjeffm/webui-framework.git
 fi
 
-chmod 600 $WORKSPACE/automatjon/jon/.ssh/id*
+SSHKEYDIR=$WORKSPACE/automatjon/jon/.ssh/
+chmod 600 $SSHKEYDIR/id*
+SSHPUBKEY=~/.ssh/id_hudson_dsa
 
 cd $WORKSPACE/automatjon
 rm -rf smgui.tgz sm-tests.properties subscription-manager-gui/test-output/ subscription-manager-gui/results.tgz
@@ -130,17 +134,24 @@ rhsm.insecure: true
 rhsm.localcert: $RHSM_LOCALCERT
 &quot; &gt; $WORKSPACE/sm-tests.properties
 
-sudo func &quot;$CLIENT_HOSTNAME&quot; call command run &quot;rm -rf /tmp/smgui.tgz /tmp/subscription-manager-gui&quot;
-scp $WORKSPACE/automatjon/smgui.tgz $CLIENT_LOCALUSER@$CLIENT_HOSTNAME:/tmp/smgui.tgz
-scp $WORKSPACE/sm-tests.properties $CLIENT_LOCALUSER@$CLIENT_HOSTNAME:/tmp/sm-tests.properties
+SSHCLIENT=&quot;ssh -i $SSHPUBKEY $CLIENT_LOCALUSER@$CLIENT_HOSTNAME&quot;
+REMOTE_WORKDIR=/tmp/subscription-manager-gui
+REMOTE_OUTPUTDIR=$REMOTE_WORKDIR/test-output
+sudo func &quot;$CLIENT_HOSTNAME&quot; call command run &quot;rm -rf /tmp/smgui.tgz $REMOTE_WORKDIR&quot;
+scp -i $SSHPUBKEY $WORKSPACE/automatjon/smgui.tgz $CLIENT_LOCALUSER@$CLIENT_HOSTNAME:/tmp/smgui.tgz
+scp -i $SSHPUBKEY $WORKSPACE/sm-tests.properties $CLIENT_LOCALUSER@$CLIENT_HOSTNAME:/tmp/sm-tests.properties
 sudo func &quot;$CLIENT_HOSTNAME&quot; call command run &quot;tar -C /tmp -xvzf /tmp/smgui.tgz&quot;
-sudo func &quot;$CLIENT_HOSTNAME&quot; call command run &quot;mkdir /tmp/subscription-manager-gui/test-output&quot;
-sudo func &quot;$CLIENT_HOSTNAME&quot; call command run &quot;touch /tmp/subscription-manager-gui/test-output/smgui-results.xml&quot;
-sudo func &quot;$CLIENT_HOSTNAME&quot; call command run &quot;sudo nosetests --with-xunit --xunit-file=/tmp/subscription-manager-gui/test-output/smgui-results.xml /tmp/subscription-manager-gui/*tests.py&quot;
-sudo func &quot;$CLIENT_HOSTNAME&quot; call command run &quot;tar cvzf /tmp/subscription-manager-gui/results.tgz /tmp/subscription-manager-gui/test-output/*&quot;
+sudo func &quot;$CLIENT_HOSTNAME&quot; call command run &quot;mkdir $REMOTE_OUTPUTDIR&quot;
+sudo func &quot;$CLIENT_HOSTNAME&quot; call command run &quot;touch $REMOTE_OUTPUTDIR/smgui-results.xml&quot;
+
+#Register our nosetests plugin(s), if hasn&apos;t been done already
+sudo func &quot;$CLIENT_HOSTNAME&quot; call command run &quot;cd $REMOTE_WORKDIR;easy_install .&quot;
+#Run tests
+sudo func &quot;$CLIENT_HOSTNAME&quot; call command run &quot;nosetests --screenshot-dir=$REMOTE_OUTPUTDIR/screenshots --with-xunit --xunit-file=$REMOTE_OUTPUTDIR/smgui-results.xml $REMOTE_WORKDIR/*tests.py&quot;
+sudo func &quot;$CLIENT_HOSTNAME&quot; call command run &quot;tar cvzf $REMOTE_WORKDIR/results.tgz $REMOTE_OUTPUTDIR/*;chown $CLIENT_LOCALUSER $REMOTE_WORKDIR/results.tgz&quot;
 
 mkdir -p $WORKSPACE/automatjon/subscription-manager-gui/test-output/
-scp $CLIENT_LOCALUSER@$CLIENT_HOSTNAME:/tmp/subscription-manager-gui/results.tgz $WORKSPACE/automatjon/subscription-manager-gui/test-output/results.tgz
+scp -i $SSHPUBKEY $CLIENT_LOCALUSER@$CLIENT_HOSTNAME:$REMOTE_WORKDIR/results.tgz $WORKSPACE/automatjon/subscription-manager-gui/test-output/results.tgz
 cd $WORKSPACE/automatjon/subscription-manager-gui/test-output/
 tar xvzf results.tgz
 mv $WORKSPACE/automatjon/subscription-manager-gui/test-output/tmp/subscription-manager-gui/test-output/* .
@@ -158,44 +169,6 @@ touch $WORKSPACE/automatjon/subscription-manager-gui/test-output/smgui-results.x
       <keepLongStdio>false</keepLongStdio>
       <testDataPublishers/>
     </hudson.tasks.junit.JUnitResultArchiver>
-    <hudson.plugins.emailext.ExtendedEmailPublisher>
-      <recipientList>ssalevan@redhat.com, spandey@redhat.com, whayutin@redhat.com</recipientList>
-      <configuredTriggers>
-        <hudson.plugins.emailext.plugins.trigger.UnstableTrigger>
-          <email>
-            <recipientList></recipientList>
-            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
-            <body>$PROJECT_DEFAULT_CONTENT</body>
-            <sendToDevelopers>true</sendToDevelopers>
-            <includeCulprits>false</includeCulprits>
-            <sendToRecipientList>true</sendToRecipientList>
-          </email>
-        </hudson.plugins.emailext.plugins.trigger.UnstableTrigger>
-        <hudson.plugins.emailext.plugins.trigger.FailureTrigger>
-          <email>
-            <recipientList></recipientList>
-            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
-            <body>$PROJECT_DEFAULT_CONTENT</body>
-            <sendToDevelopers>true</sendToDevelopers>
-            <includeCulprits>false</includeCulprits>
-            <sendToRecipientList>true</sendToRecipientList>
-          </email>
-        </hudson.plugins.emailext.plugins.trigger.FailureTrigger>
-        <hudson.plugins.emailext.plugins.trigger.StillUnstableTrigger>
-          <email>
-            <recipientList></recipientList>
-            <subject>$PROJECT_DEFAULT_SUBJECT</subject>
-            <body>$PROJECT_DEFAULT_CONTENT</body>
-            <sendToDevelopers>true</sendToDevelopers>
-            <includeCulprits>false</includeCulprits>
-            <sendToRecipientList>true</sendToRecipientList>
-          </email>
-        </hudson.plugins.emailext.plugins.trigger.StillUnstableTrigger>
-      </configuredTriggers>
-      <contentType>default</contentType>
-      <defaultSubject>subscription-manager-gui: latest entitlement-qe test execution </defaultSubject>
-      <defaultContent>$DEFAULT_CONTENT</defaultContent>
-    </hudson.plugins.emailext.ExtendedEmailPublisher>
   </publishers>
   <buildWrappers/>
 </project>

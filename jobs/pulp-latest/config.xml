@@ -9,7 +9,17 @@
     <artifactNumToKeep>-1</artifactNumToKeep>
   </logRotator>
   <keepDependencies>false</keepDependencies>
-  <properties/>
+  <properties>
+    <hudson.security.AuthorizationMatrixProperty>
+      <permission>hudson.model.Item.Read:anonymous</permission>
+      <permission>hudson.model.Item.Read:dgao</permission>
+      <permission>hudson.model.Item.Release:anonymous</permission>
+      <permission>hudson.model.Item.Release:dgao</permission>
+      <permission>hudson.model.Item.Workspace:dgao</permission>
+      <permission>hudson.model.Item.Configure:dgao</permission>
+      <permission>hudson.model.Item.Build:dgao</permission>
+    </hudson.security.AuthorizationMatrixProperty>
+  </properties>
   <scm class="hudson.plugins.git.GitSCM">
     <configVersion>1</configVersion>
     <remoteRepositories>
@@ -23,14 +33,14 @@
         <string>uploadpack</string>
         <string>git-upload-pack</string>
         <string>url</string>
-        <string>git://cs-repo.engsupport.redhat.com/srv/git/sd/services/code</string>
+        <string>git://git.fedorahosted.org/git/pulp.git/</string>
         <string>tagopt</string>
         <string></string>
       </org.spearce.jgit.transport.RemoteConfig>
     </remoteRepositories>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>origin/cp</name>
+        <name>**</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <mergeOptions/>
@@ -47,15 +57,41 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector">
     <hudson.triggers.TimerTrigger>
-      <spec>@daily</spec>
+      <spec>59 22 * * *</spec>
     </hudson.triggers.TimerTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>mvn clean install -Dmaven.test.skip -fae</command>
+      <command>#!/bin/bash -xe
+cd $WORKSPACE
+REPONAME=pulp
+
+tito build --test --rpm --output .
+cd noarch
+mv -v `find -iregex &quot;^.*pulp[0-9\.\-]+[0-9]+.*$&quot;` pulp-git-latest.noarch.rpm
+mv -v `find -iregex &quot;^.*pulp-client[0-9\.\-]+[0-9]+.*$&quot;` pulp-client-git-latest.noarch.rpm
+mv -v `find -iregex &quot;^.*pulp-common[0-9\.\-]+[0-9]+.*$&quot;` pulp-common-git-latest.noarch.rpm</command>
     </hudson.tasks.Shell>
   </builders>
-  <publishers/>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>noarch/*.rpm</artifacts>
+      <latestOnly>false</latestOnly>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.tasks.BuildTrigger>
+      <childProjects>pulp-cli</childProjects>
+      <threshold>
+        <name>SUCCESS</name>
+        <ordinal>0</ordinal>
+        <color>BLUE</color>
+      </threshold>
+    </hudson.tasks.BuildTrigger>
+    <hudson.tasks.Mailer>
+      <recipients>dgao@redhat.com</recipients>
+      <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
+      <sendToIndividuals>false</sendToIndividuals>
+    </hudson.tasks.Mailer>
+  </publishers>
   <buildWrappers/>
 </project>

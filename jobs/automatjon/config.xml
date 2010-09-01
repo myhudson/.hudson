@@ -12,27 +12,13 @@
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
       <permission>hudson.model.Item.Read:anonymous</permission>
-      <permission>hudson.model.Item.Build:anonymous</permission>
       <permission>hudson.model.Item.Workspace:anonymous</permission>
+      <permission>hudson.model.Item.Build:anonymous</permission>
     </hudson.security.AuthorizationMatrixProperty>
   </properties>
   <scm class="hudson.plugins.git.GitSCM">
     <configVersion>1</configVersion>
     <remoteRepositories>
-      <org.spearce.jgit.transport.RemoteConfig>
-        <string>origin</string>
-        <int>5</int>
-        <string>fetch</string>
-        <string>+refs/heads/*:refs/remotes/origin/*</string>
-        <string>receivepack</string>
-        <string>git-upload-pack</string>
-        <string>uploadpack</string>
-        <string>git-upload-pack</string>
-        <string>url</string>
-        <string>git://github.com/weissjeffm/webui-framework.git</string>
-        <string>tagopt</string>
-        <string></string>
-      </org.spearce.jgit.transport.RemoteConfig>
       <org.spearce.jgit.transport.RemoteConfig>
         <string>origin1</string>
         <int>5</int>
@@ -43,7 +29,7 @@
         <string>uploadpack</string>
         <string>git-upload-pack</string>
         <string>url</string>
-        <string>git://git.rhndev.redhat.com/automatjon</string>
+        <string>git://git.engineering.redhat.com/users/jweiss/automatjon.git</string>
         <string>tagopt</string>
         <string></string>
       </org.spearce.jgit.transport.RemoteConfig>
@@ -55,8 +41,11 @@
     </branches>
     <mergeOptions/>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <authorOrCommitter>false</authorOrCommitter>
     <clean>false</clean>
-    <choosingStrategy>Default</choosingStrategy>
+    <wipeOutWorkspace>false</wipeOutWorkspace>
+    <buildChooser class="hudson.plugins.git.util.DefaultBuildChooser"/>
+    <gitTool>Default</gitTool>
     <submoduleCfg class="list"/>
   </scm>
   <canRoam>true</canRoam>
@@ -70,8 +59,26 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>#git clone git://github.com/weissjeffm/webui-framework.git
-#git clone git://git.rhndev.redhat.com/automatjon</command>
+      <command>#!/bin/bash -xe
+cd $WORKSPACE
+if [ -d automatjon ]; then 
+ cd automatjon
+ git clean -dxf
+ git pull
+else
+ git clone git://git.engineering.redhat.com/users/jweiss/automatjon.git
+fi
+
+cd $WORKSPACE
+
+if [ -d webui-framework ]; then 
+ cd webui-framework
+ git clean -dxf
+ git pull
+else
+ git clone git://github.com/weissjeffm/webui-framework.git
+fi
+</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Ant>
       <targets>compile-jon</targets>
@@ -88,11 +95,6 @@
       <artifacts>**/*</artifacts>
       <latestOnly>false</latestOnly>
     </hudson.tasks.ArtifactArchiver>
-    <hudson.tasks.Mailer>
-      <recipients></recipients>
-      <dontNotifyEveryUnstableBuild>true</dontNotifyEveryUnstableBuild>
-      <sendToIndividuals>true</sendToIndividuals>
-    </hudson.tasks.Mailer>
   </publishers>
   <buildWrappers/>
 </project>

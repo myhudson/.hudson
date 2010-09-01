@@ -14,16 +14,16 @@ This project is scheduled to kick-off automatically every night following the su
 &lt;font color=red&gt;WARNING:&lt;/font&gt; Do not use the TestNG Reports links on this page since their embedded screenshot links will not work.  Instead click to the build# of interest to you in the Build History table below and open its TestNG Report.</description>
   <logRotator>
     <daysToKeep>60</daysToKeep>
-    <numToKeep>10</numToKeep>
+    <numToKeep>-1</numToKeep>
     <artifactDaysToKeep>30</artifactDaysToKeep>
     <artifactNumToKeep>-1</artifactNumToKeep>
   </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.security.AuthorizationMatrixProperty>
-      <permission>hudson.model.Item.Workspace:anonymous</permission>
       <permission>hudson.model.Item.Read:anonymous</permission>
       <permission>hudson.model.Item.Build:anonymous</permission>
+      <permission>hudson.model.Item.Workspace:anonymous</permission>
       <permission>hudson.model.Item.Release:anonymous</permission>
     </hudson.security.AuthorizationMatrixProperty>
     <hudson.model.ParametersDefinitionProperty>

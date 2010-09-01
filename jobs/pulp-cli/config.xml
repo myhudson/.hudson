@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <logRotator>
+    <daysToKeep>15</daysToKeep>
+    <numToKeep>10</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.security.AuthorizationMatrixProperty>
+      <permission>hudson.model.Item.Read:anonymous</permission>
+      <permission>hudson.model.Item.Read:dgao</permission>
+      <permission>hudson.model.Item.Read:jdob</permission>
+      <permission>hudson.model.Item.Read:mmccune</permission>
+      <permission>hudson.model.Run.Update:dgao</permission>
+      <permission>hudson.model.Run.Update:jdob</permission>
+      <permission>hudson.model.Run.Delete:dgao</permission>
+      <permission>hudson.model.Item.Release:anonymous</permission>
+      <permission>hudson.model.Item.Release:dgao</permission>
+      <permission>hudson.model.Item.Release:jdob</permission>
+      <permission>hudson.model.Item.Release:mmccune</permission>
+      <permission>hudson.model.Item.Delete:dgao</permission>
+      <permission>hudson.model.Item.Workspace:anonymous</permission>
+      <permission>hudson.model.Item.Workspace:dgao</permission>
+      <permission>hudson.model.Item.Workspace:jdob</permission>
+      <permission>hudson.model.Item.Workspace:mmccune</permission>
+      <permission>hudson.model.Item.Configure:dgao</permission>
+      <permission>hudson.model.Item.Configure:jdob</permission>
+      <permission>hudson.model.Item.Configure:mmccune</permission>
+      <permission>hudson.model.Item.Build:anonymous</permission>
+      <permission>hudson.model.Item.Build:dgao</permission>
+      <permission>hudson.model.Item.Build:jdob</permission>
+      <permission>hudson.model.Item.Build:mmccune</permission>
+    </hudson.security.AuthorizationMatrixProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>TEST_SCRIPT</name>
+          <description></description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>testng.xml</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>SERVER_HOSTNAME</name>
+          <description></description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>10.16.79.232</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>CLIENT_HOSTNAME</name>
+          <description></description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>10.16.79.232</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>REPO_LOCATION</name>
+          <description></description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>yum:http://mmccune.fedorapeople.org/pulp/fedora/13/x86_64/</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector"/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash -xe
+cd $WORKSPACE
+REPONAME=webui-framework
+if [ -d $REPONAME ]; then 
+ cd $REPONAME
+ git clean -dxf
+ git pull
+else
+ git clone git://github.com/weissjeffm/webui-framework.git
+fi</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash -xe
+cd $WORKSPACE
+REPONAME=automatjon
+if [ -d $REPONAME ]; then 
+ cd $REPONAME
+ git clean -dxf
+ git pull
+else
+ git clone git://git.engineering.redhat.com/users/jweiss/automatjon.git
+fi</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Ant>
+      <targets>compile-pulp</targets>
+      <antName>(Default)</antName>
+      <buildFile>automatjon/pulp/build.xml</buildFile>
+    </hudson.tasks.Ant>
+    <hudson.plugins.groovy.Groovy>
+      <scriptSource class="hudson.plugins.groovy.FileScriptSource">
+        <scriptFile>webui-framework/groovy/src/hudson.groovy</scriptFile>
+      </scriptSource>
+      <groovyName>(Default)</groovyName>
+      <parameters>-Dpulp.server.hostname=$SERVER_HOSTNAME
+-Dpulp.client.hostname=$CLIENT_HOSTNAME
+-Dpulp.ssh.user=root
+-Dpulp.sshkey.private=$WORKSPACE/automatjon/jon/.ssh/id_auto_dsa
+-Dpulp.sshkey.passphrase=dog8code
+-Dpulp.repoId=f13test
+-Dpulp.repoLocation=$REPO_LOCATION
+-Dpulp.repoArch=x86_64
+-Dpulp.consumer.id=test_consumer</parameters>
+      <scriptParameters>automatjon/pulp/src/com/redhat/qe/pulp/tests/$TEST_SCRIPT</scriptParameters>
+      <properties>testng.project.dir=automatjon/pulp</properties>
+    </hudson.plugins.groovy.Groovy>
+  </builders>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>automatjon/pulp/test-output/**/*</artifacts>
+      <latestOnly>false</latestOnly>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.tasks.junit.JUnitResultArchiver>
+      <testResults>automatjon/pulp/test-output-junit/*.xml</testResults>
+      <keepLongStdio>false</keepLongStdio>
+      <testDataPublishers/>
+    </hudson.tasks.junit.JUnitResultArchiver>
+    <htmlpublisher.HtmlPublisher>
+      <reportTargets>
+        <htmlpublisher.HtmlPublisherTarget>
+          <reportName>Pulp HTML Report</reportName>
+          <reportDir>automatjon/pulp/test-output</reportDir>
+          <reportFiles>index.html</reportFiles>
+          <keepAll>false</keepAll>
+          <wrapperName>htmlpublisher-wrapper.html</wrapperName>
+        </htmlpublisher.HtmlPublisherTarget>
+      </reportTargets>
+    </htmlpublisher.HtmlPublisher>
+    <hudson.tasks.Mailer>
+      <recipients>dgao@redhat.com</recipients>
+      <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
+      <sendToIndividuals>false</sendToIndividuals>
+    </hudson.tasks.Mailer>
+  </publishers>
+  <buildWrappers/>
+</project>
